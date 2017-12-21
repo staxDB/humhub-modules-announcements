@@ -14,7 +14,7 @@ use humhub\modules\space\models\Space;
 /**
  * CreatePost Permission
  */
-class CreateAnnouncement extends \humhub\libs\BasePermission
+class ViewStatistics extends \humhub\libs\BasePermission
 {
 
     /**
@@ -29,7 +29,6 @@ class CreateAnnouncement extends \humhub\libs\BasePermission
         Space::USERGROUP_OWNER,
         Space::USERGROUP_ADMIN,
         Space::USERGROUP_MODERATOR,
-        Space::USERGROUP_MEMBER,
     ];
 
     /**
@@ -41,12 +40,12 @@ class CreateAnnouncement extends \humhub\libs\BasePermission
 
     public function getTitle()
     {
-        return Yii::t('AnnouncementsModule.base', 'Create Announcement');
+        return Yii::t('AnnouncementsModule.base', 'View Statistics');
     }
 
     public function getDescription()
     {
-        return Yii::t('AnnouncementsModule.base', 'Allows the user to create an Announcement');
+        return Yii::t('AnnouncementsModule.base', 'Allows the user to view the statistics (read, unread)');
     }
 
 }

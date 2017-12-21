@@ -15,7 +15,7 @@ use humhub\modules\announcements\permissions\CreateAnnouncement;
     </div>
 <?php endif; ?>
 
-<?php if ($announcement->content->canEdit()): ?>
+<?php if ($announcement->canShowStatistics()): ?>
     <br/>
     <div class="media">
         <div style="padding-left:10px; border-left: 3px solid">

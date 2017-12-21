@@ -13,10 +13,6 @@ humhub\modules\announcements\assets\AnnouncementsAsset::register($this);
 
     <?= Html::beginForm($contentContainer->createUrl('/announcements/message/confirm', ['announcementId' => $announcement->id])); ?>
 
-    <div data-ui-markdown>
-        <?= humhub\widgets\RichText::widget(['text' => $announcement->title]); ?>
-    </div>
-
 <!--    TODO: remove AddMessageInput-->
 
     <div data-ui-markdown>
@@ -29,5 +25,5 @@ humhub\modules\announcements\assets\AnnouncementsAsset::register($this);
 
     <div class="clearFloats"></div>
 
-    <?php echo Html::endForm(); ?>
+    <?= Html::endForm(); ?>
 </div>

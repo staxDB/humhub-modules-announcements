@@ -8,7 +8,6 @@ class m171208_130303_initial extends Migration
     {
         $this->createTable('announcement', array(
             'id' => 'pk',
-            'title' => 'varchar(255) NOT NULL',
             'message' => 'TEXT NULL',
         ), '');
 

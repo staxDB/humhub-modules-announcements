@@ -6,6 +6,8 @@ use humhub\modules\user\models\User;
 use Yii;
 use humhub\modules\content\components\ContentActiveRecord;
 use humhub\modules\announcements\models\AnnouncementUser;
+use humhub\modules\announcements\permissions\CreateAnnouncement;
+use humhub\modules\announcements\permissions\ViewStatistics;
 
 /**
  * This is the model class for table "announcements".
@@ -13,7 +15,6 @@ use humhub\modules\announcements\models\AnnouncementUser;
  * The followings are the available columns in table 'announcements':
  *
  * @property integer $id
- * @property string $title
  * @property string $message
  * @property string $created_at
  * @property string $updated_at
@@ -30,6 +31,11 @@ class Announcement extends ContentActiveRecord implements \humhub\modules\search
     public $wallEntryClass = 'humhub\modules\announcements\widgets\WallEntry';
 
     /**
+     * @inheritdoc
+     */
+    public $managePermission = CreateAnnouncement::class;
+
+    /**
      * @return string the associated database table name
      */
     public static function tableName()
@@ -41,8 +47,8 @@ class Announcement extends ContentActiveRecord implements \humhub\modules\search
     {
         return [
             self::SCENARIO_CLOSE => [],
-            self::SCENARIO_CREATE => ['title', 'message'],
-            self::SCENARIO_EDIT => ['title', 'message']
+            self::SCENARIO_CREATE => ['message'],
+            self::SCENARIO_EDIT => ['message']
         ];
     }
 
@@ -53,8 +59,8 @@ class Announcement extends ContentActiveRecord implements \humhub\modules\search
     public function rules()
     {
         return array(
-//            [['title', 'message'], 'required'],
-            [['title', 'message'], 'string'],
+            [['message'], 'required'],
+            [['message'], 'string'],
         );
     }
 
@@ -64,7 +70,6 @@ class Announcement extends ContentActiveRecord implements \humhub\modules\search
     public function attributeLabels()
     {
         return array(
-            'title' => Yii::t('AnnouncementsModule.base', 'Title'),
             'message' => Yii::t('AnnouncementsModule.base', 'Message'),
         );
     }
@@ -319,7 +324,7 @@ class Announcement extends ContentActiveRecord implements \humhub\modules\search
      */
     public function getContentDescription()
     {
-        return $this->title;
+        return Yii::t('AnnouncementsModule', 'Announcement');
     }
 
     /**
@@ -329,9 +334,13 @@ class Announcement extends ContentActiveRecord implements \humhub\modules\search
     {
 
         return array(
-            'title' => $this->title,
             'message' => $this->message
         );
+    }
+
+    public function canShowStatistics()
+    {
+        return $this->content->container->permissionManager->can(ViewStatistics::class);
     }
 
 }

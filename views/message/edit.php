@@ -10,18 +10,10 @@ use humhub\widgets\ActiveForm;
 
 <div data-message="<?= $announcement->id ?>" data-content-component="announcements.Message" data-content-key="<?= $announcement->content->id ?>" class="content_edit" id="message_edit_<?= $announcement->id; ?>">
     <div  class="alert alert-danger" role="alert" style="display:none">
-        <span class="errorMessage"></p>
+        <span class="errorMessage"></span>
     </div>
 
     <?php $form = ActiveForm::begin(); ?>
-    
-    <?= \humhub\widgets\RichtextField::widget([
-        'form' => $form,
-        'model' => $announcement,
-        'label' => Yii::t('AnnouncementsModule.base', 'Title'),
-        'attribute' => 'title',
-        'placeholder' => Yii::t('AnnouncementsModule.base', 'Title')
-    ]); ?>
 
     <?= \humhub\widgets\RichtextField::widget([
         'form' => $form,

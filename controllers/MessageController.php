@@ -59,7 +59,6 @@ class MessageController extends ContentContainerController
 
         $announcement = new Announcement();
         $announcement->scenario = Announcement::SCENARIO_CREATE;
-        $announcement->title = Yii::$app->request->post('title');
         $announcement->message = Yii::$app->request->post('message');
         return WallCreateForm::create($announcement, $this->contentContainer);
     }

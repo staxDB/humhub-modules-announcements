@@ -1,6 +1,5 @@
 <?php
 return array(
-    'Title' => 'Titel',
     'Announcement' => 'Ankündigung',
     'Announcements' => 'Ankündigungen',
     'Add Announcement...' => 'Ankündigung hinzufügen...',
@@ -25,5 +24,12 @@ return array(
     'Mark as read' => 'Als gelesen markieren',
     'Mark as unread' => 'Als ungelesen markieren',
     'and {count} more read this.' => 'und {count} mehr haben das gelesen.',
-    'and {count} more didn\'t read this.' => 'und {count} mehr haben das nicht gelesen.'
+    'and {count} more didn\'t read this.' => 'und {count} mehr haben das nicht gelesen.',
+
+
+//    permissions
+    'Create Announcement' => 'Ankündigungen erstellen',
+    'Allows the user to create an Announcement' => 'Erlaube dem Nutzer, eine Ankündigung zu erstellen',
+    'View Statistics' => 'Auswertungen ansehen',
+    'Allows the user to view the statistics (read, unread)' => 'Erlaube dem Nutzer, die Auswertungen anzusehen (gelesen, nicht gelesen)'
 );
