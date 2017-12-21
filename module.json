@@ -1,0 +1,11 @@
+{
+    "id": "announcements",
+    "name": "Announcement",
+    "description": "An automatically generated HumHub module to help you get started quickly.",
+    "keywords": ["confirm", "message", "announce"],
+    "version": "0.1",
+    "humhub": {
+        "minVersion": "1.2.3"
+    },
+    "screenshots": ["assets/screen1.jpg"]
+}
