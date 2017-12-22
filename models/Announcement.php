@@ -16,6 +16,7 @@ use humhub\modules\announcements\permissions\ViewStatistics;
  *
  * @property integer $id
  * @property string $message
+ * @property int $closed
  * @property string $created_at
  * @property string $updated_at
  *
@@ -206,7 +207,7 @@ class Announcement extends ContentActiveRecord implements \humhub\modules\search
 
     public function isResetAllowed()
     {
-        return $this->hasUserConfirmed();
+        return $this->hasUserConfirmed() && !$this->closed;
     }
 
 
@@ -217,6 +218,10 @@ class Announcement extends ContentActiveRecord implements \humhub\modules\search
      */
     public function resetConfirmation($userId = "")
     {
+
+        if($this->closed) {
+            return;
+        }
 
         if ($userId == "")
             $userId = Yii::$app->user->id;
@@ -236,7 +241,7 @@ class Announcement extends ContentActiveRecord implements \humhub\modules\search
      */
     public function afterSave($insert, $changedAttributes)
     {
-        if ($insert || $changedAttributes) {
+        if (($insert || $changedAttributes)  && !array_key_exists('closed', $changedAttributes)) {
             $members = $this->content->container->getMembershipUser()->all();
             foreach ($members as $member) {
                 $this->setConfirmation($member);

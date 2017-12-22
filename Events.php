@@ -25,6 +25,12 @@ class Events extends \yii\base\Object
             return;
         }
 
+        if($object->content->canWrite()) {
+            $event->sender->addWidget(\humhub\modules\announcements\widgets\CloseButton::className(), [
+                'announcement' => $object
+            ]);
+        }
+
         if($object->isResetAllowed()) {
             $event->sender->addWidget(\humhub\modules\announcements\widgets\ResetButton::className(), [
                 'announcement' => $object

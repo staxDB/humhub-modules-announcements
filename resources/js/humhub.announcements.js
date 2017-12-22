@@ -14,6 +14,10 @@ humhub.module('announcements', function (module, require, $) {
         this.update(client.submit(submitEvent));
     };
 
+    Message.prototype.close = function (event) {
+        this.update(client.post(event));
+    };
+
     Message.prototype.update = function (update) {
         this.loader();
         update.then($.proxy(this.handleUpdateSuccess, this))
@@ -54,7 +58,6 @@ humhub.module('announcements', function (module, require, $) {
     Message.prototype.editCancel = function (evt) {
         this.update(client.post(evt));
     };
-
 
     Message.prototype.loader = function ($loader) {
         this.streamEntry().loader($loader);

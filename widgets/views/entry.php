@@ -11,6 +11,10 @@ humhub\modules\announcements\assets\AnnouncementsAsset::register($this);
 
 <div data-announcement="<?= $announcement->id ?>" data-content-component="announcements.Message" data-content-key="<?= $announcement->content->id ?>">
 
+    <?php if ($announcement->closed) : ?>
+        &nbsp;<span class="label label-danger pull-right"><?= Yii::t('AnnouncementsModule.base', 'Closed') ?></span>
+    <?php endif; ?>
+
     <?= Html::beginForm($contentContainer->createUrl('/announcements/message/confirm', ['announcementId' => $announcement->id])); ?>
 
 <!--    TODO: remove AddMessageInput-->

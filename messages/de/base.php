@@ -16,7 +16,6 @@ return array(
     'Could not load Announcement!' => 'Ankündigung konnte nicht geladen werden!',
 
 
-
     'Read, ' => 'Gelesen, ',
     'Unread' => 'Nicht gelesen',
     'Statistic:' => 'Auswertung:',
@@ -31,5 +30,9 @@ return array(
     'Create Announcement' => 'Ankündigungen erstellen',
     'Allows the user to create an Announcement' => 'Erlaube dem Nutzer, eine Ankündigung zu erstellen',
     'View Statistics' => 'Auswertungen ansehen',
-    'Allows the user to view the statistics (read, unread)' => 'Erlaube dem Nutzer, die Auswertungen anzusehen (gelesen, nicht gelesen)'
+    'Allows the user to view the statistics (read, unread)' => 'Erlaube dem Nutzer, die Auswertungen anzusehen (gelesen, nicht gelesen)',
+
+    // close-link
+      'Complete Announcement' => 'Ankündigung schliessen',
+      'Reopen Announcement' => 'Ankündigung wieder öffnen'
 );

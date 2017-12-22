@@ -20,6 +20,7 @@ use humhub\widgets\ActiveForm;
         'model' => $announcement,
         'label' => Yii::t('AnnouncementsModule.base', 'Message'),
         'attribute' => "message",
+        'disabled' => $announcement->closed,
         'placeholder' => Yii::t('AnnouncementsModule.base', 'Edit your message')
     ]); ?>
 

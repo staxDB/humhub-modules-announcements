@@ -108,6 +108,33 @@ class MessageController extends ContentContainerController
         return $this->renderAjax('edit', ['announcement' => $model, 'edited' => $edited]);
     }
 
+    public function actionOpen()
+    {
+        return $this->asJson($this->setClosed(Yii::$app->request->get('id'), false));
+    }
+
+    public function actionClose()
+    {
+        return  $this->asJson($this->setClosed(Yii::$app->request->get('id'), true));
+    }
+
+    public function setClosed($id, $closed)
+    {
+        $model = Announcement::findOne(['id' => $id]);
+        $model->scenario = Announcement::SCENARIO_CLOSE;
+
+        if (!$model->content->canWrite()) {
+            throw new HttpException(403, Yii::t('AnnouncementsModule.base', 'Access denied!'));
+        }
+
+        $model->closed = $closed;
+        $model->save();
+        // Refresh updated_at
+//        $model->content->refresh();
+
+        return \humhub\modules\stream\actions\Stream::getContentResultEntry($model->content);
+    }
+
     /**
      * Confirm a Message
      */
