@@ -37,6 +37,30 @@ class Events extends \yii\base\Object
             ]);
         }
     }
+    
+    public static function onMemberAdded ($event)
+    {
+        // TODO: add member to open announcements
+        echo '<pre>Space: ';
+        print_r($event->space->name);
+        echo '</pre>';
+        echo '<pre>User: ';
+        print_r($event->user->username);
+        echo '</pre>';
+        die();
+    }
+
+    public static function onMemberRemoved ($event)
+    {
+        // TODO: remove member from  announcements
+//        echo '<pre>Space: ';
+//        print_r($event->space->name);
+//        echo '</pre>';
+//        echo '<pre>User: ';
+//        print_r($event->user->username);
+//        echo '</pre>';
+//        die();
+    }
 
 
     /**

@@ -84,7 +84,6 @@ class MessageController extends ContentContainerController
         $request = Yii::$app->request;
         $id = $request->get('id');
 
-        $edited = false;
         $model = Announcement::findOne(['id' => $id]);
         $model->scenario = Announcement::SCENARIO_EDIT;
 
@@ -105,7 +104,7 @@ class MessageController extends ContentContainerController
             return $result;
         }
 
-        return $this->renderAjax('edit', ['announcement' => $model, 'edited' => $edited]);
+        return $this->renderAjax('edit', ['announcement' => $model]);
     }
 
     public function actionOpen()
@@ -176,7 +175,7 @@ class MessageController extends ContentContainerController
         $query->andWhere(['announcement_user.confirmed' => true]);
 //        $query->orderBy('announcement_user.created_at DESC');
 
-        $title = Yii::t('AnnouncementsModule.base', "Users read: <strong>{title}</strong>", ['{title}' => Html::encode($announcement->title)]);
+        $title = Yii::t('AnnouncementsModule.base', "Users read this <strong>{title}</strong>", ['{title}' => Yii::t('AnnouncementsModule.base', 'Announcement')]);
 
         return $this->renderAjaxContent(UserListBox::widget(['query' => $query, 'title' => $title]));
     }
@@ -198,8 +197,7 @@ class MessageController extends ContentContainerController
         $query->andWhere(['announcement_user.announcement_id' => $announcement->id]);
         $query->andWhere(['announcement_user.confirmed' => false]);
 //        $query->orderBy('announcement_user.created_at DESC');
-
-        $title = Yii::t('AnnouncementsModule.base', "Users didn't read: <strong>{title}</strong>", ['{title}' => Html::encode($announcement->title)]);
+        $title = Yii::t('AnnouncementsModule.base', "Users didn't read this <strong>{title}</strong>", ['{title}' => Yii::t('AnnouncementsModule.base', 'Announcement')]);
 
         return $this->renderAjaxContent(UserListBox::widget(['query' => $query, 'title' => $title]));
     }

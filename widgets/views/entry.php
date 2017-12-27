@@ -20,7 +20,7 @@ humhub\modules\announcements\assets\AnnouncementsAsset::register($this);
 <!--    TODO: remove AddMessageInput-->
 
     <div data-ui-markdown>
-        <?= humhub\widgets\RichText::widget(['text' => $announcement->message]); ?>
+        <?= humhub\widgets\RichText::widget(['text' => $announcement->message, 'record' => $announcement, 'markdown' => true]); ?>
     </div>
 
 <!--    <br><br>-->

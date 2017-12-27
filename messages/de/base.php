@@ -3,14 +3,14 @@ return array(
     'Announcement' => 'Ankündigung',
     'Announcements' => 'Ankündigungen',
     'Add Announcement...' => 'Ankündigung hinzufügen...',
-    'Note: You can use markdown syntax. (For more information visit http://www.markdown.de)' => 'Hinweis: Du kannst die Markdown Sytax verwenden. (Weitere Infos unter http://www.markdown.de)',
+    'Note: You can use markdown syntax. (For more information visit <a target="_blank" href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">this link</a>)' => 'Hinweis: Du kannst die Markdown Sytax verwenden. (Weitere Infos unter <a target="_blank" href="http://www.markdown.de">diesem Link</a>)',
 
     '{userName} has read {announcement}.' => '{userName} hat {announcement} gelesen.',
 
 //    controller
     'Access denied!' => 'Zutritt verboten!',
-    'Users read: <strong>{title}</strong>' => 'Personen, die <strong>{title}</strong> gelesen haben',
-    "Users didn't read: <strong>{title}</strong>" => "Personen, die <strong>{title}</strong> nicht gelesen haben",
+    'Users read this <strong>{title}</strong>' => 'Personen, die diese <strong>{title}</strong> gelesen haben',
+    "Users didn't read this <strong>{title}</strong>" => "Personen, die diese <strong>{title}</strong> nicht gelesen haben",
     'Announcement not found!' => 'Ankündigung nicht gefunden!',
     'You have insufficient permissions to perform that operation!' => 'Sie haben nicht genügend Rechte, um diese Aktion auszuführen!',
     'Could not load Announcement!' => 'Ankündigung konnte nicht geladen werden!',
@@ -34,5 +34,9 @@ return array(
 
     // close-link
       'Complete Announcement' => 'Ankündigung schliessen',
-      'Reopen Announcement' => 'Ankündigung wieder öffnen'
+      'Reopen Announcement' => 'Ankündigung wieder öffnen',
+
+    // entry-view
+    'Save' => 'Speichern',
+    'Cancel' => 'Abbrechen'
 );

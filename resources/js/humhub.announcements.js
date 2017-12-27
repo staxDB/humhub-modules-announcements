@@ -1,8 +1,8 @@
 humhub.module('announcements', function (module, require, $) {
 
+    var Content = require('content').Content;
     var object = require('util').object;
     var client = require('client');
-    var Content = require('content').Content;
 
     var Message = function (id) {
         Content.call(this, id);
