@@ -45,7 +45,7 @@ class CreateAnnouncement extends \humhub\libs\BasePermission
 
     public function getDescription()
     {
-        return Yii::t('AnnouncementsModule.base', 'Allows the user to create an Announcement');
+        return Yii::t('AnnouncementsModule.base', 'Allows the user to create/edit an Announcement');
     }
 
 }

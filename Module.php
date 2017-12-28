@@ -88,5 +88,18 @@ class Module extends ContentContainerModule
         return Yii::t('AnnouncementsModule.base', 'Allows to post messages that can be confirmed by users.');
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function getName()
+    {
+        return Yii::t('AnnouncementsModule.base', 'Announcements');
+    }
+
+    public function getDescription()
+    {
+        return Yii::t('AnnouncementsModule.base', 'Module for adding posts to spaces, that can be confirmed as read.');
+    }
+
 
 }

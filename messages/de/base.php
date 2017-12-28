@@ -4,8 +4,8 @@ return array(
     'Announcements' => 'Ankündigungen',
     'Add Announcement...' => 'Ankündigung hinzufügen...',
     'Note: You can use markdown syntax. (For more information visit <a target="_blank" href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">this link</a>)' => 'Hinweis: Du kannst die Markdown Sytax verwenden. (Weitere Infos unter <a target="_blank" href="http://www.markdown.de">diesem Link</a>)',
-
     '{userName} has read {announcement}.' => '{userName} hat {announcement} gelesen.',
+    'Module for adding posts to spaces, that can be confirmed as read.' => 'Modul zum Hinzufügen von Posts in Spaces, die als gelesen markiert werden können.',
 
 //    controller
     'Access denied!' => 'Zutritt verboten!',
@@ -28,7 +28,7 @@ return array(
 
 //    permissions
     'Create Announcement' => 'Ankündigungen erstellen',
-    'Allows the user to create an Announcement' => 'Erlaube dem Nutzer, eine Ankündigung zu erstellen',
+    'Allows the user to create/edit an Announcement' => 'Erlaube dem Nutzer, eine Ankündigung zu erstellen/bearbeiten',
     'View Statistics' => 'Auswertungen ansehen',
     'Allows the user to view the statistics (read, unread)' => 'Erlaube dem Nutzer, die Auswertungen anzusehen (gelesen, nicht gelesen)',
 

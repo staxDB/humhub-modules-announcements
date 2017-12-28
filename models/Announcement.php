@@ -362,7 +362,7 @@ class Announcement extends ContentActiveRecord implements \humhub\modules\search
      */
     public function getContentName()
     {
-        return Yii::t('AnnouncementsModule.base', "Message");
+        return Yii::t('AnnouncementsModule.base', "Announcement");
     }
 
     /**
