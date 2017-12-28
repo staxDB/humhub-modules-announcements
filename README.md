@@ -15,5 +15,4 @@ v 0.0.1:
 
 ## ToDo
 - testing
-- Events: OnUserAddedToSpace && OnRemoveUserFromSpace
-- on reopening announcement --> reset all confirmations and add spaces-members
+- handle guest-users
