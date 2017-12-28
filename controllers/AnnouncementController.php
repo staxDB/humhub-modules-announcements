@@ -18,9 +18,9 @@ use humhub\modules\announcements\permissions\CreateAnnouncement;
 
 
 /**
- * DefaultController implements the CRUD actions for Message model.
+ * Controller for handling the Announcement-Models
  */
-class MessageController extends ContentContainerController
+class AnnouncementController extends ContentContainerController
 {
 
     public function actions()
@@ -36,7 +36,7 @@ class MessageController extends ContentContainerController
     }
 
     /**
-     * Shows the questions tab
+     * Shows the announcement tab
      */
     public function actionShow()
     {
@@ -46,7 +46,7 @@ class MessageController extends ContentContainerController
     }
 
     /**
-     * Posts a new announcement  throu the announcement form
+     * Posts a new announcement throu the announcement form
      *
      * @return type
      * @throws HttpException
@@ -76,7 +76,7 @@ class MessageController extends ContentContainerController
             throw new HttpException(403, Yii::t('AnnouncementsModule.base', 'Access denied!'));
         }
 
-        return \humhub\modules\stream\actions\Stream::getContentResultEntry($model->content);
+        return Stream::getContentResultEntry($model->content);
     }
 
     public function actionEdit()
@@ -131,11 +131,11 @@ class MessageController extends ContentContainerController
         // Refresh updated_at
 //        $model->content->refresh();
 
-        return \humhub\modules\stream\actions\Stream::getContentResultEntry($model->content);
+        return Stream::getContentResultEntry($model->content);
     }
 
     /**
-     * Confirm a Message
+     * Confirm an Announcement
      */
     public function actionConfirm()
     {
@@ -166,7 +166,7 @@ class MessageController extends ContentContainerController
         $announcement = $this->getAnnouncementByParameter();
 
         if ($announcement == null) {
-            throw new HttpException(401, Yii::t('AnnouncementsModule.base', 'Message not found!'));
+            throw new HttpException(401, Yii::t('AnnouncementsModule.base', 'Announcement not found!'));
         }
 
         $query = User::find();

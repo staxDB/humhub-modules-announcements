@@ -213,7 +213,6 @@ class Announcement extends ContentActiveRecord implements \humhub\modules\search
         return $this->hasUserConfirmed() && !$this->closed;
     }
 
-
     /**
      * Resets all answers from a user only if the poll is not closed yet.
      *
@@ -250,8 +249,8 @@ class Announcement extends ContentActiveRecord implements \humhub\modules\search
             return true;
 
         // reset announcement because attributes have been changed (except 'closed')
-//        $members = $this->content->container->getMembershipUser()->all(); // gets all users in space
-        $members = $this->getConfirmationUsers()->all();    // gets all confirmationUsers
+        $members = $this->content->container->getMembershipUser()->all(); // gets all users in space
+//        $members = $this->getConfirmationUsers()->all();    // gets all confirmationUsers
         foreach ($members as $member) {
             $this->setConfirmation($member);
         }

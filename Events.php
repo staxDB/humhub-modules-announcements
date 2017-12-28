@@ -25,7 +25,7 @@ class Events extends \yii\base\Object
             return;
         }
 
-        if($object->content->canWrite()) {
+        if($object->content->canEdit()) {
             $event->sender->addWidget(\humhub\modules\announcements\widgets\CloseButton::className(), [
                 'announcement' => $object
             ]);
@@ -41,13 +41,13 @@ class Events extends \yii\base\Object
     public static function onMemberAdded ($event)
     {
         // TODO: add member to open announcements
-        echo '<pre>Space: ';
-        print_r($event->space->name);
-        echo '</pre>';
-        echo '<pre>User: ';
-        print_r($event->user->username);
-        echo '</pre>';
-        die();
+//        echo '<pre>Space: ';
+//        print_r($event->space->name);
+//        echo '</pre>';
+//        echo '<pre>User: ';
+//        print_r($event->user->username);
+//        echo '</pre>';
+//        die();
     }
 
     public static function onMemberRemoved ($event)
@@ -78,7 +78,7 @@ class Events extends \yii\base\Object
             $event->sender->addItem(array(
                 'label' => Yii::t('AnnouncementsModule.base', 'Announcements'),
                 'group' => 'modules',
-                'url' => $space->createUrl('/announcements/message/show'),
+                'url' => $space->createUrl('/announcements/announcement/show'),
                 'icon' => '<i class="fa fa-check-square-o"></i>',
                 'isActive' => (Yii::$app->controller->module && Yii::$app->controller->module->id == 'announcements'),
             ));
@@ -86,7 +86,7 @@ class Events extends \yii\base\Object
     }
 
     /**
-     * On User delete, delete all messages connected to this user
+     * On User delete, delete all announcements connected to this user
      *
      * @param type $event
      */
