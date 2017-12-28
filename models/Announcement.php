@@ -371,6 +371,12 @@ class Announcement extends ContentActiveRecord implements \humhub\modules\search
         return true;
     }
 
+    /**
+     * handle click on confirm as read
+     *
+     * @return void
+     * @throws \yii\base\Exception
+     */
     public function confirm()
     {
 
