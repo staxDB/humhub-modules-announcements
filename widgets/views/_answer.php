@@ -49,7 +49,7 @@ use humhub\modules\announcements\permissions\CreateAnnouncement;
                         <span class="tt" data-toggle="tooltip" data-placement="top"
                               data-original-title="<?= $userlist; ?>">
                             <?php if ($announcement->confirmedCount > 0) { ?>
-                                <a href="<?= $contentContainer->createUrl('/announcements/message/user-list-confirmed', ['announcementId' => $announcement->id]); ?>"
+                                <a href="<?= $contentContainer->createUrl('/announcements/announcement/user-list-confirmed', ['announcementId' => $announcement->id]); ?>"
                                    data-target="#globalModal">
                                     <?= $announcement->confirmedCount . " " . $announcementText ?>
                                 </a>
@@ -84,7 +84,7 @@ use humhub\modules\announcements\permissions\CreateAnnouncement;
                         <span class="tt" data-toggle="tooltip" data-placement="top"
                               data-original-title="<?= $userlist; ?>">
                             <?php if ($announcement->unConfirmedCount > 0) { ?>
-                                <a href="<?= $contentContainer->createUrl('/announcements/message/user-list-unconfirmed', ['announcementId' => $announcement->id]); ?>"
+                                <a href="<?= $contentContainer->createUrl('/announcements/announcement/user-list-unconfirmed', ['announcementId' => $announcement->id]); ?>"
                                    data-target="#globalModal">
                                     <?= $announcement->unConfirmedCount . " " . $announcementText ?>
                                 </a>

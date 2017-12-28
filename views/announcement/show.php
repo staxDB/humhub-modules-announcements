@@ -13,7 +13,7 @@ $canCreateAnnouncements = $contentContainer->permissionManager->can(new \humhub\
 
 echo \humhub\modules\stream\widgets\StreamViewer::widget([
     'contentContainer' => $contentContainer,
-    'streamAction' => '/announcements/message/stream',
+    'streamAction' => '/announcements/announcement/stream',
     'messageStreamEmpty' => ($canCreateAnnouncements) ?
         Yii::t('AnnouncementsModule.base', '<b>There are no messages yet!</b><br>Be the first and create one...') :
         Yii::t('AnnouncementsModule.base', '<b>There are no messages yet!</b>'),

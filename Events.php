@@ -5,8 +5,8 @@ namespace humhub\modules\announcements;
 use humhub\modules\space\models\Space;
 use humhub\modules\user\models\User;
 use humhub\modules\announcements\models\Announcement;
-use Yii;
 use humhub\modules\announcements\models\AnnouncementUser;
+use Yii;
 use humhub\modules\space\models\Membership;
 
 /**
@@ -40,7 +40,16 @@ class Events extends \yii\base\Object
     
     public static function onMemberAdded ($event)
     {
-        // TODO: add member to open announcements
+        // add member to open announcements
+        $announcements = Announcement::find()->contentContainer($event->space)->all();
+        if (isset($announcements) && $announcements !== null) {
+            foreach ($announcements as $announcement) {
+                if ($announcement->closed)
+                    continue;
+                $announcement->setConfirmation($event->user);
+            }
+        }
+
 //        echo '<pre>Space: ';
 //        print_r($event->space->name);
 //        echo '</pre>';
@@ -53,6 +62,17 @@ class Events extends \yii\base\Object
     public static function onMemberRemoved ($event)
     {
         // TODO: remove member from  announcements
+        $announcements = Announcement::find()->contentContainer($event->space)->all();
+        if (isset($announcements) && $announcements !== null) {
+            foreach ($announcements as $announcement) {
+                if ($announcement->closed)  // skip closed announcements, because we want user to be part of statistics
+                    continue;
+                $announcementUser = $announcement->findAnnouncementUser($event->user);
+                if (isset($announcementUser) && $announcementUser !== null) {
+                    $announcement->unlink('confirmations', $announcementUser, true);
+                }
+            }
+        }
 //        echo '<pre>Space: ';
 //        print_r($event->space->name);
 //        echo '</pre>';

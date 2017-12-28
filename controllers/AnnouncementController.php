@@ -129,7 +129,7 @@ class AnnouncementController extends ContentContainerController
         $model->closed = $closed;
         $model->save();
         // Refresh updated_at
-//        $model->content->refresh();
+        $model->content->refresh();
 
         return Stream::getContentResultEntry($model->content);
     }

@@ -99,16 +99,59 @@ class Announcement extends ContentActiveRecord implements \humhub\modules\search
      */
     public function setConfirmation($user, $state = false)
     {
-        $recipient = $this->findAnnouncementUser($user);
+        $announcementUser = $this->findAnnouncementUser($user);
 
-        if (!$recipient) {
-            $recipient = new AnnouncementUser();
+        if (!$announcementUser) {
+            $announcementUser = new AnnouncementUser();
         }
 
-        $recipient->user_id = $user->id;
-        $recipient->announcement_id = $this->id;
-        $recipient->confirmed = $state;
-        $recipient->save();
+        $announcementUser->user_id = $user->id;
+        $announcementUser->announcement_id = $this->id;
+        $announcementUser->confirmed = $state;
+        $announcementUser->save();
+    }
+
+    /**
+     *
+     */
+    public function setConfirmations()
+    {
+        // reset announcement because attributes have been changed (except 'closed')
+        $members = $this->content->container->getMembershipUser()->all(); // gets all users in space
+//        $members = $this->getConfirmationUsers()->all();    // gets all confirmationUsers
+        foreach ($members as $member) {
+            $this->setConfirmation($member);
+        }
+        // so now, everytime someone clicks on save, the whole list will be resetted
+
+
+
+//        if (($insert || $changedAttributes)  && !array_key_exists('closed', $changedAttributes)) {
+//            $members = $this->content->container->getMembershipUser()->all();
+//            foreach ($members as $member) {
+//                $this->setConfirmation($member);
+//            }
+//        }
+
+//        // #### check if attached files have been changed
+//        $files = $this->fileManager->findAll();
+//        $changed = false;
+//        if (isset($files) && $files !== null) {
+//            foreach ($files as $file) {
+//                $file_date = new \DateTime($file->updated_at);
+//                $today = new \DateTime('now');
+//                if ($file_date->format('Y-m-d') === $today->format('Y-m-d')) {
+//                    $changed = true;
+//                }
+//            }
+//        }
+//        if ($changed) {
+//            $members = $this->content->container->getMembershipUser()->all();
+//            foreach ($members as $member) {
+//                $this->setConfirmation($member);
+//            }
+//        }
+//        // #### end
     }
 
     /**
@@ -237,6 +280,37 @@ class Announcement extends ContentActiveRecord implements \humhub\modules\search
     }
 
     /**
+     * Handles a reset of an announcement, also if user left space
+     *
+     */
+    public function resetConfirmations()
+    {
+        $members = $this->content->container->getMembershipUser()->all(); // gets all users in space
+        $confirmed = $this->getConfirmationUsers()->all();    // gets all confirmationUsers
+        foreach ($members as $memberKey => $member) {
+            foreach ($confirmed as $userKey => $user) {
+                if ($member === $user) {
+                    $this->setConfirmation($member);
+                    unset($confirmed[$userKey]);    // user exists in space and in AnnouncementUser
+                    unset($members[$memberKey]);
+                }
+            }
+        }
+        // add new members to list of AnnouncementUser
+        foreach ($members as $memberKey => $member) {
+            $this->setConfirmation($member);    // user is a member but not in list of AnnouncementUser --> add to list
+            unset($members[$memberKey]);
+        }
+        // remove old AnnouncementUser from list
+        foreach ($confirmed as $userKey => $user) {
+            $announcementUser = $this->findAnnouncementUser($user);
+            $this->unlink('confirmations', $announcementUser, true);
+            unset($confirmed[$userKey]);
+        }
+
+    }
+
+    /**
      * @param type $insert
      * @param type $changedAttributes
      * @return boolean
@@ -245,46 +319,14 @@ class Announcement extends ContentActiveRecord implements \humhub\modules\search
     {
         parent::afterSave($insert, $changedAttributes);
 
-        if (array_key_exists('closed', $changedAttributes))
-            return true;
-
-        // reset announcement because attributes have been changed (except 'closed')
-        $members = $this->content->container->getMembershipUser()->all(); // gets all users in space
-//        $members = $this->getConfirmationUsers()->all();    // gets all confirmationUsers
-        foreach ($members as $member) {
-            $this->setConfirmation($member);
+        if (array_key_exists('closed', $changedAttributes)) {
+            if (!$changedAttributes['closed'])  // if closed === false --> reopen-->reset confirmations
+                return true;
+            else
+                $this->resetConfirmations();    // reset all existing confirmations, remove non-members of space and add space-members, that are not in list of AnnouncementUser
         }
 
-        // so now, everytime someone clicks on save, the whole list will be resetted
-
-
-
-//        if (($insert || $changedAttributes)  && !array_key_exists('closed', $changedAttributes)) {
-//            $members = $this->content->container->getMembershipUser()->all();
-//            foreach ($members as $member) {
-//                $this->setConfirmation($member);
-//            }
-//        }
-
-//        // #### check if attached files have been changed
-//        $files = $this->fileManager->findAll();
-//        $changed = false;
-//        if (isset($files) && $files !== null) {
-//            foreach ($files as $file) {
-//                $file_date = new \DateTime($file->updated_at);
-//                $today = new \DateTime('now');
-//                if ($file_date->format('Y-m-d') === $today->format('Y-m-d')) {
-//                    $changed = true;
-//                }
-//            }
-//        }
-//        if ($changed) {
-//            $members = $this->content->container->getMembershipUser()->all();
-//            foreach ($members as $member) {
-//                $this->setConfirmation($member);
-//            }
-//        }
-//        // #### end
+        $this->setConfirmations();
 
         return true;
     }

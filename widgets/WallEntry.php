@@ -14,7 +14,7 @@ use Yii;
 class WallEntry extends \humhub\modules\content\widgets\WallEntry
 {
 
-    public $editRoute = "/announcements/message/edit";
+    public $editRoute = "/announcements/announcement/edit";
 
     public function run()
     {

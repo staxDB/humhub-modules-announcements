@@ -1,5 +1,9 @@
 <?php
 return array(
+    // base
+    'Save' => 'Speichern',
+    'Cancel' => 'Abbrechen',
+
     'Announcement' => 'Ankündigung',
     'Announcements' => 'Ankündigungen',
     'Add Announcement...' => 'Ankündigung hinzufügen...',
@@ -37,6 +41,5 @@ return array(
       'Reopen Announcement' => 'Ankündigung wieder öffnen',
 
     // entry-view
-    'Save' => 'Speichern',
-    'Cancel' => 'Abbrechen'
+    'Old' => 'Veraltet'
 );

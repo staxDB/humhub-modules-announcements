@@ -13,7 +13,7 @@ class WallCreateForm extends \humhub\modules\content\widgets\WallCreateContentFo
     /**
      * @inheritdoc
      */
-    public $submitUrl = '/announcements/message/create';
+    public $submitUrl = '/announcements/announcement/create';
 
     /**
      * @inheritdoc
