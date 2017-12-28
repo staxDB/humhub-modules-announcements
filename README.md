@@ -1,19 +1,19 @@
 ## Description
 
-Simple confirm message system for spaces.
+Simple confirm posts as read system.
 
-__Module website:__ <https://github.com/...>  
+__Module website:__ <https://github.com/staxDB/announcements>  
 __Author:__ davidborn  
-__Author website:__ [humhub.org](http://humhub.org)
 
 ## Changelog
 v 0.0.1:
-    - First Try
-<https://github.com/...>
+<https://github.com/staxDB/announcements/commits/master>
 
 ## Bugtracker
 
-<https://github.com/...>
+<https://github.com/staxDB/announcements/issues>
 
 ## ToDo
-- remove RichtText for Title --> always as h5
+- testing
+- Events: OnUserAddedToSpace && OnRemoveUserFromSpace
+- on reopening announcement --> reset all confirmations and add spaces-members
