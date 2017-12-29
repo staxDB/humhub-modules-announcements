@@ -99,7 +99,7 @@ class Events extends \yii\base\Object
                 'label' => Yii::t('AnnouncementsModule.base', 'Announcements'),
                 'group' => 'modules',
                 'url' => $space->createUrl('/announcements/announcement/show'),
-                'icon' => '<i class="fa fa-check-square-o"></i>',
+                'icon' => '<i class="fa fa-bullhorn"></i>',
                 'isActive' => (Yii::$app->controller->module && Yii::$app->controller->module->id == 'announcements'),
             ));
         }
