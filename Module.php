@@ -85,7 +85,7 @@ class Module extends ContentContainerModule
      */
     public function getContentContainerDescription(ContentContainerActiveRecord $container)
     {
-        return Yii::t('AnnouncementsModule.base', 'Allows to post messages that can be confirmed by users.');
+        return Yii::t('AnnouncementsModule.base', 'Allows to post messages to spaces, that can be confirmed as read.');
     }
 
     /**
@@ -98,7 +98,7 @@ class Module extends ContentContainerModule
 
     public function getDescription()
     {
-        return Yii::t('AnnouncementsModule.base', 'Module for adding posts to spaces, that can be confirmed as read.');
+        return Yii::t('AnnouncementsModule.base', 'Allows to post messages to spaces, that can be confirmed as read.');
     }
 
 
