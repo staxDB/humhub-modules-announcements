@@ -123,34 +123,26 @@ class Events extends \yii\base\Object
      * Callback to validate module database records.
      *
      * @param Event $event
+     * @throws \Exception
+     * @throws \yii\db\StaleObjectException
      */
-//    public static function onIntegrityCheck($event)
-//    {
-//        $integrityController = $event->sender;
-//        $integrityController->showTestHeadline("Polls Module - Answers (" . PollAnswer::find()->count() . " entries)");
-//        foreach (PollAnswer::find()->joinWith('poll')->all() as $answer) {
-//            if ($answer->poll === null) {
-//                if ($integrityController->showFix("Deleting poll answer id " . $answer->id . " without existing poll!")) {
-//                    $answer->delete();
-//                }
-//            }
-//        }
-//
-//        $integrityController->showTestHeadline("Polls Module - Answers User (" . PollAnswerUser::find()->count() . " entries)");
-//        foreach (PollAnswerUser::find()->joinWith(['poll', 'user'])->all() as $answerUser) {
-//            if ($answerUser->poll === null) {
-//                if ($integrityController->showFix("Deleting poll answer id " . $answerUser->id . " without existing poll!")) {
-//                    $answerUser->delete();
-//                }
-//            }
-//            if ($answerUser->user === null) {
-//                if ($integrityController->showFix("Deleting poll answer id " . $answerUser->id . " without existing user!")) {
-//                    $answerUser->delete();
-//                }
-//            }
-//        }
-//    }
-
+    public static function onIntegrityCheck($event)
+    {
+        $integrityController = $event->sender;
+        $integrityController->showTestHeadline("Announcements Module - Users (" . AnnouncementUser::find()->count() . " entries)");
+        foreach (AnnouncementUser::find()->joinWith('announcement')->all() as $announcementUser) {
+            if ($announcementUser->announcement === null) {
+                if ($integrityController->showFix("Deleting announcement user id " . $announcementUser->id . " without existing announcement!")) {
+                    $announcementUser->delete();
+                }
+            }
+            if ($announcementUser->user === null) {
+                if ($integrityController->showFix("Deleting announcement user id " . $announcementUser->id . " without existing user!")) {
+                    $announcementUser->delete();
+                }
+            }
+        }
+    }
 
 }
 

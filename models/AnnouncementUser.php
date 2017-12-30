@@ -42,7 +42,7 @@ class AnnouncementUser extends ActiveRecord
         );
     }
 
-    public function getMessage()
+    public function getAnnouncement()
     {
         return $this->hasOne(Announcement::className(), ['id' => 'announcement_id']);
     }

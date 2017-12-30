@@ -17,7 +17,7 @@ return [
         ['class' => Menu::className(), 'event' => Menu::EVENT_INIT, 'callback' => ['humhub\modules\announcements\Events', 'onSpaceMenuInit']],
         ['class' => Membership::className(), 'event' => Membership::EVENT_MEMBER_ADDED, 'callback' => ['humhub\modules\announcements\Events', 'onMemberAdded']],
         ['class' => Membership::className(), 'event' => Membership::EVENT_MEMBER_REMOVED, 'callback' => ['humhub\modules\announcements\Events', 'onMemberRemoved']],
-//        ['class' => IntegrityController::className(), 'event' => IntegrityController::EVENT_ON_RUN, 'callback' => ['humhub\modules\announcements\Events', 'onIntegrityCheck']],
+        ['class' => IntegrityController::className(), 'event' => IntegrityController::EVENT_ON_RUN, 'callback' => ['humhub\modules\announcements\Events', 'onIntegrityCheck']],
     ],
 ];
 ?>
