@@ -41,7 +41,7 @@ use yii\helpers\Html;
 
     <a href="#" class="btn btn-default btn-sm btn-comment-submit"
        data-action-click="editSubmit"
-       data-action-url="<?= $announcement->content->container->createUrl('/announcements/message/edit', ['id' => $announcement->id]) ?>"
+       data-action-url="<?= $announcement->content->container->createUrl('/announcements/announcement/edit', ['id' => $announcement->id]) ?>"
        data-action-submit
        data-ui-loader>
         <?= Yii::t('AnnouncementsModule.base', "Save") ?>
