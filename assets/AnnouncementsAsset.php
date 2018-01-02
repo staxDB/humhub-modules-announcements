@@ -15,7 +15,9 @@ class AnnouncementsAsset extends AssetBundle
 
     public $jsOptions = ['position' => \yii\web\View::POS_END];
     public $sourcePath = '@announcements/resources';
-    public $css = [];
+    public $css = [
+        'css/announcements.cs'
+    ];
     public $js = [
         'js/humhub.announcements.js'
     ];
