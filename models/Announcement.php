@@ -403,13 +403,6 @@ class Announcement extends ContentActiveRecord implements \humhub\modules\search
                 $confirmed = true;
             }
         }
-
-        if ($confirmed) {
-            $activity = new \humhub\modules\announcements\activities\NewConfirm();
-            $activity->source = $this;
-            $activity->originator = Yii::$app->user->getIdentity();
-            $activity->create();
-        }
     }
 
     /**
