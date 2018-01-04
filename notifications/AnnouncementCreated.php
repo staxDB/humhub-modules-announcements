@@ -27,10 +27,18 @@ class AnnouncementCreated extends BaseNotification
     /**
      *  @inheritdoc
      */
-//    public function category()
-//    {
-//        return new SpaceMemberNotificationCategory;
-//    }
+    public function category()
+    {
+        return new AnnouncementNotificationCategory();
+    }
+
+    /**
+     *  @inheritdoc
+     */
+    public function getMailSubject()
+    {
+        return strip_tags($this->html());
+    }
 
     public function html() {
         return Yii::t('AnnouncementsModule.base', '{userName} created a new Announcement.', [

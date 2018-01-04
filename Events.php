@@ -49,14 +49,6 @@ class Events extends \yii\base\Object
                 $announcement->setConfirmation($event->user);
             }
         }
-
-//        echo '<pre>Space: ';
-//        print_r($event->space->name);
-//        echo '</pre>';
-//        echo '<pre>User: ';
-//        print_r($event->user->username);
-//        echo '</pre>';
-//        die();
     }
 
     public static function onMemberRemoved ($event)

@@ -354,9 +354,9 @@ class Announcement extends ContentActiveRecord implements \humhub\modules\search
      */
     public function beforeDelete()
     {
-//        foreach ($this->confirmations as $answer) {
-//            $answer->delete();
-//        }
+        foreach ($this->confirmations as $confirmation) {
+            $confirmation->delete();
+        }
         return parent::beforeDelete();
     }
 

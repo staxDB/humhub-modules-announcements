@@ -19,6 +19,22 @@ class AnnouncementUpdated extends BaseNotification
      */
     public $moduleId = "announcements";
 
+    /**
+     *  @inheritdoc
+     */
+    public function category()
+    {
+        return new AnnouncementNotificationCategory();
+    }
+
+    /**
+     *  @inheritdoc
+     */
+    public function getMailSubject()
+    {
+        return strip_tags($this->html());
+    }
+
 
     public function html() {
         return Yii::t('AnnouncementsModule.base', '{userName} updated an Announcement.', [
