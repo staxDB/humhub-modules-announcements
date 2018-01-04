@@ -41,5 +41,9 @@ return array(
       'Reopen Announcement' => 'Ankündigung wieder öffnen',
 
     // entry-view
-    'Old' => 'Veraltet'
+    'Old' => 'Veraltet',
+
+    // notifications
+    '{userName} updated an Announcement.' => '{userName} hat eine Ankündigung aktualisiert.',
+    '{userName} created a new Announcement.' => '{userName} hat eine neue Ankündigung erstellt.'
 );

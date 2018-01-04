@@ -12,12 +12,14 @@ use yii\web\AssetBundle;
 
 class AnnouncementsAsset extends AssetBundle
 {
-
-    public $jsOptions = ['position' => \yii\web\View::POS_END];
     public $sourcePath = '@announcements/resources';
+    public $jsOptions = ['position' => \yii\web\View::POS_END];
+//    public $cssOptions = ['position' => \yii\web\View::POS_END];
+
     public $css = [
-        'css/announcements.cs'
+        'css/announcements.css',
     ];
+
     public $js = [
         'js/humhub.announcements.js'
     ];

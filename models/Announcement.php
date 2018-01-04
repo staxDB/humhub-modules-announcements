@@ -9,6 +9,8 @@ use humhub\modules\content\components\ContentActiveRecord;
 use humhub\modules\announcements\models\AnnouncementUser;
 use humhub\modules\announcements\permissions\CreateAnnouncement;
 use humhub\modules\announcements\permissions\ViewStatistics;
+use humhub\modules\announcements\notifications\AnnouncementCreated;
+use humhub\modules\announcements\notifications\AnnouncementUpdated;
 
 /**
  * This is the model class for table "announcements".
@@ -328,6 +330,11 @@ class Announcement extends ContentActiveRecord implements \humhub\modules\search
 
         $this->setConfirmations();
 
+        if (array_key_exists('id', $changedAttributes))
+            $this->informUsers(true);   // is new record
+        else
+            $this->informUsers();
+
         return true;
     }
 
@@ -435,6 +442,17 @@ class Announcement extends ContentActiveRecord implements \humhub\modules\search
     public function canShowStatistics()
     {
         return $this->content->container->permissionManager->can(ViewStatistics::class);
+    }
+
+    /**
+     * Invite user to this meeting
+     */
+    public function informUsers($newRecord = false)
+    {
+        if ($newRecord)
+            AnnouncementCreated::instance()->from(Yii::$app->user->getIdentity())->about($this)->sendBulk($this->confirmationUsers);
+        else
+            AnnouncementUpdated::instance()->from(Yii::$app->user->getIdentity())->about($this)->sendBulk($this->confirmationUsers);
     }
 
 }

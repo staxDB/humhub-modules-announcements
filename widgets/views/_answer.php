@@ -5,12 +5,14 @@ use humhub\modules\announcements\permissions\CreateAnnouncement;
 
 /* @var $announcement \humhub\modules\announcements\models\Announcement */
 /* @var $contentContainer \humhub\modules\content\models\ContentContainer */
+
+humhub\modules\announcements\assets\AnnouncementsAsset::register($this);
 ?>
 
 
 
 <?php if (!$announcement->hasUserConfirmed() && $announcement->findAnnouncementUser() && !Yii::$app->user->isGuest && !$announcement->closed) : ?>
-    <div class="alert alert-info" style="margin-top: 1px;">
+    <div id="confirm-button" class="alert alert-info" style="margin-top: 1px;">
         <?= Html::checkBox('checked', false, ['class' => 'tt', 'label' => Yii::t('AnnouncementsModule.base', 'Mark as read'), 'announcementId' => $announcement->id, 'data-action-change' => 'confirm', 'data-action-submit', 'data-ui-loader']); ?>
     </div>
 <?php endif; ?>
