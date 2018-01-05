@@ -97,6 +97,7 @@ class AnnouncementController extends ContentContainerController
             if ($model->validate() && $model->save()) {
                 // Reload record to get populated updated_at field
                 $model = Announcement::findOne(['id' => $id]);
+                $model->informUsers();
                 return Stream::getContentResultEntry($model->content);
             } else {
                 $result['errors'] = $model->getErrors();

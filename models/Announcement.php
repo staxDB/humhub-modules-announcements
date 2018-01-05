@@ -338,8 +338,6 @@ class Announcement extends ContentActiveRecord implements Searchable
 
         if (array_key_exists('id', $changedAttributes))
             $this->informUsers(true);   // is new record
-        elseif (array_key_exists('message', $changedAttributes))
-            $this->informUsers();
 
         return true;
     }
