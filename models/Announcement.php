@@ -2,6 +2,8 @@
 
 namespace humhub\modules\announcements\models;
 
+use humhub\modules\file\libs\FileHelper;
+use humhub\modules\file\models\File;
 use humhub\modules\user\models\fieldtype\DateTime;
 use humhub\modules\user\models\User;
 use Yii;
@@ -11,6 +13,7 @@ use humhub\modules\announcements\permissions\CreateAnnouncement;
 use humhub\modules\announcements\permissions\ViewStatistics;
 use humhub\modules\announcements\notifications\AnnouncementCreated;
 use humhub\modules\announcements\notifications\AnnouncementUpdated;
+use humhub\modules\search\interfaces\Searchable;
 
 /**
  * This is the model class for table "announcements".
@@ -25,15 +28,18 @@ use humhub\modules\announcements\notifications\AnnouncementUpdated;
  *
  * @author davidborn
  */
-class Announcement extends ContentActiveRecord implements \humhub\modules\search\interfaces\Searchable
+class Announcement extends ContentActiveRecord implements Searchable
 {
     const SCENARIO_CREATE = 'create';
     const SCENARIO_EDIT = 'edit';
     const SCENARIO_CLOSE = 'close';
-    const SCENARIO_DEFAULT = 'default';
+    const SCENARIO_DEFAULT = 'default'; // on file-upload
 
     public $autoAddToWall = true;
     public $wallEntryClass = 'humhub\modules\announcements\widgets\WallEntry';
+
+    // won't create any activities
+//    public $silentContentCreation = true;
 
     /**
      * @inheritdoc
@@ -261,7 +267,7 @@ class Announcement extends ContentActiveRecord implements \humhub\modules\search
     /**
      * Resets all answers from a user only if the poll is not closed yet.
      *
-     * @param type $userId
+     * @param string $userId
      */
     public function resetConfirmation($userId = "")
     {
@@ -332,7 +338,7 @@ class Announcement extends ContentActiveRecord implements \humhub\modules\search
 
         if (array_key_exists('id', $changedAttributes))
             $this->informUsers(true);   // is new record
-        else
+        elseif (array_key_exists('message', $changedAttributes))
             $this->informUsers();
 
         return true;
@@ -418,7 +424,7 @@ class Announcement extends ContentActiveRecord implements \humhub\modules\search
      */
     public function getContentDescription()
     {
-        return Yii::t('AnnouncementsModule.base', 'Announcement');
+        return $this->message;
     }
 
     /**

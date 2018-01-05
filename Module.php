@@ -101,5 +101,4 @@ class Module extends ContentContainerModule
         return Yii::t('AnnouncementsModule.base', 'Allows to post messages to spaces, that can be confirmed as read.');
     }
 
-
 }

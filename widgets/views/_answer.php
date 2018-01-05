@@ -9,7 +9,9 @@ use humhub\modules\announcements\permissions\CreateAnnouncement;
 humhub\modules\announcements\assets\AnnouncementsAsset::register($this);
 ?>
 
-
+<?php if ($announcement->canShowStatistics()): ?>
+    <div class="announcement-media">
+<?php endif; ?>
 
 <?php if (!$announcement->hasUserConfirmed() && $announcement->findAnnouncementUser() && !Yii::$app->user->isGuest && !$announcement->closed) : ?>
     <div id="confirm-button" class="alert alert-info" style="margin-top: 1px;">
@@ -18,8 +20,8 @@ humhub\modules\announcements\assets\AnnouncementsAsset::register($this);
 <?php endif; ?>
 
 <?php if ($announcement->canShowStatistics()): ?>
-    <br/>
-    <div class="media">
+    <!--    <br/>-->
+    <div class="media" id="announcement_statistics">
         <div style="padding-left:10px; border-left: 3px solid">
             <div class="media-left media-middle">
                 <i class="fa fa-line-chart colorDefault" style="font-size: 35px;"></i>
@@ -50,18 +52,18 @@ humhub\modules\announcements\assets\AnnouncementsAsset::register($this);
                         ?>
                         <span class="tt" data-toggle="tooltip" data-placement="top"
                               data-original-title="<?= $userlist; ?>">
-                            <?php if ($announcement->confirmedCount > 0) { ?>
-                                <a href="<?= $contentContainer->createUrl('/announcements/announcement/user-list-confirmed', ['announcementId' => $announcement->id]); ?>"
-                                   data-target="#globalModal">
-                                    <?= $announcement->confirmedCount . " " . $announcementText ?>
-                                </a>
-                            <?php } else if ($announcement->confirmedCount > 0) { ?>
+                        <?php if ($announcement->confirmedCount > 0) { ?>
+                            <a href="<?= $contentContainer->createUrl('/announcements/announcement/user-list-confirmed', ['announcementId' => $announcement->id]); ?>"
+                               data-target="#globalModal">
                                 <?= $announcement->confirmedCount . " " . $announcementText ?>
-                            <?php } else { ?>
-                                0 <?= $announcementText ?>
-                            <?php } ?>
+                            </a>
+                        <?php } else if ($announcement->confirmedCount > 0) { ?>
+                            <?= $announcement->confirmedCount . " " . $announcementText ?>
+                        <?php } else { ?>
+                            0 <?= $announcementText ?>
+                        <?php } ?>
 
-                        </span>
+                    </span>
 
 
                         <!--Unconfirmed Users-->
@@ -85,18 +87,18 @@ humhub\modules\announcements\assets\AnnouncementsAsset::register($this);
                         ?>
                         <span class="tt" data-toggle="tooltip" data-placement="top"
                               data-original-title="<?= $userlist; ?>">
-                            <?php if ($announcement->unConfirmedCount > 0) { ?>
-                                <a href="<?= $contentContainer->createUrl('/announcements/announcement/user-list-unconfirmed', ['announcementId' => $announcement->id]); ?>"
-                                   data-target="#globalModal">
-                                    <?= $announcement->unConfirmedCount . " " . $announcementText ?>
-                                </a>
-                            <?php } else if ($announcement->unConfirmedCount > 0) { ?>
+                        <?php if ($announcement->unConfirmedCount > 0) { ?>
+                            <a href="<?= $contentContainer->createUrl('/announcements/announcement/user-list-unconfirmed', ['announcementId' => $announcement->id]); ?>"
+                               data-target="#globalModal">
                                 <?= $announcement->unConfirmedCount . " " . $announcementText ?>
-                            <?php } else { ?>
-                                0 <?= $announcementText ?>
-                            <?php } ?>
+                            </a>
+                        <?php } else if ($announcement->unConfirmedCount > 0) { ?>
+                            <?= $announcement->unConfirmedCount . " " . $announcementText ?>
+                        <?php } else { ?>
+                            0 <?= $announcementText ?>
+                        <?php } ?>
 
-                        </span>
+                    </span>
                     </div>
                 </div>
 
@@ -108,7 +110,8 @@ humhub\modules\announcements\assets\AnnouncementsAsset::register($this);
 
                 <div class="col-md-6">
                     <div class="progress">
-                        <div id="announcement_progress_<?= $announcement->id; ?>" class="progress-bar <?= $color; ?>"
+                        <div id="announcement_progress_<?= $announcement->id; ?>"
+                             class="progress-bar <?= $color; ?>"
                              role="progressbar"
                              aria-valuenow="<?= $percent; ?>" aria-valuemin="0" aria-valuemax="100"
                              style="width: 0%"></div>
@@ -120,6 +123,13 @@ humhub\modules\announcements\assets\AnnouncementsAsset::register($this);
             </div>
         </div>
     </div>
+<?php endif; ?>
+
+<?php if ($announcement->canShowStatistics()): ?>
     </div>
-    <br>
+<?php endif; ?>
+
+<?php if (!$announcement->fileManager->find()->one()): ?>
+<!--add a headline if no files are attached-->
+    <hr>
 <?php endif; ?>

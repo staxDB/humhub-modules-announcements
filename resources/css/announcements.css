@@ -1,7 +1,29 @@
 /*!
  * Stylesheet
  */
+.announcement-media {
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+#announcement_statistics {
+    padding-top: 12px;
+}
 
 .alert-info label{
     cursor:pointer;
+}
+.alert-info {
+    padding-top: 6px;
+    padding-left: 8px;
+    padding-bottom: 4px;
+    border-radius: 3px;
+    margin-right: 50px;
+    border: 1px solid #ddd;
+}
+
+#confirm-button label {
+    font-size: 12px;
+    font-weight: normal;
+    color: #0a0a0a;
 }

@@ -23,9 +23,6 @@ humhub\modules\announcements\assets\AnnouncementsAsset::register($this);
         <?= humhub\widgets\RichText::widget(['text' => $announcement->message, 'record' => $announcement, 'markdown' => true]); ?>
     </div>
 
-<!--    <br><br>-->
-    <br>
-
     <?= $this->render('_answer', ['announcement' => $announcement, 'contentContainer' => $contentContainer]); ?>
 
     <div class="clearFloats"></div>
