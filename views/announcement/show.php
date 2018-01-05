@@ -19,6 +19,7 @@ echo \humhub\modules\stream\widgets\StreamViewer::widget([
         Yii::t('AnnouncementsModule.base', '<b>There are no announcements yet!</b>'),
     'messageStreamEmptyCss' => ($canCreateAnnouncements) ? 'placeholder-empty-stream' : '',
     'filters' => [
+        'announcement_notAnswered' => Yii::t('AnnouncementsModule.base', 'Not read'),
         'filter_entry_files' => Yii::t('ContentModule.widgets_views_stream', 'Content with attached files'),
         'filter_entry_mine' => Yii::t('ContentModule.widgets_views_stream', 'Created by me'),
         'filter_entry_archived' => Yii::t('ContentModule.widgets_views_stream', 'Include archived posts'),
