@@ -129,6 +129,8 @@ class AnnouncementController extends ContentContainerController
 
         $model->closed = $closed;
         $model->save();
+        if (!$closed)
+            $model->informUsers();
         // Refresh updated_at
         $model->content->refresh();
 

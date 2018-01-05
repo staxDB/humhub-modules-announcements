@@ -45,5 +45,11 @@ return array(
 
     // notifications
     '{userName} updated an Announcement.' => '{userName} hat eine Ankündigung aktualisiert.',
-    '{userName} created a new Announcement.' => '{userName} hat eine neue Ankündigung erstellt.'
+    '{userName} created a new Announcement.' => '{userName} hat eine neue Ankündigung erstellt.',
+
+    // stream
+    '<b>There are no announcements yet!</b><br>Be the first and create one...' => '<b>Hier gibt es noch keine Ankündigungen!</b><br>Sei der Erste und erstelle eine...',
+    '<b>There are no announcements yet!</b>' => '<b>Hier gibt es noch keine Ankündigungen!</b>',
+
+
 );
