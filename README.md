@@ -1,6 +1,7 @@
 ## Description
 
 Simple confirm posts as read system.
+Also allows users (e.g. Admins) to see a statistic.
 
 __Module website:__ <https://github.com/staxDB/announcements>  
 __Author:__ davidborn  
@@ -15,4 +16,3 @@ v 0.0.1:
 
 ## ToDo
 - testing
-- handle guest-users
