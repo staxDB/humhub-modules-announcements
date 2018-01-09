@@ -17,8 +17,16 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Save' => 'Speichern',
-    '<b>There are no announcements yet!</b>' => '<b>Hier gibt es noch keine Ankündigungen!</b>',
-    '<b>There are no announcements yet!</b><br>Be the first and create one...' => '<b>Hier gibt es noch keine Ankündigungen!</b><br>Sei der Erste und erstelle eine...',
-    'Not read' => 'Nicht gelesen',
+    'Add Announcement...' => '',
+    'Complete Announcement' => '',
+    'Mark as read' => '',
+    'Mark as unread' => '',
+    'Note: You can use markdown syntax. (For more information visit <a target="_blank" href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">this link</a>)' => '',
+    'Old' => '',
+    'Read, ' => '',
+    'Reopen Announcement' => '',
+    'Statistic:' => '',
+    'Unread' => '',
+    'and {count} more didn\'t read this.' => '',
+    'and {count} more read this.' => '',
 ];

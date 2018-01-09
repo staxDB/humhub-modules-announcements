@@ -17,8 +17,8 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Save' => 'Speichern',
-    '<b>There are no announcements yet!</b>' => '<b>Hier gibt es noch keine Ankündigungen!</b>',
-    '<b>There are no announcements yet!</b><br>Be the first and create one...' => '<b>Hier gibt es noch keine Ankündigungen!</b><br>Sei der Erste und erstelle eine...',
-    'Not read' => 'Nicht gelesen',
+    '<b>There are no announcements yet!</b>' => '',
+    '<b>There are no announcements yet!</b><br>Be the first and create one...' => '',
+    'Not read' => '',
+    'Save' => '',
 ];
