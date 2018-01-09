@@ -41,7 +41,7 @@ class AnnouncementNotificationCategory extends NotificationCategory
      */
     public function getDescription()
     {
-        return Yii::t('AnnouncementsModule.base', 'Receive Notifications for Announcements.');
+        return Yii::t('AnnouncementsModule.notifications', 'Receive Notifications for Announcements (Create, Update, Reopen).');
     }
 
     /**

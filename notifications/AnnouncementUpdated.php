@@ -37,7 +37,7 @@ class AnnouncementUpdated extends BaseNotification
 
 
     public function html() {
-        return Yii::t('AnnouncementsModule.base', '{userName} updated an Announcement.', [
+        return Yii::t('AnnouncementsModule.notifications', '{userName} updated an Announcement.', [
             '{userName}' => '<strong>' . Html::encode($this->originator->displayName) . '</strong>',
         ]);
     }

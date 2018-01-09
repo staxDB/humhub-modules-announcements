@@ -38,8 +38,8 @@ class Module extends ContentContainerModule
      */
     public function disable()
     {
-        foreach (Announcement::find()->all() as $message) {
-            $message->delete();
+        foreach (Announcement::find()->all() as $announement) {
+            $announement->delete();
         }
 
         parent::disable();

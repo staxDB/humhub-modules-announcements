@@ -15,7 +15,7 @@ humhub\modules\announcements\assets\AnnouncementsAsset::register($this);
 
 <?php if (!$announcement->hasUserConfirmed() && $announcement->findAnnouncementUser() && !Yii::$app->user->isGuest && !$announcement->closed) : ?>
     <div id="confirm-button" class="alert alert-info" style="margin-top: 1px;">
-        <?= Html::checkBox('checked', false, ['class' => 'tt', 'label' => Yii::t('AnnouncementsModule.base', 'Mark as read'), 'announcementId' => $announcement->id, 'data-action-change' => 'confirm', 'data-action-submit', 'data-ui-loader']); ?>
+        <?= Html::checkBox('checked', false, ['class' => 'tt', 'label' => Yii::t('AnnouncementsModule.widgets', 'Mark as read'), 'announcementId' => $announcement->id, 'data-action-change' => 'confirm', 'data-action-submit', 'data-ui-loader']); ?>
     </div>
 <?php endif; ?>
 
@@ -29,7 +29,7 @@ humhub\modules\announcements\assets\AnnouncementsAsset::register($this);
             <div class="media-body clearfix">
                 <div class="col-md-12">
                     <div class="media-heading">
-                        <b><?= Yii::t('AnnouncementsModule.base', 'Statistic:') ?></b>
+                        <b><?= Yii::t('AnnouncementsModule.widgets', 'Statistic:') ?></b>
 
                         <!--    confirmed users-->
                         <?php
@@ -39,7 +39,7 @@ humhub\modules\announcements\assets\AnnouncementsAsset::register($this);
                         foreach ($announcement->confirmedUsers as $confirmedUserKey => $confirmedUser) {
                             if ($confirmedUserKey == $maxUser) {
                                 // output with the number of not rendered users
-                                $userlist .= Yii::t('AnnouncementsModule.base', 'and {count} more read this.', array('{count}' => (intval($announcement->confirmedCount - $maxUser))));
+                                $userlist .= Yii::t('AnnouncementsModule.widgets', 'and {count} more read this.', array('{count}' => (intval($announcement->confirmedCount - $maxUser))));
 
                                 // stop the loop
                                 break;
@@ -48,7 +48,7 @@ humhub\modules\announcements\assets\AnnouncementsAsset::register($this);
                             }
                         }
 
-                        $announcementText = Yii::t('AnnouncementsModule.base', 'Read, ');
+                        $announcementText = Yii::t('AnnouncementsModule.widgets', 'Read, ');
                         ?>
                         <span class="tt" data-toggle="tooltip" data-placement="top"
                               data-original-title="<?= $userlist; ?>">
@@ -74,7 +74,7 @@ humhub\modules\announcements\assets\AnnouncementsAsset::register($this);
                         foreach ($announcement->unConfirmedUsers as $unConfirmedUserKey => $unConfirmedUser) {
                             if ($unConfirmedUserKey == $maxUser) {
                                 // output with the number of not rendered users
-                                $userlist .= Yii::t('AnnouncementsModule.base', 'and {count} more didn\'t read this.', array('{count}' => (intval($announcement->unConfirmedCount - $maxUser))));
+                                $userlist .= Yii::t('AnnouncementsModule.widgets', 'and {count} more didn\'t read this.', array('{count}' => (intval($announcement->unConfirmedCount - $maxUser))));
 
                                 // stop the loop
                                 break;
@@ -83,7 +83,7 @@ humhub\modules\announcements\assets\AnnouncementsAsset::register($this);
                             }
                         }
 
-                        $announcementText = Yii::t('AnnouncementsModule.base', 'Unread');
+                        $announcementText = Yii::t('AnnouncementsModule.widgets', 'Unread');
                         ?>
                         <span class="tt" data-toggle="tooltip" data-placement="top"
                               data-original-title="<?= $userlist; ?>">

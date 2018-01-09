@@ -82,7 +82,7 @@ class Announcement extends ContentActiveRecord implements Searchable
     public function attributeLabels()
     {
         return array(
-            'message' => Yii::t('AnnouncementsModule.base', 'Message'),
+            'message' => Yii::t('AnnouncementsModule.models', 'Message'),
         );
     }
 

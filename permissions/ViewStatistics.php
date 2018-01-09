@@ -40,12 +40,12 @@ class ViewStatistics extends \humhub\libs\BasePermission
 
     public function getTitle()
     {
-        return Yii::t('AnnouncementsModule.base', 'View Statistics');
+        return Yii::t('AnnouncementsModule.permissions', 'View Statistics');
     }
 
     public function getDescription()
     {
-        return Yii::t('AnnouncementsModule.base', 'Allows the user to view the statistics (read, unread)');
+        return Yii::t('AnnouncementsModule.permissions', 'Allows the user to view the statistics (read, unread)');
     }
 
 }

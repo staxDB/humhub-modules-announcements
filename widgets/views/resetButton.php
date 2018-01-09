@@ -3,6 +3,6 @@
        data-action-target="[data-announcement='<?= $announcement->id ?>']"
        data-action-url="<?= $announcement->content->container->createUrl('/announcements/announcement/confirmation-reset', ['announcementId' => $announcement->id]); ?>">
         <i class="fa fa-undo"></i>
-        <?= Yii::t('AnnouncementsModule.base', 'Mark as unread') ?>
+        <?= Yii::t('AnnouncementsModule.widgets', 'Mark as unread') ?>
     </a>
 </li>

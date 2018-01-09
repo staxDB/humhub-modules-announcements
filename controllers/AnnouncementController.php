@@ -73,7 +73,7 @@ class AnnouncementController extends ContentContainerController
         $model = Announcement::findOne(['id' => $id]);
 
         if (!$model->content->canRead()) {
-            throw new HttpException(403, Yii::t('AnnouncementsModule.base', 'Access denied!'));
+            throw new HttpException(403, Yii::t('AnnouncementsModule.controller', 'Access denied!'));
         }
 
         return Stream::getContentResultEntry($model->content);
@@ -88,7 +88,7 @@ class AnnouncementController extends ContentContainerController
         $model->scenario = Announcement::SCENARIO_EDIT;
 
         if (!$model->content->canWrite()) {
-            throw new HttpException(403, Yii::t('AnnouncementsModule.base', 'Access denied!'));
+            throw new HttpException(403, Yii::t('AnnouncementsModule.controller', 'Access denied!'));
         }
 
         if ($model->load($request->post())) {
@@ -128,7 +128,7 @@ class AnnouncementController extends ContentContainerController
         }
 
         if (!$model->content->canWrite()) {
-            throw new HttpException(403, Yii::t('AnnouncementsModule.base', 'Access denied!'));
+            throw new HttpException(403, Yii::t('AnnouncementsModule.controller', 'Access denied!'));
         }
 
         $model->closed = $closed;
@@ -173,7 +173,7 @@ class AnnouncementController extends ContentContainerController
         $announcement = $this->getAnnouncementByParameter();
 
         if ($announcement == null) {
-            throw new HttpException(401, Yii::t('AnnouncementsModule.base', 'Announcement not found!'));
+            throw new HttpException(401, Yii::t('AnnouncementsModule.controller', 'Announcement not found!'));
         }
 
         $query = User::find();
@@ -182,7 +182,7 @@ class AnnouncementController extends ContentContainerController
         $query->andWhere(['announcement_user.confirmed' => true]);
 //        $query->orderBy('announcement_user.created_at DESC');
 
-        $title = Yii::t('AnnouncementsModule.base', "Users read this <strong>{title}</strong>", ['{title}' => Yii::t('AnnouncementsModule.base', 'Announcement')]);
+        $title = Yii::t('AnnouncementsModule.controller', "Users read this <strong>{title}</strong>", ['{title}' => Yii::t('AnnouncementsModule.base', 'Announcement')]);
 
         return $this->renderAjaxContent(UserListBox::widget(['query' => $query, 'title' => $title]));
     }
@@ -196,7 +196,7 @@ class AnnouncementController extends ContentContainerController
         $announcement = $this->getAnnouncementByParameter();
 
         if ($announcement == null) {
-            throw new HttpException(401, Yii::t('AnnouncementsModule.base', 'Announcement not found!'));
+            throw new HttpException(401, Yii::t('AnnouncementsModule.controller', 'Announcement not found!'));
         }
 
         $query = User::find();
@@ -204,7 +204,7 @@ class AnnouncementController extends ContentContainerController
         $query->andWhere(['announcement_user.announcement_id' => $announcement->id]);
         $query->andWhere(['announcement_user.confirmed' => false]);
 //        $query->orderBy('announcement_user.created_at DESC');
-        $title = Yii::t('AnnouncementsModule.base', "Users didn't read this <strong>{title}</strong>", ['{title}' => Yii::t('AnnouncementsModule.base', 'Announcement')]);
+        $title = Yii::t('AnnouncementsModule.controller', "Users didn't read this <strong>{title}</strong>", ['{title}' => Yii::t('AnnouncementsModule.base', 'Announcement')]);
 
         return $this->renderAjaxContent(UserListBox::widget(['query' => $query, 'title' => $title]));
     }
@@ -223,11 +223,11 @@ class AnnouncementController extends ContentContainerController
         $announcement = Announcement::find()->contentContainer($this->contentContainer)->readable()->where(['announcement.id' => $announcementId])->one();
 
         if ($announcement == null) {
-            throw new HttpException(401, Yii::t('AnnouncementsModule.base', 'Could not load Announcement!'));
+            throw new HttpException(401, Yii::t('AnnouncementsModule.controller', 'Could not load Announcement!'));
         }
 
         if (!$announcement->content->canRead()) {
-            throw new HttpException(401, Yii::t('AnnouncementsModule.base', 'You have insufficient permissions to perform that operation!'));
+            throw new HttpException(401, Yii::t('AnnouncementsModule.controller', 'You have insufficient permissions to perform that operation!'));
         }
 
         return $announcement;

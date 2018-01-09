@@ -44,7 +44,7 @@ use yii\helpers\Html;
        data-action-url="<?= $announcement->content->container->createUrl('/announcements/announcement/edit', ['id' => $announcement->id]) ?>"
        data-action-submit
        data-ui-loader>
-        <?= Yii::t('AnnouncementsModule.base', "Save") ?>
+        <?= Yii::t('AnnouncementsModule.views', "Save") ?>
     </a>
 
     </div>
