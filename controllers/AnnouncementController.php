@@ -123,6 +123,10 @@ class AnnouncementController extends ContentContainerController
         $model = Announcement::findOne(['id' => $id]);
         $model->scenario = Announcement::SCENARIO_CLOSE;
 
+        if ($model->content->isArchived()) {
+            $model->content->unarchive();
+        }
+
         if (!$model->content->canWrite()) {
             throw new HttpException(403, Yii::t('AnnouncementsModule.base', 'Access denied!'));
         }

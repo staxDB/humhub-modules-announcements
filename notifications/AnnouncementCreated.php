@@ -7,7 +7,7 @@ use yii\bootstrap\Html;
 use humhub\modules\notification\components\BaseNotification;
 
 /**
- * SpaceAnnouncementCreatedNotification is sent to alls members of the space
+ * SpaceAnnouncementCreatedNotification is sent to all members of the space
  *
  * @author davidborn
  */
