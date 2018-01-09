@@ -20,6 +20,11 @@ class AnnouncementUpdated extends BaseNotification
     public $moduleId = "announcements";
 
     /**
+     * @inheritdoc
+     */
+    public $viewName = 'announcementNotification';
+
+    /**
      *  @inheritdoc
      */
     public function category()
@@ -30,15 +35,20 @@ class AnnouncementUpdated extends BaseNotification
     /**
      *  @inheritdoc
      */
-    public function getMailSubject()
-    {
-        return strip_tags($this->html());
+    public function html() {
+        return Yii::t('AnnouncementsModule.notifications', '{displayName} updated an Announcement in space {spaceName}.', [
+            'displayName' => Html::tag('strong', Html::encode($this->originator->displayName)),
+            'spaceName' =>  Html::encode($this->source->content->container->displayName)
+        ]);
     }
 
-
-    public function html() {
-        return Yii::t('AnnouncementsModule.notifications', '{userName} updated an Announcement.', [
-            '{userName}' => '<strong>' . Html::encode($this->originator->displayName) . '</strong>',
+    /**
+     *  @inheritdoc
+     */
+    public function getMailSubject()
+    {
+        return Yii::t('AnnouncementsModule.notifications', '{displayName} updated an Announcement.', [
+            'displayName' => Html::encode($this->originator->displayName),
         ]);
     }
 

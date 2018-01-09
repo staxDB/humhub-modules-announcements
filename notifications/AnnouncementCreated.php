@@ -22,7 +22,7 @@ class AnnouncementCreated extends BaseNotification
     /**
      * @inheritdoc
      */
-//    public $viewName = "announcementCreated";
+    public $viewName = 'announcementNotification';
 
     /**
      *  @inheritdoc
@@ -35,15 +35,20 @@ class AnnouncementCreated extends BaseNotification
     /**
      *  @inheritdoc
      */
-    public function getMailSubject()
-    {
-        return strip_tags($this->html());
-    }
-
     public function html() {
-        return Yii::t('AnnouncementsModule.notifications', '{userName} created a new Announcement.', [
-            '{userName}' => '<strong>' . Html::encode($this->originator->displayName) . '</strong>',
+        return Yii::t('AnnouncementsModule.notifications', '{displayName} created a new Announcement in space {spaceName}.', [
+            'displayName' => Html::tag('strong', Html::encode($this->originator->displayName)),
+            'spaceName' =>  Html::encode($this->source->content->container->displayName)
         ]);
     }
 
+    /**
+     *  @inheritdoc
+     */
+    public function getMailSubject()
+    {
+        return Yii::t('AnnouncementsModule.notifications', '{displayName} created a new Announcement.', [
+            'displayName' => Html::encode($this->originator->displayName),
+        ]);
+    }
 }
