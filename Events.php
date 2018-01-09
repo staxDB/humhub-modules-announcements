@@ -87,9 +87,10 @@ class Events extends \yii\base\Object
     {
         $space = $event->sender->space;
 
-        // Is Module enabled on this workspace?
-        if ($space->isModuleEnabled('announcements')) {
-            $event->sender->addItem(array(
+        // Is Module enabled on this workspace and is user member of space?
+        if ($space->isModuleEnabled('announcements') && $space->isMember()) {
+
+                $event->sender->addItem(array(
                 'label' => Yii::t('AnnouncementsModule.base', 'Announcements'),
                 'group' => 'modules',
                 'url' => $space->createUrl('/announcements/announcement/show'),
