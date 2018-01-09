@@ -57,9 +57,11 @@ class Events extends \yii\base\Object
         $announcements = Announcement::find()->contentContainer($event->space)->all();
         if (isset($announcements) && $announcements !== null) {
             foreach ($announcements as $announcement) {
-                if ($announcement->closed)  // skip closed announcements, because we want user to be part of statistics
-                    continue;
                 $announcementUser = $announcement->findAnnouncementUser($event->user);
+                if ($announcement->closed) {  // skip closed announcements, because we want user to be part of statistics
+                    $announcementUser->followContent(false);    // but he shouldn't get any notifications about the content
+                    continue;
+                }
                 if (isset($announcementUser) && $announcementUser !== null) {
                     $announcement->unlink('confirmations', $announcementUser, true);
                 }
