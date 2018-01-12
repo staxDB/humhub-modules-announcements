@@ -2,6 +2,7 @@
 
 namespace humhub\modules\announcements\widgets;
 
+use Yii;
 use humhub\modules\content\components\ContentActiveRecord;
 use humhub\modules\content\components\ContentContainerActiveRecord;
 use humhub\modules\space\models\Space;
@@ -32,6 +33,13 @@ class WallCreateForm extends \humhub\modules\content\widgets\WallCreateContentFo
     public function run()
     {
 
+        if ($this->contentContainer instanceof Space) {
+
+            if (!$this->contentContainer->permissionManager->can(new CreateAnnouncement())) {
+                return;
+            }
+        }
+
         if ($this->contentContainer->visibility !== Space::VISIBILITY_NONE && $this->contentContainer->can(CreatePublicContent::class)) {
             $defaultVisibility = $this->contentContainer->getDefaultContentVisibility();
             $canSwitchVisibility = true;
@@ -52,15 +60,39 @@ class WallCreateForm extends \humhub\modules\content\widgets\WallCreateContentFo
             'canSwitchVisibility' => $canSwitchVisibility,
             'fileHandlers' => array_merge($fileHandlerCreate, $fileHandlerImport),
         ));
+    }
 
-        if ($this->contentContainer instanceof Space) {
+    /**
+     * Creates the given ContentActiveRecord based on given submitted form information.
+     *
+     * - Automatically assigns ContentContainer
+     * - Access Check
+     * - User Notification / File Uploads
+     * - Reloads Wall after successfull creation or returns error json
+     *
+     * [See guide section](guide:dev-module-stream.md#CreateContentForm)
+     *
+     * @param ContentActiveRecord $record
+     * @return string json
+     */
+    public static function create(ContentActiveRecord $record, ContentContainerActiveRecord $contentContainer = null)
+    {
+        Yii::$app->response->format = 'json';
 
-            if (!$this->contentContainer->permissionManager->can(new CreateAnnouncement())) {
-                return;
-            }
+        $visibility = Yii::$app->request->post('visibility');
+        if ($visibility == Content::VISIBILITY_PUBLIC && !$contentContainer->permissionManager->can(new CreatePublicContent())) {
+            $visibility = Content::VISIBILITY_PRIVATE;
         }
 
-        return parent::run();
+        $record->content->visibility = $visibility;
+        $record->content->container = $contentContainer;
+
+        if ($record->save()) {
+            $record->fileManager->attach(Yii::$app->request->post('fileList'));
+            return \humhub\modules\stream\actions\Stream::getContentResultEntry($record->content);
+        }
+
+        return array('errors' => $record->getErrors());
     }
 
 }
