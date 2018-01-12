@@ -17,9 +17,9 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Receive Notifications for Announcements (Create, Update, Reopen).' => '',
-    '{displayName} created a new Announcement in space {spaceName}.' => '',
-    '{displayName} created a new Announcement.' => '',
-    '{displayName} updated an Announcement in space {spaceName}.' => '',
-    '{displayName} updated an Announcement.' => '',
+    'Receive Notifications for Announcements (Create, Update, Reopen).' => 'Получать уведомления для анонсов (создавать, обновлять, повторно открывать).',
+    '{displayName} created a new Announcement in space {spaceName}.' => '{displayName} создан новый анонс в пространстве {spaceName}.',
+    '{displayName} created a new Announcement.' => '{displayName} создан новый анонс.',
+    '{displayName} updated an Announcement in space {spaceName}.' => '{displayName} изменён анонс в пространстве {spaceName}.',
+    '{displayName} updated an Announcement.' => '{displayName} изменён анонс.',
 ];

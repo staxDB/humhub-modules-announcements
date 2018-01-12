@@ -17,8 +17,8 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Allows the user to create/edit an Announcement' => '',
-    'Allows the user to view the statistics (read, unread)' => '',
-    'Create Announcement' => '',
-    'View Statistics' => '',
+    'Allows the user to create/edit an Announcement' => 'Позволяет пользователю создавать/изменять анонс',
+    'Allows the user to view the statistics (read, unread)' => 'Позволяет пользователю видеть статистику (прочитанные, непрочитанные)',
+    'Create Announcement' => 'Создание анонсов',
+    'View Statistics' => 'Просмотр статистики',
 ];
