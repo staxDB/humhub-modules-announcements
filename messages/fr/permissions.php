@@ -16,9 +16,10 @@
  *
  * NOTE: this file must be saved in UTF-8 encoding.
  */
+
 return [
-    'Allows the user to create/edit an Announcement' => '',
-    'Allows the user to view the statistics (read, unread)' => '',
-    'Create Announcement' => '',
-    'View Statistics' => '',
+    'Allows the user to create/edit an Announcement' => 'Autoriser l‘utilisateur à créer/éditer une annonce importante',
+    'Allows the user to view the statistics (read, unread)' => 'Autoriser l‘utilisateur à voir les statistiques (lu, non lu)',
+    'Create Announcement' => 'Créer une annonce importance',
+    'View Statistics' => 'Voir les statistiques',
 ];

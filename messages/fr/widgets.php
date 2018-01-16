@@ -17,16 +17,16 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Add Announcement...' => '',
-    'Complete Announcement' => '',
-    'Mark as read' => '',
-    'Mark as unread' => '',
-    'Note: You can use markdown syntax. (For more information visit <a target="_blank" href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">this link</a>)' => '',
-    'Old' => '',
-    'Read, ' => '',
-    'Reopen Announcement' => '',
-    'Statistic:' => '',
-    'Unread' => '',
-    'and {count} more didn\'t read this.' => '',
-    'and {count} more read this.' => '',
+    'Add Announcement...' => 'Publier une annonce importante...',
+    'Complete Announcement' => 'Compléter l‘annonce',
+    'Mark as read' => 'Marquer comme lu',
+    'Mark as unread' => 'Marquer comme non lu',
+    'Note: You can use markdown syntax. (For more information visit <a target="_blank" href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">this link</a>)' => 'Note : vous pouvez utiliser la syntaxe markdown. (Pour plus d‘informations, consultez <a target="_blank" href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">ce lien</a>)',
+    'Old' => 'Ancien',
+    'Read, ' => 'Lu(s)',
+    'Reopen Announcement' => 'Réouvrir l‘annonce',
+    'Statistic:' => 'Statistiques',
+    'Unread' => 'Non lu(s)',
+    'and {count} more didn\'t read this.' => 'et {count} autres non lus',
+    'and {count} more read this.' => 'et {count} autres à lire',
 ];

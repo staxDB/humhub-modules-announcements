@@ -17,8 +17,8 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    '<b>There are no announcements yet!</b>' => '',
-    '<b>There are no announcements yet!</b><br>Be the first and create one...' => '',
-    'Not read' => '',
-    'Save' => '',
+    '<b>There are no announcements yet!</b>' => '<b>Il n‘y a encore aucune annonce !</b>',
+    '<b>There are no announcements yet!</b><br>Be the first and create one...' => '<b>Il n‘y a encore aucune annonce !</b>Soyez le premier à faire une...<br>',
+    'Not read' => 'Non lu',
+    'Save' => 'Publier l‘annonce',
 ];
