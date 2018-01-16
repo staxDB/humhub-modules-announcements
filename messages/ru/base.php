@@ -17,9 +17,9 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Allows to post messages to spaces, that can be confirmed as read.' => '',
-    'Announcement' => '',
-    'Announcements' => '',
-    'Edit your message' => '',
-    'Save' => '',
+    'Allows to post messages to spaces, that can be confirmed as read.' => 'Позволяет публиковать в пространство сообщения, которые могут подтверждаться как прочитанными.',
+    'Announcement' => 'Анонс',
+    'Announcements' => 'Анонсы',
+    'Edit your message' => 'Изменить сообщение',
+    'Save' => 'Сохранить',
 ];

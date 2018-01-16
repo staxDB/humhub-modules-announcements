@@ -17,16 +17,16 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Add Announcement...' => '',
-    'Complete Announcement' => '',
-    'Mark as read' => '',
-    'Mark as unread' => '',
-    'Note: You can use markdown syntax. (For more information visit <a target="_blank" href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">this link</a>)' => '',
-    'Old' => '',
-    'Read, ' => '',
-    'Reopen Announcement' => '',
-    'Statistic:' => '',
-    'Unread' => '',
-    'and {count} more didn\'t read this.' => '',
-    'and {count} more read this.' => '',
+    'Add Announcement...' => 'Добавить Анонс...',
+    'Complete Announcement' => 'Завершить Анонс',
+    'Mark as read' => 'Отметить прочитанным',
+    'Mark as unread' => 'Отметить непрочитанным',
+    'Note: You can use markdown syntax. (For more information visit <a target="_blank" href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">this link</a>)' => 'Примечание: Вы можете использовать markdown синтаксис. (Для большей информации посетите <a target="_blank" href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">эту ссылку</a>)',
+    'Old' => 'Устарел',
+    'Read, ' => 'Прочитали,',
+    'Reopen Announcement' => 'Перевыпустить анонс',
+    'Statistic:' => 'Статистика:',
+    'Unread' => 'Непрочитали',
+    'and {count} more didn\'t read this.' => 'и более {count} непрочитали это.',
+    'and {count} more read this.' => 'и более {count} прочитали это.',
 ];
