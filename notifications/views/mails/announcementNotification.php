@@ -21,6 +21,7 @@
 /* @var text string */
 ?>
 <?php $this->beginContent('@notification/views/layouts/mail.php', $_params_); ?>
+
 <?php $contentRecord = $viewable->source ?>
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0" align="left">
@@ -40,7 +41,7 @@
             <?=
             humhub\widgets\mails\MailContentEntry::widget([
                 'originator' => $originator,
-                'content' => $viewable->source,
+                'content' => $contentRecord,
                 'date' => $date,
                 'space' => $space
             ])
