@@ -300,8 +300,7 @@ class Announcement extends ContentActiveRecord implements Searchable
         if (array_key_exists('closed', $changedAttributes)) {
             if (!$changedAttributes['closed']) { // if closed === false --> reopen-->reset confirmations
                 return true;
-            }
-            else {
+            } else {
                 $this->resetConfirmations(); // reset all existing confirmations, remove non-members of space and add space-members, that are not in list of AnnouncementUser
             }
         }
@@ -422,8 +421,7 @@ class Announcement extends ContentActiveRecord implements Searchable
     {
         if ($newRecord) {
             AnnouncementCreated::instance()->from(Yii::$app->user->getIdentity())->about($this)->sendBulk($this->confirmationUsers);
-        }
-        else {
+        } else {
             AnnouncementUpdated::instance()->from(Yii::$app->user->getIdentity())->about($this)->sendBulk($this->confirmationUsers);
         }
     }
