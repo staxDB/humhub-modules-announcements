@@ -22,5 +22,3 @@ class StreamAction extends ContentContainerStream
     }
 
 }
-
-?>
