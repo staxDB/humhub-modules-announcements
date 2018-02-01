@@ -23,5 +23,3 @@ class ResetButton extends Widget
     }
 
 }
-
-?>
