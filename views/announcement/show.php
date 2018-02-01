@@ -1,17 +1,17 @@
 <?php
 
-echo \humhub\modules\announcements\widgets\WallCreateForm::widget([
+use humhub\modules\announcements\widgets\WallCreateForm;
+use humhub\modules\announcements\permissions\CreateAnnouncement;
+use humhub\modules\stream\widgets\StreamViewer;
+
+echo WallCreateForm::widget([
     'contentContainer' => $contentContainer,
     'submitButtonText' => Yii::t('AnnouncementsModule.base', 'Save'),
 ]);
-?>
 
-<?php
+$canCreateAnnouncements = $contentContainer->permissionManager->can(new CreateAnnouncement());
 
-$canCreateAnnouncements = $contentContainer->permissionManager->can(new \humhub\modules\announcements\permissions\CreateAnnouncement());
-
-
-echo \humhub\modules\stream\widgets\StreamViewer::widget([
+echo StreamViewer::widget([
     'contentContainer' => $contentContainer,
     'streamAction' => '/announcements/announcement/stream',
     'messageStreamEmpty' => ($canCreateAnnouncements) ?
@@ -27,4 +27,3 @@ echo \humhub\modules\stream\widgets\StreamViewer::widget([
         'filter_visibility_private' => Yii::t('ContentModule.widgets_views_stream', 'Only private posts')
     ]
 ]);
-?>
