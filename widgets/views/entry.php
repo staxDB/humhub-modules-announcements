@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use humhub\widgets\RichText;
 
 /* @var $announcement \humhub\modules\announcements\models\Announcement */
 /* @var $user \humhub\modules\user\models\User */
@@ -20,7 +21,7 @@ humhub\modules\announcements\assets\AnnouncementsAsset::register($this);
 <!--    TODO: remove AddMessageInput-->
 
     <div data-ui-markdown>
-        <?= humhub\widgets\RichText::widget(['text' => $announcement->message, 'record' => $announcement, 'markdown' => true]); ?>
+        <?= RichText::widget(['text' => $announcement->message, 'record' => $announcement, 'markdown' => true]); ?>
     </div>
 
     <?= $this->render('_answer', ['announcement' => $announcement, 'contentContainer' => $contentContainer]); ?>
