@@ -14,16 +14,17 @@ use Yii;
 class WallEntry extends \humhub\modules\content\widgets\WallEntry
 {
 
-    public $editRoute = "/announcements/announcement/edit";
+    public $editRoute = '/announcements/announcement/edit';
 
     public function run()
     {
-        //We don't want an edit menu when the poll is closed
-        if(version_compare(Yii::$app->version, '1.0.0-beta.4', 'lt') || $this->contentObject->closed) {
+        // We don't want an edit menu when the poll is closed
+        if (version_compare(Yii::$app->version, '1.0.0-beta.4', 'lt') || $this->contentObject->closed) {
             $this->editRoute = '';
         }
 
-        return $this->render('entry', ['announcement' => $this->contentObject,
+        return $this->render('entry', [
+            'announcement' => $this->contentObject,
             'user' => $this->contentObject->content->user,
             'contentContainer' => $this->contentObject->content->container
         ]);
