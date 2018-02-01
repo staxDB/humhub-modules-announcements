@@ -8,7 +8,7 @@ __Author:__ davidborn
 
 ## Installation
 
-- Download the (Latest Release)[https://github.com/staxDB/announcements/releases/latest] and upload contents to **/protected/modules/announcements**
+- Download the [Latest Release](https://github.com/staxDB/announcements/releases/latest) and upload contents to **/protected/modules/announcements**
 - or simply clone this repo by `git clone https://github.com/staxDB/announcements.git` into **/protected/modules**
 
 then go to `Administration -> Modules` and **Enable** the **Announcements** module.
