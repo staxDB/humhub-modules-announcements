@@ -10,11 +10,12 @@ namespace humhub\modules\announcements\permissions;
 
 use Yii;
 use humhub\modules\space\models\Space;
+use humhub\libs\BasePermission;
 
 /**
  * CreatePost Permission
  */
-class CreateAnnouncement extends \humhub\libs\BasePermission
+class CreateAnnouncement extends BasePermission
 {
 
     /**
