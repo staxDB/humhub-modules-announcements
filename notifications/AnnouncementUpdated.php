@@ -17,7 +17,7 @@ class AnnouncementUpdated extends BaseNotification
     /**
      * @inheritdoc
      */
-    public $moduleId = "announcements";
+    public $moduleId = 'announcements';
 
     /**
      * @inheritdoc
