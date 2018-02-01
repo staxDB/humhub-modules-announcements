@@ -21,5 +21,3 @@ class CloseButton extends Widget
     }
 
 }
-
-?>
