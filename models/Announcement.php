@@ -6,7 +6,6 @@ use humhub\modules\file\libs\FileHelper;
 use humhub\modules\file\models\File;
 use humhub\modules\user\models\fieldtype\DateTime;
 use humhub\modules\user\models\User;
-use Yii;
 use humhub\modules\content\components\ContentActiveRecord;
 use humhub\modules\announcements\models\AnnouncementUser;
 use humhub\modules\announcements\permissions\CreateAnnouncement;
@@ -14,6 +13,7 @@ use humhub\modules\announcements\permissions\ViewStatistics;
 use humhub\modules\announcements\notifications\AnnouncementCreated;
 use humhub\modules\announcements\notifications\AnnouncementUpdated;
 use humhub\modules\search\interfaces\Searchable;
+use Yii;
 
 /**
  * This is the model class for table "announcements".
@@ -39,7 +39,7 @@ class Announcement extends ContentActiveRecord implements Searchable
     public $wallEntryClass = 'humhub\modules\announcements\widgets\WallEntry';
 
     // won't create any activities
-//    public $silentContentCreation = true;
+    // public $silentContentCreation = true;
 
     /**
      * @inheritdoc
@@ -64,16 +64,15 @@ class Announcement extends ContentActiveRecord implements Searchable
         ];
     }
 
-
     /**
      * @return array validation rules for model attributes.
      */
     public function rules()
     {
-        return array(
+        return [
             [['message'], 'required'],
             [['message'], 'string'],
-        );
+        ];
     }
 
     /**
@@ -81,9 +80,9 @@ class Announcement extends ContentActiveRecord implements Searchable
      */
     public function attributeLabels()
     {
-        return array(
+        return [
             'message' => Yii::t('AnnouncementsModule.models', 'Message'),
-        );
+        ];
     }
 
     public function getConfirmations()
@@ -126,40 +125,9 @@ class Announcement extends ContentActiveRecord implements Searchable
     {
         // reset announcement because attributes have been changed (except 'closed')
         $members = $this->content->container->getMembershipUser()->all(); // gets all users in space
-//        $members = $this->getConfirmationUsers()->all();    // gets all confirmationUsers
         foreach ($members as $member) {
             $this->setConfirmation($member);
         }
-        // so now, everytime someone clicks on save, the whole list will be resetted
-
-
-
-//        if (($insert || $changedAttributes)  && !array_key_exists('closed', $changedAttributes)) {
-//            $members = $this->content->container->getMembershipUser()->all();
-//            foreach ($members as $member) {
-//                $this->setConfirmation($member);
-//            }
-//        }
-
-//        // #### check if attached files have been changed
-//        $files = $this->fileManager->findAll();
-//        $changed = false;
-//        if (isset($files) && $files !== null) {
-//            foreach ($files as $file) {
-//                $file_date = new \DateTime($file->updated_at);
-//                $today = new \DateTime('now');
-//                if ($file_date->format('Y-m-d') === $today->format('Y-m-d')) {
-//                    $changed = true;
-//                }
-//            }
-//        }
-//        if ($changed) {
-//            $members = $this->content->container->getMembershipUser()->all();
-//            foreach ($members as $member) {
-//                $this->setConfirmation($member);
-//            }
-//        }
-//        // #### end
     }
 
     /**
@@ -198,7 +166,7 @@ class Announcement extends ContentActiveRecord implements Searchable
             }
         }
 
-        if(!$currentUser) {
+        if (!$currentUser) {
             return;
         }
 
@@ -213,8 +181,9 @@ class Announcement extends ContentActiveRecord implements Searchable
     public function getPercent()
     {
         $total = AnnouncementUser::find()->where(['announcement_id' => $this->id])->count();
-        if ($total == 0)
+        if ($total == 0) {
             return 0;
+        }
 
         return $this->getConfirmedCount() / $total * 100;
     }
@@ -269,18 +238,17 @@ class Announcement extends ContentActiveRecord implements Searchable
      *
      * @param string $userId
      */
-    public function resetConfirmation($userId = "")
+    public function resetConfirmation($userId = '')
     {
-
-        if($this->closed) {
+        if ($this->closed) {
             return;
         }
 
-        if ($userId == "")
+        if ($userId == '') {
             $userId = Yii::$app->user->id;
+        }
 
         if ($this->hasUserConfirmed($userId)) {
-
             $userConfirmation = $this->getConfirmations()->where(['user_id' => $userId])->one();
             $userConfirmation->confirmed = false;
             $userConfirmation->save();
@@ -294,28 +262,30 @@ class Announcement extends ContentActiveRecord implements Searchable
     public function resetConfirmations()
     {
         $members = $this->content->container->getMembershipUser()->all(); // gets all users in space
-        $confirmed = $this->getConfirmationUsers()->all();    // gets all confirmationUsers
+        $confirmed = $this->getConfirmationUsers()->all(); // gets all confirmationUsers
+
         foreach ($members as $memberKey => $member) {
             foreach ($confirmed as $userKey => $user) {
                 if ($member === $user) {
                     $this->setConfirmation($member);
-                    unset($confirmed[$userKey]);    // user exists in space and in AnnouncementUser
+                    unset($confirmed[$userKey]); // user exists in space and in AnnouncementUser
                     unset($members[$memberKey]);
                 }
             }
         }
+
         // add new members to list of AnnouncementUser
         foreach ($members as $memberKey => $member) {
-            $this->setConfirmation($member);    // user is a member but not in list of AnnouncementUser --> add to list
+            $this->setConfirmation($member); // user is a member but not in list of AnnouncementUser --> add to list
             unset($members[$memberKey]);
         }
+
         // remove old AnnouncementUser from list
         foreach ($confirmed as $userKey => $user) {
             $announcementUser = $this->findAnnouncementUser($user);
             $this->unlink('confirmations', $announcementUser, true);
             unset($confirmed[$userKey]);
         }
-
     }
 
     /**
@@ -328,16 +298,19 @@ class Announcement extends ContentActiveRecord implements Searchable
         parent::afterSave($insert, $changedAttributes);
 
         if (array_key_exists('closed', $changedAttributes)) {
-            if (!$changedAttributes['closed'])  // if closed === false --> reopen-->reset confirmations
+            if (!$changedAttributes['closed']) { // if closed === false --> reopen-->reset confirmations
                 return true;
-            else
-                $this->resetConfirmations();    // reset all existing confirmations, remove non-members of space and add space-members, that are not in list of AnnouncementUser
+            }
+            else {
+                $this->resetConfirmations(); // reset all existing confirmations, remove non-members of space and add space-members, that are not in list of AnnouncementUser
+            }
         }
 
         $this->setConfirmations();
 
-        if (array_key_exists('id', $changedAttributes))
+        if (array_key_exists('id', $changedAttributes)) {
             $this->informUsers(true);   // is new record
+        }
 
         return true;
     }
@@ -352,7 +325,6 @@ class Announcement extends ContentActiveRecord implements Searchable
         return parent::beforeSave($insert); // TODO: Change the autogenerated stub
     }
 
-
     /**
      * Deletes a Announcement including its dependencies.
      */
@@ -361,6 +333,7 @@ class Announcement extends ContentActiveRecord implements Searchable
         foreach ($this->confirmations as $confirmation) {
             $confirmation->delete();
         }
+
         return parent::beforeDelete();
     }
 
@@ -370,14 +343,17 @@ class Announcement extends ContentActiveRecord implements Searchable
      * @param type $userId
      * @return type
      */
-    public function hasUserConfirmed($userId = "")
+    public function hasUserConfirmed($userId = '')
     {
         $confirmedUser = $this->findAnnouncementUserById($userId);
 
-        if ($confirmedUser == null)
+        if ($confirmedUser == null) {
             return false;
-        if ($confirmedUser->confirmed == false || $confirmedUser->confirmed == null)
+        }
+        
+        if ($confirmedUser->confirmed == false || $confirmedUser->confirmed == null) {
             return false;
+        }
 
         return true;
     }
@@ -390,7 +366,6 @@ class Announcement extends ContentActiveRecord implements Searchable
      */
     public function confirm()
     {
-
         if ($this->hasUserConfirmed()) {
             return;
         }
@@ -414,7 +389,7 @@ class Announcement extends ContentActiveRecord implements Searchable
      */
     public function getContentName()
     {
-        return Yii::t('AnnouncementsModule.base', "Announcement");
+        return Yii::t('AnnouncementsModule.base', 'Announcement');
     }
 
     /**
@@ -430,10 +405,9 @@ class Announcement extends ContentActiveRecord implements Searchable
      */
     public function getSearchAttributes()
     {
-
-        return array(
+        return [
             'message' => $this->message
-        );
+        ];
     }
 
     public function canShowStatistics()
@@ -446,10 +420,12 @@ class Announcement extends ContentActiveRecord implements Searchable
      */
     public function informUsers($newRecord = false)
     {
-        if ($newRecord)
+        if ($newRecord) {
             AnnouncementCreated::instance()->from(Yii::$app->user->getIdentity())->about($this)->sendBulk($this->confirmationUsers);
-        else
+        }
+        else {
             AnnouncementUpdated::instance()->from(Yii::$app->user->getIdentity())->about($this)->sendBulk($this->confirmationUsers);
+        }
     }
 
 }
