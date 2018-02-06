@@ -3,9 +3,6 @@
 namespace humhub\modules\announcements\controllers;
 
 use humhub\components\mail\Message;
-use Yii;
-use yii\web\HttpException;
-use yii\helpers\Html;
 use humhub\modules\user\models\User;
 use humhub\modules\user\widgets\UserListBox;
 use humhub\modules\content\components\ContentContainerController;
@@ -15,6 +12,9 @@ use humhub\modules\announcements\widgets\WallCreateForm;
 use humhub\modules\announcements\components\StreamAction;
 use humhub\modules\stream\actions\Stream;
 use humhub\modules\announcements\permissions\CreateAnnouncement;
+use Yii;
+use yii\web\HttpException;
+use yii\helpers\Html;
 
 
 /**
@@ -25,14 +25,14 @@ class AnnouncementController extends ContentContainerController
 
     public function actions()
     {
-        return array(
-            'stream' => array(
+        return [
+            'stream' => [
                 'class' => StreamAction::className(),
                 'includes' => Announcement::className(),
                 'mode' => StreamAction::MODE_NORMAL,
                 'contentContainer' => $this->contentContainer
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -40,9 +40,9 @@ class AnnouncementController extends ContentContainerController
      */
     public function actionShow()
     {
-        return $this->render('show', array(
+        return $this->render('show', [
             'contentContainer' => $this->contentContainer
-        ));
+        ]);
     }
 
     /**
@@ -60,6 +60,7 @@ class AnnouncementController extends ContentContainerController
         $announcement = new Announcement();
         $announcement->scenario = Announcement::SCENARIO_CREATE;
         $announcement->message = Yii::$app->request->post('message');
+
         return WallCreateForm::create($announcement, $this->contentContainer);
     }
 
@@ -115,7 +116,7 @@ class AnnouncementController extends ContentContainerController
 
     public function actionClose()
     {
-        return  $this->asJson($this->setClosed(Yii::$app->request->get('id'), true));
+        return $this->asJson($this->setClosed(Yii::$app->request->get('id'), true));
     }
 
     public function setClosed($id, $closed)
@@ -161,6 +162,7 @@ class AnnouncementController extends ContentContainerController
         Yii::$app->response->format = 'json';
         $announcement = $this->getAnnouncementByParameter();
         $announcement->resetConfirmation();
+
         return Stream::getContentResultEntry($announcement->content);
     }
 
@@ -180,9 +182,9 @@ class AnnouncementController extends ContentContainerController
         $query->leftJoin('announcement_user', 'announcement_user.user_id=user.id');
         $query->andWhere(['announcement_user.announcement_id' => $announcement->id]);
         $query->andWhere(['announcement_user.confirmed' => true]);
-//        $query->orderBy('announcement_user.created_at DESC');
+        //$query->orderBy('announcement_user.created_at DESC');
 
-        $title = Yii::t('AnnouncementsModule.controller', "Users read this <strong>{title}</strong>", ['{title}' => Yii::t('AnnouncementsModule.base', 'Announcement')]);
+        $title = Yii::t('AnnouncementsModule.controller', 'Users who read this <strong>{title}</strong>', ['{title}' => Yii::t('AnnouncementsModule.base', 'Announcement')]);
 
         return $this->renderAjaxContent(UserListBox::widget(['query' => $query, 'title' => $title]));
     }
@@ -203,12 +205,11 @@ class AnnouncementController extends ContentContainerController
         $query->leftJoin('announcement_user', 'announcement_user.user_id=user.id');
         $query->andWhere(['announcement_user.announcement_id' => $announcement->id]);
         $query->andWhere(['announcement_user.confirmed' => false]);
-//        $query->orderBy('announcement_user.created_at DESC');
+        //$query->orderBy('announcement_user.created_at DESC');
         $title = Yii::t('AnnouncementsModule.controller', "Users didn't read this <strong>{title}</strong>", ['{title}' => Yii::t('AnnouncementsModule.base', 'Announcement')]);
 
         return $this->renderAjaxContent(UserListBox::widget(['query' => $query, 'title' => $title]));
     }
-
 
     /**
      * Returns a given confirmMessage by given request parameter.
@@ -232,6 +233,5 @@ class AnnouncementController extends ContentContainerController
 
         return $announcement;
     }
-
 
 }
