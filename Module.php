@@ -62,7 +62,7 @@ class Module extends ContentContainerModule
      */
     public function getPermissions($contentContainer = null)
     {
-        if ($contentContainer instanceof \humhub\modules\space\models\Space) {
+        if ($contentContainer instanceof Space) {
             return [
                 new permissions\CreateAnnouncement(),
                 new permissions\ViewStatistics()
