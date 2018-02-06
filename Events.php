@@ -6,33 +6,36 @@ use humhub\modules\space\models\Space;
 use humhub\modules\user\models\User;
 use humhub\modules\announcements\models\Announcement;
 use humhub\modules\announcements\models\AnnouncementUser;
-use Yii;
 use humhub\modules\space\models\Membership;
+use humhub\modules\announcements\widgets\CloseButton;
+use humhub\modules\announcements\widgets\ResetButton;
+use Yii;
+use yii\base\Object;
 
 /**
  * Description of Events
  *
  * @author davidborn
  */
-class Events extends \yii\base\Object
+class Events extends Object
 {
 
     public static function onWallEntryControlsInit($event)
     {
         $object = $event->sender->object;
 
-        if(!$object instanceof Announcement) {
+        if (!$object instanceof Announcement) {
             return;
         }
 
-        if($object->content->canEdit()) {
-            $event->sender->addWidget(\humhub\modules\announcements\widgets\CloseButton::className(), [
+        if ($object->content->canEdit()) {
+            $event->sender->addWidget(CloseButton::className(), [
                 'announcement' => $object
             ]);
         }
 
-        if($object->isResetAllowed()) {
-            $event->sender->addWidget(\humhub\modules\announcements\widgets\ResetButton::className(), [
+        if ($object->isResetAllowed()) {
+            $event->sender->addWidget(ResetButton::className(), [
                 'announcement' => $object
             ]);
         }
@@ -40,12 +43,14 @@ class Events extends \yii\base\Object
     
     public static function onMemberAdded ($event)
     {
-        // add member to open announcements
+        // Add member to open announcements
         $announcements = Announcement::find()->contentContainer($event->space)->all();
+
         if (isset($announcements) && $announcements !== null) {
             foreach ($announcements as $announcement) {
-                if ($announcement->closed)
+                if ($announcement->closed) {
                     continue;
+                }
                 $announcement->setConfirmation($event->user);
             }
         }
@@ -55,11 +60,12 @@ class Events extends \yii\base\Object
     {
         // TODO: remove member from  announcements
         $announcements = Announcement::find()->contentContainer($event->space)->all();
+
         if (isset($announcements) && $announcements !== null) {
             foreach ($announcements as $announcement) {
                 $announcementUser = $announcement->findAnnouncementUser($event->user);
-                if ($announcement->closed) {  // skip closed announcements, because we want user to be part of statistics
-                    $announcementUser->followContent(false);    // but he shouldn't get any notifications about the content
+                if ($announcement->closed) { // Skip closed announcements, because we want user to be part of statistics
+                    $announcementUser->followContent(false); // But he shouldn't get any notifications about the content
                     continue;
                 }
                 if (isset($announcementUser) && $announcementUser !== null) {
@@ -67,15 +73,7 @@ class Events extends \yii\base\Object
                 }
             }
         }
-//        echo '<pre>Space: ';
-//        print_r($event->space->name);
-//        echo '</pre>';
-//        echo '<pre>User: ';
-//        print_r($event->user->username);
-//        echo '</pre>';
-//        die();
     }
-
 
     /**
      * On build of a Space Navigation, check if this module is enabled.
@@ -89,14 +87,13 @@ class Events extends \yii\base\Object
 
         // Is Module enabled on this workspace and is user member of space?
         if ($space->isModuleEnabled('announcements') && $space->isMember()) {
-
-                $event->sender->addItem(array(
+                $event->sender->addItem([
                 'label' => Yii::t('AnnouncementsModule.base', 'Announcements'),
                 'group' => 'modules',
                 'url' => $space->createUrl('/announcements/announcement/show'),
                 'icon' => '<i class="fa fa-bullhorn"></i>',
                 'isActive' => (Yii::$app->controller->module && Yii::$app->controller->module->id == 'announcements'),
-            ));
+            ]);
         }
     }
 
@@ -107,7 +104,7 @@ class Events extends \yii\base\Object
      */
     public static function onUserDelete($event)
     {
-        foreach (AnnouncementUser::findAll(array('user_id' => $event->sender->id)) as $user) {
+        foreach (AnnouncementUser::findAll(['user_id' => $event->sender->id]) as $user) {
             $user->delete();
         }
 
@@ -124,15 +121,16 @@ class Events extends \yii\base\Object
     public static function onIntegrityCheck($event)
     {
         $integrityController = $event->sender;
-        $integrityController->showTestHeadline("Announcements Module - Users (" . AnnouncementUser::find()->count() . " entries)");
+        $integrityController->showTestHeadline('Announcements Module - Users (' . AnnouncementUser::find()->count() . ' entries)');
         foreach (AnnouncementUser::find()->joinWith('announcement')->all() as $announcementUser) {
             if ($announcementUser->announcement === null) {
-                if ($integrityController->showFix("Deleting announcement user id " . $announcementUser->id . " without existing announcement!")) {
+                if ($integrityController->showFix('Deleting announcement user id ' . $announcementUser->id . ' without existing announcement!')) {
                     $announcementUser->delete();
                 }
             }
+            
             if ($announcementUser->user === null) {
-                if ($integrityController->showFix("Deleting announcement user id " . $announcementUser->id . " without existing user!")) {
+                if ($integrityController->showFix('Deleting announcement user id ' . $announcementUser->id . ' without existing user!')) {
                     $announcementUser->delete();
                 }
             }
@@ -140,4 +138,3 @@ class Events extends \yii\base\Object
     }
 
 }
-
