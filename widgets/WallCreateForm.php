@@ -3,6 +3,7 @@
 namespace humhub\modules\announcements\widgets;
 
 use Yii;
+use humhub\modules\content\widgets\WallCreateContentForm;
 use humhub\modules\content\components\ContentActiveRecord;
 use humhub\modules\content\components\ContentContainerActiveRecord;
 use humhub\modules\space\models\Space;
@@ -10,8 +11,9 @@ use humhub\modules\content\models\Content;
 use humhub\modules\announcements\permissions\CreateAnnouncement;
 use humhub\modules\content\permissions\CreatePublicContent;
 use humhub\modules\file\handler\FileHandlerCollection;
+use humhub\modules\stream\actions\Stream;
 
-class WallCreateForm extends \humhub\modules\content\widgets\WallCreateContentForm
+class WallCreateForm extends WallCreateContentForm
 {
 
     /**
@@ -32,9 +34,7 @@ class WallCreateForm extends \humhub\modules\content\widgets\WallCreateContentFo
      */
     public function run()
     {
-
         if ($this->contentContainer instanceof Space) {
-
             if (!$this->contentContainer->permissionManager->can(new CreateAnnouncement())) {
                 return;
             }
@@ -51,7 +51,7 @@ class WallCreateForm extends \humhub\modules\content\widgets\WallCreateContentFo
         $fileHandlerImport = FileHandlerCollection::getByType(FileHandlerCollection::TYPE_IMPORT);
         $fileHandlerCreate = FileHandlerCollection::getByType(FileHandlerCollection::TYPE_CREATE);
 
-        return $this->render('@announcements/widgets/views/wallCreateContentForm', array(
+        return $this->render('@announcements/widgets/views/wallCreateContentForm', [
             'form' => $this->renderForm(),
             'contentContainer' => $this->contentContainer,
             'submitUrl' => $this->contentContainer->createUrl($this->submitUrl),
@@ -59,7 +59,7 @@ class WallCreateForm extends \humhub\modules\content\widgets\WallCreateContentFo
             'defaultVisibility' => $defaultVisibility,
             'canSwitchVisibility' => $canSwitchVisibility,
             'fileHandlers' => array_merge($fileHandlerCreate, $fileHandlerImport),
-        ));
+        ]);
     }
 
     /**
@@ -89,12 +89,10 @@ class WallCreateForm extends \humhub\modules\content\widgets\WallCreateContentFo
 
         if ($record->save()) {
             $record->fileManager->attach(Yii::$app->request->post('fileList'));
-            return \humhub\modules\stream\actions\Stream::getContentResultEntry($record->content);
+            return Stream::getContentResultEntry($record->content);
         }
 
-        return array('errors' => $record->getErrors());
+        return ['errors' => $record->getErrors()];
     }
 
 }
-
-?>
