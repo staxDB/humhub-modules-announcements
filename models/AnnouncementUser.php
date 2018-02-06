@@ -36,11 +36,11 @@ class AnnouncementUser extends ActiveRecord
      */
     public function rules()
     {
-        return array(
-            array(['announcement_id', 'confirmed'], 'required'),
+        return [
+            [['announcement_id', 'confirmed'], 'required'],
             [['announcement_id'], 'integer'],
             [['confirmed'], 'boolean'],
-        );
+        ];
     }
 
     public function followContent($follow = true)
