@@ -2,6 +2,11 @@
 
 use yii\helpers\Html;
 use humhub\modules\space\models\Space;
+use humhub\modules\user\widgets\UserPickerField;
+use humhub\modules\file\widgets\UploadButton;
+use humhub\modules\file\widgets\FileHandlerButtonDropdown;
+use humhub\modules\file\widgets\UploadProgress;
+use humhub\modules\file\widgets\FilePreview;
 
 \humhub\modules\content\assets\ContentFormAsset::register($this);
 
@@ -13,7 +18,6 @@ $this->registerJsConfig('content.form', [
         'makePublic' => Yii::t('ContentModule.widgets_views_contentForm', 'Make public'),
         'info.archived' => Yii::t('ContentModule.widgets_views_contentForm', 'This space is archived.')
 ]]);
-
 ?>
 
 <div class="panel panel-default clearfix">
@@ -23,20 +27,19 @@ $this->registerJsConfig('content.form', [
         <?= $form; ?>
 
         <div id="notifyUserContainer" class="form-group" style="margin-top: 15px;display:none;">
-            <?=
-            humhub\modules\user\widgets\UserPickerField::widget([
+            <?= UserPickerField::widget([
                 'id' => 'notifyUserInput',
                 'url' => ($contentContainer instanceof Space) ? $contentContainer->createUrl('/space/membership/search') : null,
                 'formName' => 'notifyUserInput',
                 'maxSelection' => 10,
                 'disabledItems' => [Yii::$app->user->guid],
                 'placeholder' => Yii::t('ContentModule.widgets_views_contentForm', 'Add a member to notify'),
-            ])
+            ]);
             ?>
         </div>
 
-        <?= Html::hiddenInput("containerGuid", $contentContainer->guid); ?>
-        <?= Html::hiddenInput("containerClass", get_class($contentContainer)); ?>
+        <?= Html::hiddenInput('containerGuid', $contentContainer->guid); ?>
+        <?= Html::hiddenInput('containerClass', get_class($contentContainer)); ?>
 
         <ul id="contentFormError"></ul>
 
@@ -48,7 +51,7 @@ $this->registerJsConfig('content.form', [
                 </button>
 
                 <?php
-                $uploadButton = humhub\modules\file\widgets\UploadButton::widget([
+                $uploadButton = UploadButton::widget([
                             'id' => 'contentFormFiles',
                             'progress' => '#contentFormFiles_progress',
                             'preview' => '#contentFormFiles_preview',
@@ -56,41 +59,62 @@ $this->registerJsConfig('content.form', [
                             'max' => Yii::$app->getModule('content')->maxAttachedFiles
                 ]);
                 ?>
-                <?= humhub\modules\file\widgets\FileHandlerButtonDropdown::widget(['primaryButton' => $uploadButton, 'handlers' => $fileHandlers, 'cssButtonClass' => 'btn-default']); ?>
+                <?= FileHandlerButtonDropdown::widget([
+                            'primaryButton' => $uploadButton,
+                            'handlers' => $fileHandlers,
+                            'cssButtonClass' => 'btn-default'
+                ]);
+                ?>
 
                 <!-- public checkbox -->
-                <?= Html::checkbox("visibility", "", ['id' => 'contentForm_visibility', 'class' => 'contentForm hidden', 'aria-hidden' => 'true', 'title' => Yii::t('ContentModule.widgets_views_contentForm', 'Content visibility') ]); ?>
+                <?= Html::checkbox('visibility', '', [
+                            'id' => 'contentForm_visibility',
+                            'class' => 'contentForm hidden',
+                            'aria-hidden' => 'true',
+                            'title' => Yii::t('ContentModule.widgets_views_contentForm', 'Content visibility')
+                ]);
+                ?>
 
                 <!-- content sharing -->
                 <div class="pull-right">
 
-                    <span class="label label-info label-public hidden"><?= Yii::t('ContentModule.widgets_views_contentForm', 'Public'); ?></span>
+                    <span class="label label-info label-public hidden">
+                        <?= Yii::t('ContentModule.widgets_views_contentForm', 'Public'); ?>
+                    </span>
 
-                    <?php if ($canSwitchVisibility): ?>
-                    <ul class="nav nav-pills preferences" style="right: 0; top: 5px;">
+                    <?php if ($canSwitchVisibility) : ?>
+                    <ul class="nav nav-pills preferences" style="right:0; top:5px;">
                         <li class="dropdown">
-                            <a class="dropdown-toggle" style="padding: 5px 10px;" data-toggle="dropdown" href="#" aria-label="<?= Yii::t('base', 'Toggle post menu'); ?>" aria-haspopup="true">
-                                <i class="fa fa-cogs"></i></a>
+                            <a class="dropdown-toggle" style="padding:5px 10px;" data-toggle="dropdown" href="#"
+                               aria-label="<?= Yii::t('base', 'Toggle post menu'); ?>" aria-haspopup="true">
+                                <i class="fa fa-cogs"></i>
+                            </a>
 
-                                    <ul class="dropdown-menu pull-right">
-                                        <li>
-                                            <a id="contentForm_visibility_entry" data-action-click="changeVisibility">
-                                                <i class="fa fa-unlock"></i> <?= Yii::t('ContentModule.widgets_views_contentForm', 'Make public'); ?>
-                                            </a>
-                                        </li>
-                                    </ul>
+                            <ul class="dropdown-menu pull-right">
+                                <li>
+                                    <a id="contentForm_visibility_entry" data-action-click="changeVisibility">
+                                        <i class="fa fa-unlock"></i> <?= Yii::t('ContentModule.widgets_views_contentForm', 'Make public'); ?>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                     <?php endif; ?>
                 </div>
             </div>
 
-            <?= \humhub\modules\file\widgets\UploadProgress::widget(['id' => 'contentFormFiles_progress']) ?>
-            <?= \humhub\modules\file\widgets\FilePreview::widget(['id' => 'contentFormFiles_preview', 'edit' => true, 'options' => ['style' => 'margin-top:10px;']]); ?>
+            <?= UploadProgress::widget(['id' => 'contentFormFiles_progress']) ?>
+            <?= FilePreview::widget([
+                'id' => 'contentFormFiles_preview',
+                'edit' => true,
+                'options' => ['style' => 'margin-top:10px']
+            ]);
+            ?>
 
         </div>
         <!-- /contentForm_Options -->
-        <?php echo Html::endForm(); ?>
+        <?= Html::endForm(); ?>
     </div>
     <!-- /panel body -->
-</div> <!-- /panel -->
+</div> 
+<!-- /panel -->
