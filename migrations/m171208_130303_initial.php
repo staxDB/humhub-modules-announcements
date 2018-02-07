@@ -12,7 +12,6 @@ class m171208_130303_initial extends Migration
             'closed'=> 'tinyint(4) DEFAULT 0'
         ), '');
 
-
         $this->createTable('announcement_user', array(
             'id' => 'pk',
             'announcement_id' => 'int(11) NOT NULL',
