@@ -104,7 +104,7 @@ humhub\modules\announcements\assets\AnnouncementsAsset::register($this);
                 $color = 'progress-bar-info';
                 ?>
 
-                <div class="col-md-6">
+                <div class="col-md-5" style="padding-right: 30px;">
                     <div class="progress">
                         <div id="announcement_progress_<?= $announcement->id; ?>"
                              class="progress-bar <?= $color; ?>"
@@ -113,7 +113,7 @@ humhub\modules\announcements\assets\AnnouncementsAsset::register($this);
                              style="width:0%">
                         </div>
                     </div>
-                    <script>
+                    <script type="text/javascript">
                         $('#announcement_progress_<?= $announcement->id; ?>').css('width', '<?= $percent; ?>%');
                     </script>
                 </div>
