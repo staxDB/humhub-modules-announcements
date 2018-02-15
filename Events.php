@@ -2,6 +2,7 @@
 
 namespace humhub\modules\announcements;
 
+use humhub\modules\notification\models\Notification;
 use humhub\modules\space\models\Space;
 use humhub\modules\user\models\User;
 use humhub\modules\announcements\models\Announcement;
@@ -70,6 +71,12 @@ class Events extends Object
                 }
                 if (isset($announcementUser) && $announcementUser !== null) {
                     $announcement->unlink('confirmations', $announcementUser, true);
+                }
+
+                // remove notifications
+                $notifications = Notification::find()->where(['source_class' => Announcement::className(), 'source_pk' => $announcement->id, 'space_id' => $event->space->id])->all();
+                foreach ($notifications as $notification) {
+                    $notification->delete();
                 }
             }
         }
