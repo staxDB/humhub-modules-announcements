@@ -15,6 +15,13 @@ class AnnouncementCreated extends BaseNotification
 {
 
     /**
+     * @since 1.2.3
+     * @see NotificationManager
+     * @var boolean do not send this notification also to the originator
+     */
+    public $suppressSendToOriginator = true;
+
+    /**
      * @inheritdoc
      */
     public $moduleId = 'announcements';
@@ -38,7 +45,7 @@ class AnnouncementCreated extends BaseNotification
     public function html() {
         return Yii::t('AnnouncementsModule.notifications', '{displayName} created a new Announcement in space {spaceName}.', [
             'displayName' => Html::tag('strong', Html::encode($this->originator->displayName)),
-            'spaceName' =>  Html::encode($this->source->content->container->displayName)
+            'spaceName' =>  Html::tag('strong',Html::encode($this->source->content->container->displayName))
         ]);
     }
 
