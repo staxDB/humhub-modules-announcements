@@ -39,8 +39,6 @@ class Announcement extends ContentActiveRecord implements Searchable
     public $autoAddToWall = true;
     public $wallEntryClass = 'humhub\modules\announcements\widgets\WallEntry';
 
-    public $silentContentCreation = true;
-
     // won't create any activities
     // public $silentContentCreation = true;
 
