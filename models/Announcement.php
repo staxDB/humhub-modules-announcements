@@ -320,7 +320,7 @@ class Announcement extends ContentActiveRecord implements Searchable
 
         $settings = EditForm::instantiate();
 
-        if ($this->scenario === self::SCENARIO_CREATE && $settings->notifyCreated)
+        if ($this->scenario === self::SCENARIO_CREATE && $settings->notifyCreated && $insert)
             $this->informUsers(true);
         elseif ($this->scenario === self::SCENARIO_EDIT && $settings->notifyUpdated)
             $this->informUsers(false);
