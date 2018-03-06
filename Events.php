@@ -2,6 +2,7 @@
 
 namespace humhub\modules\announcements;
 
+use humhub\modules\announcements\widgets\ResetStatisticsButton;
 use humhub\modules\notification\models\Notification;
 use humhub\modules\space\models\Space;
 use humhub\modules\user\models\User;
@@ -37,6 +38,12 @@ class Events extends Object
 
         if ($object->isResetAllowed()) {
             $event->sender->addWidget(ResetButton::className(), [
+                'announcement' => $object
+            ]);
+        }
+
+        if ($object->isResetStatisticsAllowed()) {
+            $event->sender->addWidget(ResetStatisticsButton::className(), [
                 'announcement' => $object
             ]);
         }

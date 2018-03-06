@@ -3,6 +3,7 @@
 namespace humhub\modules\announcements\controllers;
 
 use humhub\components\mail\Message;
+use humhub\modules\announcements\notifications\AnnouncementCreated;
 use humhub\modules\user\models\User;
 use humhub\modules\user\widgets\UserListBox;
 use humhub\modules\content\components\ContentContainerController;
@@ -73,8 +74,12 @@ class AnnouncementController extends ContentContainerController
         $id = Yii::$app->request->get('id');
         $model = Announcement::findOne(['id' => $id]);
 
+        if(!$model) {
+            throw new HttpException(404);
+        }
+
         if (!$model->content->canRead()) {
-            throw new HttpException(403, Yii::t('AnnouncementsModule.controller', 'Access denied!'));
+            throw new HttpException(403);
         }
 
         return Stream::getContentResultEntry($model->content);
@@ -86,10 +91,15 @@ class AnnouncementController extends ContentContainerController
         $id = $request->get('id');
 
         $model = Announcement::findOne(['id' => $id]);
+
+        if(!$model) {
+            throw new HttpException(404);
+        }
+
         $model->scenario = Announcement::SCENARIO_EDIT;
 
         if (!$model->content->canWrite()) {
-            throw new HttpException(403, Yii::t('AnnouncementsModule.controller', 'Access denied!'));
+            throw new HttpException(403);
         }
 
         if ($model->load($request->post())) {
@@ -98,7 +108,6 @@ class AnnouncementController extends ContentContainerController
             if ($model->validate() && $model->save()) {
                 // Reload record to get populated updated_at field
                 $model = Announcement::findOne(['id' => $id]);
-                $model->informUsers();
                 return Stream::getContentResultEntry($model->content);
             } else {
                 $result['errors'] = $model->getErrors();
@@ -122,6 +131,9 @@ class AnnouncementController extends ContentContainerController
     public function setClosed($id, $closed)
     {
         $model = Announcement::findOne(['id' => $id]);
+        if(!$model) {
+            throw new HttpException(404);
+        }
         $model->scenario = Announcement::SCENARIO_CLOSE;
 
         if ($model->content->isArchived()) {
@@ -134,10 +146,40 @@ class AnnouncementController extends ContentContainerController
 
         $model->closed = $closed;
         $model->save();
-        if (!$closed)
-            $model->informUsers();
+
         // Refresh updated_at
         $model->content->refresh();
+
+        return Stream::getContentResultEntry($model->content);
+    }
+
+    public function actionResetStatistics()
+    {
+        return $this->asJson($this->resetAnnouncementStatistics());
+    }
+
+    public function resetAnnouncementStatistics()
+    {
+        $model = $this->getAnnouncementByParameter();
+        if(!$model) {
+            throw new HttpException(404);
+        }
+        $model->scenario = Announcement::SCENARIO_RESET;
+
+        if ($model->content->isArchived()) {
+            $model->content->unarchive();
+        }
+
+        if (!$model->isResetStatisticsAllowed()) {
+            throw new HttpException(403);
+        }
+
+        $model->resetStatistics();
+
+        // Refresh updated_at
+        $model->content->refresh();
+        // save model to send notifications
+        $model->save();
 
         return Stream::getContentResultEntry($model->content);
     }
@@ -228,7 +270,7 @@ class AnnouncementController extends ContentContainerController
         }
 
         if (!$announcement->content->canRead()) {
-            throw new HttpException(401, Yii::t('AnnouncementsModule.controller', 'You have insufficient permissions to perform that operation!'));
+            throw new HttpException(403, Yii::t('AnnouncementsModule.controller', 'You have insufficient permissions to perform that operation!'));
         }
 
         return $announcement;

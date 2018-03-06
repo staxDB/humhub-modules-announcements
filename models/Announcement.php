@@ -2,8 +2,10 @@
 
 namespace humhub\modules\announcements\models;
 
+use humhub\modules\announcements\models\forms\EditForm;
 use humhub\modules\file\libs\FileHelper;
 use humhub\modules\file\models\File;
+use humhub\modules\notification\models\Notification;
 use humhub\modules\user\models\fieldtype\DateTime;
 use humhub\modules\user\models\User;
 use humhub\modules\content\components\ContentActiveRecord;
@@ -314,19 +316,18 @@ class Announcement extends ContentActiveRecord implements Searchable
     {
         parent::afterSave($insert, $changedAttributes);
 
-//        if (array_key_exists('closed', $changedAttributes)) {
-//            if (!$changedAttributes['closed']) { // if closed === false --> reopen-->reset confirmations
-//                return true;
-//            } else {
-//                $this->resetConfirmations(); // reset all existing confirmations, remove non-members of space and add space-members, that are not in list of AnnouncementUser
-//            }
-//        }
-
         $this->setConfirmations();
 
-        if (array_key_exists('id', $changedAttributes)) {
-            $this->informUsers(true);   // is new record
-        }
+        $settings = EditForm::instantiate();
+
+        if ($this->scenario === self::SCENARIO_CREATE && $settings->notifyCreated)
+            $this->informUsers(true);
+        elseif ($this->scenario === self::SCENARIO_EDIT && $settings->notifyUpdated)
+            $this->informUsers(false);
+        elseif ($this->scenario === self::SCENARIO_CLOSE && $settings->notifyClosed)
+            $this->informUsers(false);
+        elseif ($this->scenario === self::SCENARIO_RESET && $settings->notifyResetStatistics)
+            $this->informUsers(false);
 
         return true;
     }
@@ -441,6 +442,12 @@ class Announcement extends ContentActiveRecord implements Searchable
      */
     public function informUsers($newRecord = false)
     {
+        // delete old notifications for this announcement
+        $notifications = Notification::find()->where(['source_class' => self::className(), 'source_pk' => $this->id, 'space_id' => $this->content->container->id])->all();
+        foreach ($notifications as $notification) {
+            $notification->delete();
+        }
+
         if ($newRecord) {
             AnnouncementCreated::instance()->from(Yii::$app->user->getIdentity())->about($this)->sendBulk($this->confirmationUsers);
         } else {

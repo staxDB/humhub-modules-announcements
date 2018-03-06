@@ -17,10 +17,10 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    'Users who read this <strong>{title}</strong>' => '',
     'Access denied!' => 'Доступ запрещён!',
     'Announcement not found!' => 'Анонс не найден!',
     'Could not load Announcement!' => 'Анонс не может быть загружен!',
     'Users didn\'t read this <strong>{title}</strong>' => 'Пользователь не прочитал <strong>{title}</strong>',
-    'Users read this <strong>{title}</strong>' => 'Пользователь прочитал <strong>{title}</strong>',
     'You have insufficient permissions to perform that operation!' => 'У вас недостаточно прав для выполнения этой операции!',
 ];

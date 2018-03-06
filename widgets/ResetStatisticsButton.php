@@ -13,13 +13,13 @@ use humhub\components\Widget;
  * @since 0.5
  * @author Luke
  */
-class ResetButton extends Widget
+class ResetStatisticsButton extends Widget
 {
     public $announcement;
 
     public function run()
     {
-        return $this->render('resetButton', ['announcement' => $this->announcement]);
+        return $this->render('resetStatisticsButton', ['announcement' => $this->announcement]);
     }
 
 }

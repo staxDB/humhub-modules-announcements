@@ -20,13 +20,11 @@ class m171208_130303_initial extends Migration
         ), '');
 
         $this->createIndex('unique_message_user', 'announcement_user', 'announcement_id,user_id', true);
-        $this->addForeignKey('fk_announcement_user', 'announcement_user', 'announcement_id', 'announcement', 'id', 'CASCADE','CASCADE');
     }
 
     public function down()
     {
-        $this->dropForeignKey('fk_announcement_user', 'announcement_user');
-//        echo "m171208_130303_initial cannot be reverted.\n";
+        echo "m171208_130303_initial cannot be reverted.\n";
 
         return false;
     }
