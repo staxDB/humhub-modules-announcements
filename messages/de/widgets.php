@@ -26,6 +26,7 @@ return [
     'Old' => 'Veraltet',
     'Read, ' => 'Gelesen, ',
     'Reopen Announcement' => 'Ankündigung wieder öffnen',
+    'Reset Statistics' => 'Statistik zurücksetzen',
     'Statistic:' => 'Auswertung:',
     'Unread' => 'Nicht gelesen',
     'and {count} more didn\'t read this.' => 'und {count} mehr haben das nicht gelesen.',
