@@ -65,8 +65,10 @@ class Events extends Object
         if (isset($announcements) && $announcements !== null) {
             foreach ($announcements as $announcement) {
                 $announcementUser = $announcement->findAnnouncementUser($event->user);
+
                 if ($announcement->closed) { // Skip closed announcements, because we want user to be part of statistics
-                    $announcementUser->followContent(false); // But he shouldn't get any notifications about the content
+                    if (isset($announcementUser) && $announcementUser !== null)
+                        $announcementUser->followContent(false); // But he shouldn't get any notifications about the content
                     continue;
                 }
                 if (isset($announcementUser) && $announcementUser !== null) {

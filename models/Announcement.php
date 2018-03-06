@@ -32,6 +32,7 @@ use Yii;
 class Announcement extends ContentActiveRecord implements Searchable
 {
     const SCENARIO_CREATE = 'create';
+    const SCENARIO_RESET = 'reset';
     const SCENARIO_EDIT = 'edit';
     const SCENARIO_CLOSE = 'close';
     const SCENARIO_DEFAULT = 'default'; // on file-upload
@@ -59,6 +60,7 @@ class Announcement extends ContentActiveRecord implements Searchable
     {
         return [
             self::SCENARIO_CLOSE => [],
+            self::SCENARIO_RESET => [],
             self::SCENARIO_CREATE => ['message'],
             self::SCENARIO_EDIT => ['message'],
             self::SCENARIO_DEFAULT => []
@@ -84,6 +86,11 @@ class Announcement extends ContentActiveRecord implements Searchable
         return [
             'message' => Yii::t('AnnouncementsModule.models', 'Message'),
         ];
+    }
+
+    public function hasConfirmations()
+    {
+        return !empty($this->confirmations);
     }
 
     public function getConfirmations()
@@ -120,14 +127,34 @@ class Announcement extends ContentActiveRecord implements Searchable
     }
 
     /**
-     *
+     * Sets all announcement user entries, but keep read statistics.
      */
     public function setConfirmations()
     {
-        // reset announcement because attributes have been changed (except 'closed')
         $members = $this->content->container->getMembershipUser()->all(); // gets all users in space
-        foreach ($members as $member) {
-            $this->setConfirmation($member);
+        $confirmed = $this->getConfirmations()->all(); // gets all confirmationUsers
+
+        foreach ($members as $memberKey => $member) {
+            foreach ($confirmed as $userKey => $user) {
+                if ($member->id === $user->user->id) {
+//                    $this->setConfirmation($member, $user->confirmed);
+                    unset($confirmed[$userKey]); // user exists in space and in AnnouncementUser
+                    unset($members[$memberKey]);
+                }
+            }
+        }
+
+        // add new members to list of AnnouncementUser
+        foreach ($members as $memberKey => $member) {
+            $this->setConfirmation($member); // user is a member but not in list of AnnouncementUser --> add to list
+            unset($members[$memberKey]);
+        }
+
+        // remove old AnnouncementUser from list
+        foreach ($confirmed as $userKey => $user) {
+            $announcementUser = $this->findAnnouncementUser($user->user);
+            $this->unlink('confirmations', $announcementUser, true);
+            unset($confirmed[$userKey]);
         }
     }
 
@@ -234,6 +261,11 @@ class Announcement extends ContentActiveRecord implements Searchable
         return $this->hasUserConfirmed() && !$this->closed;
     }
 
+    public function isResetStatisticsAllowed()
+    {
+        return $this->content->canEdit() && !$this->closed;
+    }
+
     /**
      * Resets all answers from a user only if the poll is not closed yet.
      *
@@ -257,35 +289,19 @@ class Announcement extends ContentActiveRecord implements Searchable
     }
 
     /**
-     * Handles a reset of an announcement, also if user left space
-     *
+     * Resets all confirmed-entries for each user of this announcement.
      */
-    public function resetConfirmations()
+    public function resetStatistics ()
     {
-        $members = $this->content->container->getMembershipUser()->all(); // gets all users in space
-        $confirmed = $this->getConfirmationUsers()->all(); // gets all confirmationUsers
+        if ($this->closed) {
+            return;
+        }
 
-        foreach ($members as $memberKey => $member) {
-            foreach ($confirmed as $userKey => $user) {
-                if ($member === $user) {
-                    $this->setConfirmation($member);
-                    unset($confirmed[$userKey]); // user exists in space and in AnnouncementUser
-                    unset($members[$memberKey]);
-                }
+        if ($this->hasConfirmations()) {
+            $confirmations = $this->getConfirmations()->where(['confirmed' => 1])->all();
+            foreach ($confirmations as $confirmation) {
+                $confirmation->updateAttributes(['confirmed' => false]);
             }
-        }
-
-        // add new members to list of AnnouncementUser
-        foreach ($members as $memberKey => $member) {
-            $this->setConfirmation($member); // user is a member but not in list of AnnouncementUser --> add to list
-            unset($members[$memberKey]);
-        }
-
-        // remove old AnnouncementUser from list
-        foreach ($confirmed as $userKey => $user) {
-            $announcementUser = $this->findAnnouncementUser($user);
-            $this->unlink('confirmations', $announcementUser, true);
-            unset($confirmed[$userKey]);
         }
     }
 
@@ -298,13 +314,13 @@ class Announcement extends ContentActiveRecord implements Searchable
     {
         parent::afterSave($insert, $changedAttributes);
 
-        if (array_key_exists('closed', $changedAttributes)) {
-            if (!$changedAttributes['closed']) { // if closed === false --> reopen-->reset confirmations
-                return true;
-            } else {
-                $this->resetConfirmations(); // reset all existing confirmations, remove non-members of space and add space-members, that are not in list of AnnouncementUser
-            }
-        }
+//        if (array_key_exists('closed', $changedAttributes)) {
+//            if (!$changedAttributes['closed']) { // if closed === false --> reopen-->reset confirmations
+//                return true;
+//            } else {
+//                $this->resetConfirmations(); // reset all existing confirmations, remove non-members of space and add space-members, that are not in list of AnnouncementUser
+//            }
+//        }
 
         $this->setConfirmations();
 
