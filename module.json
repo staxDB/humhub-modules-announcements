@@ -3,9 +3,14 @@
     "name": "Announcement",
     "description": "Allows to post messages to spaces, that can be confirmed as read.",
     "keywords": ["confirm", "message", "announce"],
-    "version": "0.1",
+    "version": "0.2",
     "humhub": {
         "minVersion": "1.2.3"
     },
-    "screenshots": ["assets/screen1.jpg"]
+    "screenshots": [
+        "assets/screen1.png",
+        "assets/screen2.png",
+        "assets/screen3.png",
+        "assets/screen4.png"
+    ]
 }
