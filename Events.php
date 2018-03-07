@@ -48,44 +48,61 @@ class Events extends Object
             ]);
         }
     }
-    
+
+    /**
+     * @param $event
+     * @throws \yii\base\Exception
+     */
     public static function onMemberAdded ($event)
     {
-        // Add member to open announcements
-        $announcements = Announcement::find()->contentContainer($event->space)->all();
+        $space = $event->space;
 
-        if (isset($announcements) && $announcements !== null) {
-            foreach ($announcements as $announcement) {
-                if ($announcement->closed) {
-                    continue;
+        if ($space->isModuleEnabled('announcement')) {
+            // Add member to open announcements
+            $announcements = Announcement::find()->contentContainer($space)->all();
+
+            if (isset($announcements) && $announcements !== null) {
+                foreach ($announcements as $announcement) {
+                    if ($announcement->closed) {
+                        continue;
+                    }
+                    $announcement->setConfirmation($event->user);
                 }
-                $announcement->setConfirmation($event->user);
             }
         }
     }
 
+    /**
+     * @param $event
+     * @throws \Exception
+     * @throws \yii\base\Exception
+     * @throws \yii\db\StaleObjectException
+     */
     public static function onMemberRemoved ($event)
     {
-        // TODO: remove member from  announcements
-        $announcements = Announcement::find()->contentContainer($event->space)->all();
+        $space = $event->space;
 
-        if (isset($announcements) && $announcements !== null) {
-            foreach ($announcements as $announcement) {
-                $announcementUser = $announcement->findAnnouncementUser($event->user);
+        if ($space->isModuleEnabled('announcement')) {
+            $announcements = Announcement::find()->contentContainer($space)->all();
 
-                if ($announcement->closed) { // Skip closed announcements, because we want user to be part of statistics
-                    if (isset($announcementUser) && $announcementUser !== null)
-                        $announcementUser->followContent(false); // But he shouldn't get any notifications about the content
-                    continue;
-                }
-                if (isset($announcementUser) && $announcementUser !== null) {
-                    $announcement->unlink('confirmations', $announcementUser, true);
-                }
+            if (isset($announcements) && $announcements !== null) {
+                foreach ($announcements as $announcement) {
+                    $announcementUser = $announcement->findAnnouncementUser($event->user);
 
-                // remove notifications
-                $notifications = Notification::find()->where(['source_class' => Announcement::className(), 'source_pk' => $announcement->id, 'space_id' => $event->space->id])->all();
-                foreach ($notifications as $notification) {
-                    $notification->delete();
+                    if ($announcement->closed) { // Skip closed announcements, because we want user to be part of statistics
+                        if (isset($announcementUser) && $announcementUser !== null)
+                            $announcementUser->followContent(false); // But he shouldn't get any notifications about the content
+                        continue;
+                    }
+                    if (isset($announcementUser) && $announcementUser !== null) {
+                        $announcement->unlink('confirmations', $announcementUser, true);
+                    }
+
+                    // remove notifications
+                    $notifications = Notification::find()->where(['source_class' => Announcement::className(), 'source_pk' => $announcement->id, 'space_id' => $event->space->id])->all();
+                    foreach ($notifications as $notification) {
+                        $notification->delete();
+                    }
                 }
             }
         }
