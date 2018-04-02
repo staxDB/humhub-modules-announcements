@@ -18,7 +18,7 @@
  */
 return [
     'Allows to post messages to spaces, that can be confirmed as read.' => 'Autoriser à publier des messages dans des espaces et qui peuvent être confirmés comme lus',
-    'Announcement' => 'Annonce importante',
+    'Announcement' => 'annonce importante',
     'Announcements' => 'Annonces',
     'Edit your message' => 'Editer le message',
     'Save' => 'Publier l\'annonce',
