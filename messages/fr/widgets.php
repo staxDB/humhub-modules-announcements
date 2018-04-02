@@ -17,7 +17,7 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Reset Statistics' => '',
+    'Reset Statistics' => 'Réinitialiser les statistiques',
     'Add Announcement...' => 'Publier une annonce importante...',
     'Complete Announcement' => 'Compléter l\'annonce',
     'Mark as read' => 'Marquer comme lu',
