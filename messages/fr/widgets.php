@@ -23,7 +23,7 @@ return [
     'Mark as read' => 'Marquer comme lu',
     'Mark as unread' => 'Marquer comme non lu',
     'Note: You can use markdown syntax. (For more information visit <a target="_blank" href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">this link</a>)' => 'Note : vous pouvez utiliser la syntaxe Markdown. (Pour plus d\'informations, consultez <a target="_blank" href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">ce lien</a>)',
-    'Old' => 'ancien',
+    'Old' => 'Clôturé',
     'Read, ' => 'lu(s)',
     'Reopen Announcement' => 'Réouvrir',
     'Statistic:' => 'Statistiques :',
