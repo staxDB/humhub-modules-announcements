@@ -16,7 +16,6 @@
  *
  * NOTE: this file must be saved in UTF-8 encoding.
  */
-
 return [
     'Allows the user to create/edit an Announcement' => 'Autoriser l\'utilisateur à créer/modifier une annonce importante',
     'Allows the user to view the statistics (read, unread)' => 'Autoriser l\'utilisateur à consulter les statistiques (lu, non lu)',
