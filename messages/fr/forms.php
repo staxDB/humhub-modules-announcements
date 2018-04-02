@@ -16,7 +16,6 @@
  *
  * NOTE: this file must be saved in UTF-8 encoding.
  */
- 
 return [
     '<strong>Announcement</strong> module configuration' => 'Paramètres du module <strong>annonces</strong>',
     'Global settings' => 'Paramètres Généraux',
