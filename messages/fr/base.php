@@ -21,5 +21,5 @@ return [
     'Announcement' => 'annonce importante',
     'Announcements' => 'Annonces',
     'Edit your message' => 'Editer le message',
-    'Save' => 'Publier,
+    'Save' => 'Publier',
 ];
