@@ -17,7 +17,7 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Allows to post messages to spaces, that can be confirmed as read.' => 'Autoriser à publier des annonces importantes dans des espaces, avec option de confirmation de lecture.',
+    'Allows to post messages to spaces, that can be confirmed as read.' => 'Ce module permet de publier des annonces importantes dans des espaces, avec option de confirmation de lecture.',
     'Announcement' => 'annonce importante',
     'Announcements' => 'Annonces',
     'Edit your message' => 'Editer le message',
