@@ -42,7 +42,8 @@ class AnnouncementUpdated extends BaseNotification
     /**
      *  @inheritdoc
      */
-    public function html() {
+    public function html()
+    {
         return Yii::t('AnnouncementsModule.notifications', '{displayName} updated an Announcement in space {spaceName}.', [
             'displayName' => Html::tag('strong', Html::encode($this->originator->displayName)),
             'spaceName' =>  Html::tag('strong',Html::encode($this->source->content->container->displayName))
