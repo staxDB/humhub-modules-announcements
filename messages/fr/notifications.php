@@ -17,9 +17,9 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Receive Notifications for Announcements (Create, Update, Reopen).' => 'Recevoir des notifications pour les annonces importantes (créer, mettre à jour, réouvrir)',
-    '{displayName} created a new Announcement in space {spaceName}.' => '{displayName} a publié une annonce importante dans l‘espace {spaceName}.',
-    '{displayName} created a new Announcement.' => '{displayName} a publié une nouvelle annonce importante',
-    '{displayName} updated an Announcement in space {spaceName}.' => '{displayName} a mis à jour une annonce importante dans l‘espace {spaceName}.',
+    'Receive Notifications for Announcements (Create, Update, Reopen).' => 'Recevoir une notification lorsqu\'une annonce importante est créee, mise à jour ou réouverte.',
+    '{displayName} created a new Announcement in space {spaceName}.' => '{displayName} a publié une annonce importante dans l\'espace {spaceName}.',
+    '{displayName} created a new Announcement.' => '{displayName} a publié une annonce importante',
+    '{displayName} updated an Announcement in space {spaceName}.' => '{displayName} a mis à jour une annonce importante dans l\'espace {spaceName}.',
     '{displayName} updated an Announcement.' => '{displayName} a mis à jour une annonce importante',
 ];

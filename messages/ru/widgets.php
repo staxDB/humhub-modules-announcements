@@ -17,6 +17,7 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    'Reset Statistics' => '',
     'Add Announcement...' => 'Добавить Анонс...',
     'Complete Announcement' => 'Завершить Анонс',
     'Mark as read' => 'Отметить прочитанным',

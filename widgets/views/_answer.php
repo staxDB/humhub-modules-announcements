@@ -39,7 +39,6 @@ humhub\modules\announcements\assets\AnnouncementsAsset::register($this);
                             if ($confirmedUserKey == $maxUser) {
                                 // Output with the number of not rendered users
                                 $userlist .= Yii::t('AnnouncementsModule.widgets', 'and {count} more read this.', ['{count}' => (intval($announcement->confirmedCount - $maxUser))]);
-
                                 // Stop the loop
                                 break;
                             } else {
@@ -56,7 +55,7 @@ humhub\modules\announcements\assets\AnnouncementsAsset::register($this);
                                    data-target="#globalModal">
                                    <?= $announcement->confirmedCount . " " . $announcementText ?>
                                 </a>
-                            <?php } else if ($announcement->confirmedCount > 0) { ?>
+                            <?php } elseif ($announcement->confirmedCount > 0) { ?>
                                 <?= $announcement->confirmedCount . " " . $announcementText ?>
                             <?php } else { ?>
                                 0 <?= $announcementText ?>
@@ -72,7 +71,6 @@ humhub\modules\announcements\assets\AnnouncementsAsset::register($this);
                             if ($unConfirmedUserKey == $maxUser) {
                                 // output with the number of not rendered users
                                 $userlist .= Yii::t('AnnouncementsModule.widgets', 'and {count} more didn\'t read this.', ['{count}' => (intval($announcement->unConfirmedCount - $maxUser))]);
-
                                 // stop the loop
                                 break;
                             } else {
@@ -89,7 +87,7 @@ humhub\modules\announcements\assets\AnnouncementsAsset::register($this);
                                    data-target="#globalModal">
                                     <?= $announcement->unConfirmedCount . " " . $announcementText ?>
                                 </a>
-                            <?php } else if ($announcement->unConfirmedCount > 0) { ?>
+                            <?php } elseif ($announcement->unConfirmedCount > 0) { ?>
                                 <?= $announcement->unConfirmedCount . " " . $announcementText ?>
                             <?php } else { ?>
                                 0 <?= $announcementText ?>
@@ -113,7 +111,7 @@ humhub\modules\announcements\assets\AnnouncementsAsset::register($this);
                              style="width:0%">
                         </div>
                     </div>
-                    <script type="text/javascript">
+                    <script>
                         $('#announcement_progress_<?= $announcement->id; ?>').css('width', '<?= $percent; ?>%');
                     </script>
                 </div>

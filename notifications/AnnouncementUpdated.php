@@ -15,6 +15,13 @@ class AnnouncementUpdated extends BaseNotification
 {
 
     /**
+     * @since 1.2.3
+     * @see NotificationManager
+     * @var boolean do not send this notification also to the originator
+     */
+    public $suppressSendToOriginator = true;
+
+    /**
      * @inheritdoc
      */
     public $moduleId = 'announcements';
@@ -35,10 +42,11 @@ class AnnouncementUpdated extends BaseNotification
     /**
      *  @inheritdoc
      */
-    public function html() {
+    public function html()
+    {
         return Yii::t('AnnouncementsModule.notifications', '{displayName} updated an Announcement in space {spaceName}.', [
             'displayName' => Html::tag('strong', Html::encode($this->originator->displayName)),
-            'spaceName' =>  Html::encode($this->source->content->container->displayName)
+            'spaceName' =>  Html::tag('strong',Html::encode($this->source->content->container->displayName))
         ]);
     }
 

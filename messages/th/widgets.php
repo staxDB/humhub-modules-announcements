@@ -25,6 +25,7 @@ return [
     'Old' => '',
     'Read, ' => '',
     'Reopen Announcement' => '',
+    'Reset Statistics' => '',
     'Statistic:' => '',
     'Unread' => '',
     'and {count} more didn\'t read this.' => '',

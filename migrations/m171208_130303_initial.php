@@ -20,7 +20,6 @@ class m171208_130303_initial extends Migration
         ], '');
 
         $this->createIndex('unique_message_user', 'announcement_user', 'announcement_id,user_id', true);
-        //$this->addForeignKey('fk-message-user', 'announcement_user', 'announcement_id', 'announcement', 'id', 'CASCADE','CASCADE');
     }
 
     public function down()

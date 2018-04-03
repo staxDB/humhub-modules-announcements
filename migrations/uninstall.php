@@ -7,8 +7,8 @@ class uninstall extends Migration
 
     public function up()
     {
-        $this->dropTable('announcement');
         $this->dropTable('announcement_user');
+        $this->dropTable('announcement');
     }
 
     public function down()
