@@ -17,10 +17,10 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    '<strong>Announcement</strong> module configuration' => '',
-    'Global settings' => '',
-    'Notify all Space Members if an announcement has been closed or reopened.' => '',
-    'Notify all Space Members if an announcement has been created.' => '',
-    'Notify all Space Members if an announcement has been updated.' => '',
-    'Notify all Space Members if an announcement statistics has been reset.' => '',
+    '<strong>Announcement</strong> module configuration' => 'Paramètres du module <strong>annonces</strong>',
+    'Global settings' => 'Paramètres Généraux',
+    'Notify all Space Members if an announcement has been closed or reopened.' => 'Avertir les membres lorsqu\'une annonce est clôturée ou réouverte.',
+    'Notify all Space Members if an announcement has been created.' => 'Avertir les membres lorsqu\'une annonce est créée.',
+    'Notify all Space Members if an announcement has been updated.' => 'Avertir les membres lorsqu\'une annonce est mise à jour.',
+    'Notify all Space Members if an announcement statistics has been reset.' => 'Avenir les membres lorsque les statisques d\'une annonce sont remises à zéro.',
 ];

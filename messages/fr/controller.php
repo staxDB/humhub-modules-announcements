@@ -17,10 +17,10 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Users who read this <strong>{title}</strong>' => '',
-    'Access denied!' => 'Accès non autorisé',
-    'Announcement not found!' => 'Annonce non trouvée !',
-    'Could not load Announcement!' => 'Impossible d‘afficher l‘annonce !',
-    'Users didn\'t read this <strong>{title}</strong>' => 'Les utilisateurs n‘ont pas lu cette <strong>{title}</strong>',
-    'You have insufficient permissions to perform that operation!' => 'Vous n‘êtes pas autorisé à effectuer cette opération',
+    'Users who read this <strong>{title}</strong>' => 'Les membres qui ont lu cette <strong>{title}</strong>',
+    'Access denied!' => 'Accès refusé.',
+    'Announcement not found!' => 'Annonce non trouvée.',
+    'Could not load Announcement!' => 'Impossible d\'afficher l\'annonce.',
+    'Users didn\'t read this <strong>{title}</strong>' => 'Les membres qui n\'ont pas encore lu cette <strong>{title}</strong>',
+    'You have insufficient permissions to perform that operation!' => 'Vous n\'êtes pas autorisé à effectuer cette opération.',
 ];
