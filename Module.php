@@ -3,6 +3,7 @@
 namespace humhub\modules\announcements;
 
 use Yii;
+use yii\helpers\Url;
 use humhub\modules\announcements\models\Announcement;
 use humhub\modules\space\models\Space;
 use humhub\modules\content\components\ContentContainerActiveRecord;
@@ -99,6 +100,18 @@ class Module extends ContentContainerModule
     public function getDescription()
     {
         return Yii::t('AnnouncementsModule.base', 'Allows to post messages to spaces, that can be confirmed as read.');
+    }
+
+//    public function getContentContainerConfigUrl(ContentContainerActiveRecord $container)
+//    {
+//        return $container->createUrl('/announcement/container-config');
+//    }
+
+    public function getConfigUrl()
+    {
+        return Url::to([
+            '/announcements/config'
+        ]);
     }
 
 }
