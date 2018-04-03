@@ -191,8 +191,8 @@ class AnnouncementController extends ContentContainerController
     {
         Yii::$app->response->format = 'json';
         $announcement = $this->getAnnouncementByParameter();
-
         $announcement->confirm();
+
         return Stream::getContentResultEntry($announcement->content);
     }
 
@@ -248,7 +248,7 @@ class AnnouncementController extends ContentContainerController
         $query->andWhere(['announcement_user.announcement_id' => $announcement->id]);
         $query->andWhere(['announcement_user.confirmed' => false]);
         //$query->orderBy('announcement_user.created_at DESC');
-        $title = Yii::t('AnnouncementsModule.controller', "Users didn't read this <strong>{title}</strong>", ['{title}' => Yii::t('AnnouncementsModule.base', 'Announcement')]);
+        $title = Yii::t('AnnouncementsModule.controller', 'Users didn\'t read this <strong>{title}</strong>', ['{title}' => Yii::t('AnnouncementsModule.base', 'Announcement')]);
 
         return $this->renderAjaxContent(UserListBox::widget(['query' => $query, 'title' => $title]));
     }
