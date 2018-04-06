@@ -74,7 +74,7 @@ class AnnouncementController extends ContentContainerController
         $id = Yii::$app->request->get('id');
         $model = Announcement::findOne(['id' => $id]);
 
-        if(!$model) {
+        if (!$model) {
             throw new HttpException(404);
         }
 
@@ -92,7 +92,7 @@ class AnnouncementController extends ContentContainerController
 
         $model = Announcement::findOne(['id' => $id]);
 
-        if(!$model) {
+        if (!$model) {
             throw new HttpException(404);
         }
 
@@ -131,7 +131,7 @@ class AnnouncementController extends ContentContainerController
     public function setClosed($id, $closed)
     {
         $model = Announcement::findOne(['id' => $id]);
-        if(!$model) {
+        if (!$model) {
             throw new HttpException(404);
         }
         $model->scenario = Announcement::SCENARIO_CLOSE;
@@ -161,7 +161,7 @@ class AnnouncementController extends ContentContainerController
     public function resetAnnouncementStatistics()
     {
         $model = $this->getAnnouncementByParameter();
-        if(!$model) {
+        if (!$model) {
             throw new HttpException(404);
         }
         $model->scenario = Announcement::SCENARIO_RESET;
