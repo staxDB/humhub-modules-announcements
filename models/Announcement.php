@@ -211,7 +211,7 @@ class Announcement extends ContentActiveRecord implements Searchable
     public function getPercent()
     {
         $total = AnnouncementUser::find()->where(['announcement_id' => $this->id])->count();
-        if ($total == 0) {
+        if ($total === 0) {
             return 0;
         }
 
@@ -320,14 +320,15 @@ class Announcement extends ContentActiveRecord implements Searchable
 
         $settings = EditForm::instantiate();
 
-        if ($this->scenario === self::SCENARIO_CREATE && $settings->notifyCreated && $insert)
+        if ($this->scenario === self::SCENARIO_CREATE && $settings->notifyCreated && $insert) {
             $this->informUsers(true);
-        elseif ($this->scenario === self::SCENARIO_EDIT && $settings->notifyUpdated)
+        } elseif ($this->scenario === self::SCENARIO_EDIT && $settings->notifyUpdated) {
             $this->informUsers(false);
-        elseif ($this->scenario === self::SCENARIO_CLOSE && $settings->notifyClosed)
+        } elseif ($this->scenario === self::SCENARIO_CLOSE && $settings->notifyClosed) {
             $this->informUsers(false);
-        elseif ($this->scenario === self::SCENARIO_RESET && $settings->notifyResetStatistics)
+        } elseif ($this->scenario === self::SCENARIO_RESET && $settings->notifyResetStatistics) {
             $this->informUsers(false);
+        }
 
         return true;
     }
