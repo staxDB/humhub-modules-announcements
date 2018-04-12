@@ -8,8 +8,10 @@
 /* @var $this yii\web\View */
 /* @var $model \humhub\modules\announcements\models\EditForm */
 
+use humhub\widgets\Button;
+use Yii;
 use yii\widgets\ActiveForm;
-use yii\helpers\Html;
+use yii\helpers\Url;
 ?>
 
 <div class="panel panel-default">
@@ -30,7 +32,8 @@ use yii\helpers\Html;
         <?= $form->field($model, 'notifyClosed')->checkbox(); ?>
         <?= $form->field($model, 'notifyResetStatistics')->checkbox(); ?>
 
-        <?= Html::submitButton('Submit', ['class' => 'btn btn-primary', 'data-ui-loader' => '']) ?>
+        <?= Button::save()->submit(); ?>
+        <?= Button::back(Url::to(['/admin/module'])); ?>
 
         <?php ActiveForm::end(); ?>
     </div>
