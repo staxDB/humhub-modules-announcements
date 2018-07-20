@@ -12,6 +12,7 @@ use humhub\modules\announcements\permissions\CreateAnnouncement;
 use humhub\modules\content\permissions\CreatePublicContent;
 use humhub\modules\file\handler\FileHandlerCollection;
 use humhub\modules\stream\actions\Stream;
+use humhub\modules\topic\models\Topic;
 
 class WallCreateForm extends WallCreateContentForm
 {
@@ -88,6 +89,11 @@ class WallCreateForm extends WallCreateContentForm
         $record->content->container = $contentContainer;
 
         if ($record->save()) {
+            $topics = Yii::$app->request->post('postTopicInput');
+            if(!empty($topics)) {
+                Topic::attach($record->content, $topics);
+            }
+
             $record->fileManager->attach(Yii::$app->request->post('fileList'));
             return Stream::getContentResultEntry($record->content);
         }

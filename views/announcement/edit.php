@@ -1,10 +1,10 @@
 <?php
 
-use humhub\widgets\ActiveForm;
-use humhub\widgets\RichtextField;
+//use humhub\widgets\ActiveForm;
+use humhub\modules\ui\form\widgets\ActiveForm;
+use humhub\modules\content\widgets\richtext\RichTextField;
 use humhub\modules\file\widgets\FilePreview;
 use humhub\modules\file\widgets\UploadButton;
-use yii\helpers\Html;
 
 /* @var $announcement \humhub\modules\announcements\models\Announcement */
 /* @var $user \humhub\modules\user\models\User */
@@ -19,14 +19,11 @@ use yii\helpers\Html;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= RichtextField::widget([
-        'form' => $form,
-        'model' => $announcement,
-        'attribute' => 'message',
+    <?= $form->field($announcement, 'message')->widget(RichTextField::class, [
+        'pluginOptions' => ['maxHeight' => '300px'],
         'disabled' => $announcement->closed,
         'placeholder' => Yii::t('AnnouncementsModule.base', 'Edit your message')
-    ]);
-    ?>
+    ])->label(false) ?>
 
     <div class="comment-buttons">
         <?= UploadButton::widget([

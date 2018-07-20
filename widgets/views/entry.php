@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use humhub\widgets\RichText;
+use humhub\modules\content\widgets\richtext\RichText;
 
 /* @var $announcement \humhub\modules\announcements\models\Announcement */
 /* @var $user \humhub\modules\user\models\User */
@@ -14,7 +14,7 @@ humhub\modules\announcements\assets\AnnouncementsAsset::register($this);
 
     <?= Html::beginForm($contentContainer->createUrl('/announcements/announcement/confirm', ['announcementId' => $announcement->id])); ?>
 
-    <div data-ui-markdown>
+    <div data-ui-markdown >
         <?= RichText::widget(['text' => $announcement->message, 'record' => $announcement, 'markdown' => true]); ?>
     </div>
 
