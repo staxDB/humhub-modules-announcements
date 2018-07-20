@@ -1,10 +1,15 @@
 <?php
+
 /**
  * @link https://www.humhub.org/
  * @copyright Copyright (c) 2017 HumHub GmbH & Co. KG
  * @license https://www.humhub.com/licences
- *
  */
+
+use humhub\widgets\mails\MailHeadline;
+use humhub\widgets\mails\MailContentEntry;
+use humhub\widgets\mails\MailButtonList;
+use humhub\widgets\mails\MailButton;
 
 /* @var $this yii\web\View */
 /* @var $viewable humhub\modules\user\notifications\Mentioned */
@@ -27,24 +32,22 @@
 <table width="100%" border="0" cellspacing="0" cellpadding="0" align="left">
     <tr>
         <td>
-            <?=
-            humhub\widgets\mails\MailHeadline::widget([
+            <?= MailHeadline::widget([
                 'level' => 3,
                 'text' => $contentRecord->getContentName().':',
                 'style' => 'text-transform:capitalize;'
-            ])
+            ]);
             ?>
         </td>
     </tr>
     <tr>
         <td>
-            <?=
-            humhub\widgets\mails\MailContentEntry::widget([
+            <?= MailContentEntry::widget([
                 'originator' => $originator,
                 'content' => $contentRecord,
                 'date' => $date,
                 'space' => $space
-            ])
+            ]);
             ?>
         </td>
     </tr>
@@ -53,15 +56,15 @@
     </tr>
     <tr>
         <td>
-            <?=
-            humhub\widgets\mails\MailButtonList::widget(['buttons' => [
-                humhub\widgets\mails\MailButton::widget([
-                    'url' => $url,
-                    'text' => Yii::t('ContentModule.notifications_mails', 'View Online')
-                ])
+            <?= MailButtonList::widget(['buttons' => [
+                    MailButton::widget([
+                        'url' => $url,
+                        'text' => Yii::t('ContentModule.notifications_mails', 'View Online')
+                    ])
             ]]);
             ?>
         </td>
     </tr>
 </table>
-<?php $this->endContent();
+
+<?php $this->endContent(); ?>

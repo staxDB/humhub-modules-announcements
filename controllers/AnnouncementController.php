@@ -74,7 +74,7 @@ class AnnouncementController extends ContentContainerController
         $id = Yii::$app->request->get('id');
         $model = Announcement::findOne(['id' => $id]);
 
-        if(!$model) {
+        if (!$model) {
             throw new HttpException(404);
         }
 
@@ -92,7 +92,7 @@ class AnnouncementController extends ContentContainerController
 
         $model = Announcement::findOne(['id' => $id]);
 
-        if(!$model) {
+        if (!$model) {
             throw new HttpException(404);
         }
 
@@ -131,7 +131,7 @@ class AnnouncementController extends ContentContainerController
     public function setClosed($id, $closed)
     {
         $model = Announcement::findOne(['id' => $id]);
-        if(!$model) {
+        if (!$model) {
             throw new HttpException(404);
         }
         $model->scenario = Announcement::SCENARIO_CLOSE;
@@ -161,7 +161,7 @@ class AnnouncementController extends ContentContainerController
     public function resetAnnouncementStatistics()
     {
         $model = $this->getAnnouncementByParameter();
-        if(!$model) {
+        if (!$model) {
             throw new HttpException(404);
         }
         $model->scenario = Announcement::SCENARIO_RESET;
@@ -191,8 +191,8 @@ class AnnouncementController extends ContentContainerController
     {
         Yii::$app->response->format = 'json';
         $announcement = $this->getAnnouncementByParameter();
-
         $announcement->confirm();
+
         return Stream::getContentResultEntry($announcement->content);
     }
 
@@ -248,7 +248,7 @@ class AnnouncementController extends ContentContainerController
         $query->andWhere(['announcement_user.announcement_id' => $announcement->id]);
         $query->andWhere(['announcement_user.confirmed' => false]);
         //$query->orderBy('announcement_user.created_at DESC');
-        $title = Yii::t('AnnouncementsModule.controller', "Users didn't read this <strong>{title}</strong>", ['{title}' => Yii::t('AnnouncementsModule.base', 'Announcement')]);
+        $title = Yii::t('AnnouncementsModule.controller', 'Users didn\'t read this <strong>{title}</strong>', ['{title}' => Yii::t('AnnouncementsModule.base', 'Announcement')]);
 
         return $this->renderAjaxContent(UserListBox::widget(['query' => $query, 'title' => $title]));
     }

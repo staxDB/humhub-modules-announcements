@@ -17,7 +17,6 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Reset Statistics' => '',
     'Add Announcement...' => 'Ankündigung hinzufügen...',
     'Complete Announcement' => 'Ankündigung schliessen',
     'Mark as read' => 'Als gelesen markieren',
@@ -26,7 +25,7 @@ return [
     'Old' => 'Veraltet',
     'Read, ' => 'Gelesen, ',
     'Reopen Announcement' => 'Ankündigung wieder öffnen',
-    'Reset Statistics' => 'Statistik zurücksetzen',
+    'Reset Statistics' => 'Auswertung zurücksetzen',
     'Statistic:' => 'Auswertung:',
     'Unread' => 'Nicht gelesen',
     'and {count} more didn\'t read this.' => 'und {count} mehr haben das nicht gelesen.',

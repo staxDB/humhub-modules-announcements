@@ -2,13 +2,13 @@
 
 namespace humhub\modules\announcements;
 
-use Yii;
-use yii\helpers\Url;
 use humhub\modules\announcements\models\Announcement;
 use humhub\modules\space\models\Space;
 use humhub\modules\content\components\ContentContainerActiveRecord;
 use humhub\modules\content\components\ContentContainerModule;
 use humhub\modules\space\models\Membership;
+use Yii;
+use yii\helpers\Url;
 
 /**
  *
@@ -39,8 +39,8 @@ class Module extends ContentContainerModule
      */
     public function disable()
     {
-        foreach (Announcement::find()->all() as $announement) {
-            $announement->delete();
+        foreach (Announcement::find()->all() as $announcement) {
+            $announcement->delete();
         }
 
         parent::disable();
