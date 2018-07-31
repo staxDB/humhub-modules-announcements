@@ -6,6 +6,7 @@ use humhub\components\ActiveRecord;
 use humhub\modules\announcements\models\Announcement;
 use humhub\modules\space\models\Membership;
 use humhub\modules\user\models\User;
+use Yii;
 
 /**
  * This is the model class for table "announcement_user".
@@ -40,6 +41,16 @@ class AnnouncementUser extends ActiveRecord
             [['announcement_id', 'confirmed'], 'required'],
             [['announcement_id'], 'integer'],
             [['confirmed'], 'boolean'],
+        ];
+    }
+
+    /**
+     * @return array customized attribute labels (name=>label)
+     */
+    public function attributeLabels()
+    {
+        return [
+            'confirmed' => Yii::t('AnnouncementsModule.models', 'Gelesen'),
         ];
     }
 

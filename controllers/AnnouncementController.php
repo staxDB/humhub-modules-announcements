@@ -2,8 +2,10 @@
 
 namespace humhub\modules\announcements\controllers;
 
+use humhub\components\export\DateTimeColumn;
 use humhub\components\mail\Message;
 use humhub\modules\announcements\notifications\AnnouncementCreated;
+use humhub\modules\user\models\ProfileField;
 use humhub\modules\user\models\User;
 use humhub\modules\user\widgets\UserListBox;
 use humhub\modules\content\components\ContentContainerController;
@@ -14,8 +16,11 @@ use humhub\modules\announcements\components\StreamAction;
 use humhub\modules\stream\actions\Stream;
 use humhub\modules\announcements\permissions\CreateAnnouncement;
 use Yii;
+use yii\db\Query;
 use yii\web\HttpException;
 use yii\helpers\Html;
+use humhub\components\export\SpreadsheetExport;
+use humhub\modules\admin\models\UserSearch;
 
 
 /**
@@ -251,6 +256,60 @@ class AnnouncementController extends ContentContainerController
         $title = Yii::t('AnnouncementsModule.controller', 'Users didn\'t read this <strong>{title}</strong>', ['{title}' => Yii::t('AnnouncementsModule.base', 'Announcement')]);
 
         return $this->renderAjaxContent(UserListBox::widget(['query' => $query, 'title' => $title]));
+    }
+
+
+
+    /**
+     * Export user list as csv or xlsx
+     * @param string $format supported format by phpspreadsheet
+     * @return \yii\web\Response
+     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
+     * @throws \yii\base\Exception
+     */
+    public function actionExport()
+    {
+        $format = Yii::$app->request->get('format');
+        $announcement = $this->getAnnouncementByParameter();
+
+        if ($announcement == null) {
+            throw new HttpException(401, Yii::t('AnnouncementsModule.controller', 'Announcement not found!'));
+        }
+
+        $query = AnnouncementUser::find();
+        $query->where(['announcement_user.announcement_id' => $announcement->id]);
+        $query->orderBy(['announcement_user.confirmed' => 'ASC']);
+
+        $exporter = new SpreadsheetExport([
+            'showHeader' => true,
+            'query' => $query,
+            'columns' => $this->collectExportColumns(),
+            'resultConfig' => [
+                'fileBaseName' => 'announcementID_'.$announcement->id . ' - ' . date("d.m.Y_H-m-s"),
+                'writerType' => $format,
+            ],
+        ]);
+
+        return $exporter->export()->send();
+    }
+
+    /**
+     * Return array with columns for data export
+     * @return array
+     */
+    private function collectExportColumns()
+    {
+        $userColumns = [
+            'user.id',
+            'user.username',
+            'user.profile.firstname',
+            'user.profile.lastname',
+            'user.email',
+            'confirmed',
+        ];
+
+        return $userColumns;
     }
 
     /**

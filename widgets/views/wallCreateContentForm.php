@@ -86,27 +86,30 @@ $this->registerJsConfig('content.form', [
                         <?= Yii::t('ContentModule.widgets_views_contentForm', 'Public'); ?>
                     </span>
 
-                    <ul class="nav nav-pills preferences" style="right:0; top:5px;">
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" style="padding:5px 10px;" data-toggle="dropdown" href="#"
-                               aria-label="<?= Yii::t('base', 'Toggle post menu'); ?>" aria-haspopup="true">
-                                <i class="fa fa-cogs"></i>
-                            </a>
+                    <!--compare to older versions-->
+                    <?php if (version_compare(Yii::$app->version, '1.3', '>')) : ?>
+                        <ul class="nav nav-pills preferences" style="right:0; top:5px;">
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" style="padding:5px 10px;" data-toggle="dropdown" href="#"
+                                   aria-label="<?= Yii::t('base', 'Toggle post menu'); ?>" aria-haspopup="true">
+                                    <i class="fa fa-cogs"></i>
+                                </a>
 
-                            <ul class="dropdown-menu pull-right">
-                                <li>
-                                    <?= Link::withAction(Yii::t('ContentModule.base', 'Topics'), 'setTopics')->icon(Yii::$app->getModule('topic')->icon) ?>
-                                </li>
-                                <?php if ($canSwitchVisibility) : ?>
-                                <li>
-                                    <a id="contentForm_visibility_entry" data-action-click="changeVisibility">
-                                        <i class="fa fa-unlock"></i> <?= Yii::t('ContentModule.widgets_views_contentForm', 'Make public'); ?>
-                                    </a>
-                                </li>
-                                <?php endif; ?>
-                            </ul>
-                        </li>
-                    </ul>
+                                <ul class="dropdown-menu pull-right">
+                                    <li>
+                                        <?= Link::withAction(Yii::t('ContentModule.base', 'Topics'), 'setTopics')->icon(Yii::$app->getModule('topic')->icon) ?>
+                                    </li>
+                                    <?php if ($canSwitchVisibility) : ?>
+                                    <li>
+                                        <a id="contentForm_visibility_entry" data-action-click="changeVisibility">
+                                            <i class="fa fa-unlock"></i> <?= Yii::t('ContentModule.widgets_views_contentForm', 'Make public'); ?>
+                                        </a>
+                                    </li>
+                                    <?php endif; ?>
+                                </ul>
+                            </li>
+                        </ul>
+                    <?php endif; ?>
                 </div>
             </div>
 

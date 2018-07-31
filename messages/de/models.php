@@ -1,4 +1,6 @@
 <?php
-return array(
+
+return [
+    'Gelesen' => '',
     'Message' => 'Nachricht',
-);
+];

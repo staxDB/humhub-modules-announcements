@@ -2,6 +2,7 @@
 
 namespace humhub\modules\announcements;
 
+use humhub\modules\announcements\widgets\ExportButton;
 use humhub\modules\announcements\widgets\ResetStatisticsButton;
 use humhub\modules\notification\models\Notification;
 use humhub\modules\space\models\Space;
@@ -32,6 +33,12 @@ class Events extends Object
 
         if ($object->content->canEdit()) {
             $event->sender->addWidget(CloseButton::className(), [
+                'announcement' => $object
+            ]);
+        }
+
+        if ($object->content->canEdit()) {
+            $event->sender->addWidget(ExportButton::className(), [
                 'announcement' => $object
             ]);
         }
