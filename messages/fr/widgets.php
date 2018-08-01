@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'Export in excel' => '',
+    'Export in excel' => 'Exporter au format Excel',
     'Add Announcement...' => 'Publier une annonce importante...',
     'Complete Announcement' => 'Clôturer',
     'Mark as read' => 'Marquer comme lu',

@@ -13,14 +13,13 @@ use humhub\modules\space\models\Membership;
 use humhub\modules\announcements\widgets\CloseButton;
 use humhub\modules\announcements\widgets\ResetButton;
 use Yii;
-use yii\base\Object;
 
 /**
  * Description of Events
  *
  * @author davidborn
  */
-class Events extends Object
+class Events
 {
 
     public static function onWallEntryControlsInit($event)
@@ -168,7 +167,7 @@ class Events extends Object
                     $announcementUser->delete();
                 }
             }
-            
+
             if ($announcementUser->user === null) {
                 if ($integrityController->showFix('Deleting announcement user id ' . $announcementUser->id . ' without existing user!')) {
                     $announcementUser->delete();

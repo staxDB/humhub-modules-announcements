@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'Gelesen' => '',
+    'Gelesen' => 'Lu',
     'Message' => 'Message',
 ];
