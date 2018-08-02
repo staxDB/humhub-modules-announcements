@@ -6,7 +6,6 @@ use humhub\modules\announcements\models\Announcement;
 use humhub\modules\space\models\Space;
 use humhub\modules\content\components\ContentContainerActiveRecord;
 use humhub\modules\content\components\ContentContainerModule;
-use humhub\modules\space\models\Membership;
 use Yii;
 use yii\helpers\Url;
 
@@ -14,7 +13,7 @@ use yii\helpers\Url;
  *
  * This class is also used to process events catched by the autostart.php listeners.
  *
- * @author davidborn
+ * @author David Born ([staxDB](https://github.com/staxDB))
  */
 class Module extends ContentContainerModule
 {

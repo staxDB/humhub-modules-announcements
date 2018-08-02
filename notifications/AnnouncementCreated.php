@@ -9,7 +9,7 @@ use humhub\modules\notification\components\BaseNotification;
 /**
  * SpaceAnnouncementCreatedNotification is sent to all members of the space
  *
- * @author davidborn
+ * @author David Born ([staxDB](https://github.com/staxDB))
  */
 class AnnouncementCreated extends BaseNotification
 {

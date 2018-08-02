@@ -2,14 +2,11 @@
 
 namespace humhub\modules\announcements\widgets;
 
-use Yii;
 
 /**
- * ConfirmMessageWallEntryWidget is used to display a confirm message inside the stream.
+ * WallEntry is used to display an announcement message inside the stream.
  *
- * This Widget will used by the ConfirmMessage Model in Method getWallOut().
- *
- * @author davidborn
+ * @author David Born ([staxDB](https://github.com/staxDB))
  */
 class WallEntry extends \humhub\modules\content\widgets\WallEntry
 {
@@ -18,14 +15,13 @@ class WallEntry extends \humhub\modules\content\widgets\WallEntry
 
     public function run()
     {
-//        // We don't want an edit menu when the poll is closed
+//        // We don't want an edit menu when the announcement is closed
 //        if (version_compare(Yii::$app->version, '1.0.0-beta.4', 'lt') || $this->contentObject->closed) {
 //            $this->editRoute = '';
 //        }
 
         return $this->render('entry', [
             'announcement' => $this->contentObject,
-            'user' => $this->contentObject->content->user,
             'contentContainer' => $this->contentObject->content->container
         ]);
     }

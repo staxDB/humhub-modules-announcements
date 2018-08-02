@@ -1,5 +1,12 @@
 Changelog
 =========
+20.08.2018
+----------------------
+- Release: v0.3
+  - Added Topics-Feature for Humhub v1.3
+  - Changed to new Richtext-Editor for Humhub v1.3
+  - Added export to excel functionality
+  
 07.03.2018
 ----------------------
 - Release: v0.2

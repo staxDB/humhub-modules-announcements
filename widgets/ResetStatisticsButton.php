@@ -5,13 +5,9 @@ namespace humhub\modules\announcements\widgets;
 use humhub\components\Widget;
 
 /**
- * ResetButton for closing polls per poll dropdown menu
+ * ResetButton for reset an announcement statistics per dropdown menu
  *
- * This Widget will used by the Poll Modul in Events.php
- *
- * @package humhub.modules.polls.widgets
- * @since 0.5
- * @author Luke
+ * This Widget will used by the Announcement Module in Events.php
  */
 class ResetStatisticsButton extends Widget
 {

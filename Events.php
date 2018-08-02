@@ -5,11 +5,8 @@ namespace humhub\modules\announcements;
 use humhub\modules\announcements\widgets\ExportButton;
 use humhub\modules\announcements\widgets\ResetStatisticsButton;
 use humhub\modules\notification\models\Notification;
-use humhub\modules\space\models\Space;
-use humhub\modules\user\models\User;
 use humhub\modules\announcements\models\Announcement;
 use humhub\modules\announcements\models\AnnouncementUser;
-use humhub\modules\space\models\Membership;
 use humhub\modules\announcements\widgets\CloseButton;
 use humhub\modules\announcements\widgets\ResetButton;
 use Yii;
@@ -17,7 +14,7 @@ use Yii;
 /**
  * Description of Events
  *
- * @author davidborn
+ * @author David Born ([staxDB](https://github.com/staxDB))
  */
 class Events
 {

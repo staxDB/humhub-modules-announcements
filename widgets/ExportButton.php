@@ -3,8 +3,6 @@
 namespace humhub\modules\announcements\widgets;
 
 use humhub\components\Widget;
-use Yii;
-use yii\helpers\Url;
 
 /**
  *

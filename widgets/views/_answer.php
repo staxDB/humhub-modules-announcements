@@ -1,7 +1,6 @@
 <?php
 
 use yii\helpers\Html;
-use humhub\modules\announcements\permissions\CreateAnnouncement;
 
 /* @var $announcement \humhub\modules\announcements\models\Announcement */
 /* @var $contentContainer \humhub\modules\content\models\ContentContainer */

@@ -3,13 +3,9 @@
 namespace humhub\modules\announcements\models;
 
 use humhub\modules\announcements\models\forms\EditForm;
-use humhub\modules\file\libs\FileHelper;
-use humhub\modules\file\models\File;
 use humhub\modules\notification\models\Notification;
-use humhub\modules\user\models\fieldtype\DateTime;
 use humhub\modules\user\models\User;
 use humhub\modules\content\components\ContentActiveRecord;
-use humhub\modules\announcements\models\AnnouncementUser;
 use humhub\modules\announcements\permissions\CreateAnnouncement;
 use humhub\modules\announcements\permissions\ViewStatistics;
 use humhub\modules\announcements\notifications\AnnouncementCreated;
@@ -29,7 +25,7 @@ use Yii;
  * @property string $created_at
  * @property string $updated_at
  *
- * @author davidborn
+ * @author David Born ([staxDB](https://github.com/staxDB))
  */
 class Announcement extends ContentActiveRecord implements Searchable
 {

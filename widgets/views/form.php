@@ -1,6 +1,5 @@
 <?php
 
-use yii\helpers\Html;
 use humhub\modules\announcements\assets\AnnouncementsAsset;
 use humhub\modules\content\widgets\richtext\RichTextField;
 

@@ -9,7 +9,6 @@
 /* @var $model \humhub\modules\announcements\models\EditForm */
 
 use humhub\widgets\Button;
-use Yii;
 use yii\widgets\ActiveForm;
 use yii\helpers\Url;
 ?>

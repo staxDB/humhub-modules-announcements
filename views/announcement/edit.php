@@ -1,6 +1,5 @@
 <?php
 
-//use humhub\widgets\ActiveForm;
 use humhub\modules\ui\form\widgets\ActiveForm;
 use humhub\modules\content\widgets\richtext\RichTextField;
 use humhub\modules\file\widgets\FilePreview;

@@ -11,7 +11,7 @@ class StreamAction extends ContentContainerStream
 
     public function setupFilters()
     {
-        if (in_array('announcement_notAnswered', $this->filters)) {
+        if (in_array('announcement_notAnswered', $this->filters) || in_array('announcement_mine', $this->filters)) {
             $this->activeQuery->leftJoin('announcement', 'content.object_id=announcement.id AND content.object_model=:modelClass', [':modelClass' => Announcement::className()]);
 
             if (in_array('announcement_notAnswered', $this->filters)) {

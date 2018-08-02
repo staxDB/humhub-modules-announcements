@@ -5,11 +5,13 @@ namespace humhub\modules\announcements\widgets;
 use humhub\components\Widget;
 
 /**
- * PollWallEntryWidget is used to display a poll inside the stream.
  *
- * This Widget will used by the Poll Model in Method getWallOut().
+ * CloseButton for close an announcement and mark it as old
  *
- * @author davidborn
+ * This Widget will used by the Announcement Module in Events.php
+ *
+ *
+ * @author David Born ([staxDB](https://github.com/staxDB))
  */
 class CloseButton extends Widget
 {

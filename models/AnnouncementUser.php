@@ -3,8 +3,6 @@
 namespace humhub\modules\announcements\models;
 
 use humhub\components\ActiveRecord;
-use humhub\modules\announcements\models\Announcement;
-use humhub\modules\space\models\Membership;
 use humhub\modules\user\models\User;
 use Yii;
 
@@ -19,7 +17,7 @@ use Yii;
  * @property string $updated_at
  * @property string $created_at
  *
- * @author davidborn
+ * @author David Born ([staxDB](https://github.com/staxDB))
  */
 class AnnouncementUser extends ActiveRecord
 {

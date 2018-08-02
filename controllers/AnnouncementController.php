@@ -2,10 +2,6 @@
 
 namespace humhub\modules\announcements\controllers;
 
-use humhub\components\export\DateTimeColumn;
-use humhub\components\mail\Message;
-use humhub\modules\announcements\notifications\AnnouncementCreated;
-use humhub\modules\user\models\ProfileField;
 use humhub\modules\user\models\User;
 use humhub\modules\user\widgets\UserListBox;
 use humhub\modules\content\components\ContentContainerController;
@@ -16,11 +12,8 @@ use humhub\modules\announcements\components\StreamAction;
 use humhub\modules\stream\actions\Stream;
 use humhub\modules\announcements\permissions\CreateAnnouncement;
 use Yii;
-use yii\db\Query;
 use yii\web\HttpException;
-use yii\helpers\Html;
 use humhub\components\export\SpreadsheetExport;
-use humhub\modules\admin\models\UserSearch;
 
 
 /**

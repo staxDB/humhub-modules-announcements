@@ -18,7 +18,7 @@ use humhub\modules\notification\targets\MobileTarget;
 /**
  * SpaceMemberNotificationCategory
  *
- * @author buddha
+ * @author David Born ([staxDB](https://github.com/staxDB))
  */
 class AnnouncementNotificationCategory extends NotificationCategory
 {
