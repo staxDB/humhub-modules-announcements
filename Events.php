@@ -2,6 +2,7 @@
 
 namespace humhub\modules\announcements;
 
+use humhub\modules\announcements\models\forms\EditForm;
 use humhub\modules\announcements\widgets\ExportButton;
 use humhub\modules\announcements\widgets\ResetStatisticsButton;
 use humhub\modules\notification\models\Notification;
@@ -59,6 +60,10 @@ class Events
 
     public static function onStreamFilterBeforeRun($event)
     {
+        $settings = EditForm::instantiate();
+        if (!$settings->showFilters) {
+            return;
+        }
         /** @var $wallFilterNavigation WallStreamFilterNavigation */
         $wallFilterNavigation = $event->sender;
 
@@ -85,6 +90,10 @@ class Events
 
     public static function onStreamFilterBeforeFilter($event)
     {
+        $settings = EditForm::instantiate();
+        if (!$settings->showFilters) {
+            return;
+        }
         /** @var $streamQuery WallStreamQuery */
         $streamQuery = $event->sender;
 

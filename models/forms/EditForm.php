@@ -12,6 +12,7 @@ class EditForm extends Model
     public $notifyUpdated = false;
     public $notifyClosed = false;
     public $notifyResetStatistics = true;
+    public $showFilters = true;
 
     /**
      * @inheritdocs
@@ -23,6 +24,7 @@ class EditForm extends Model
         $this->notifyUpdated = $settings->get('notify_updated', $this->notifyUpdated);
         $this->notifyClosed = $settings->get('notify_closed', $this->notifyClosed);
         $this->notifyResetStatistics = $settings->get('notify_resetStatistics', $this->notifyResetStatistics);
+        $this->showFilters = $settings->get('show_filters', $this->showFilters);
     }
     
     /**
@@ -31,7 +33,7 @@ class EditForm extends Model
     public function rules()
     {
         return [
-            [['notifyCreated', 'notifyUpdated', 'notifyClosed', 'notifyResetStatistics'],  'boolean'],
+            [['notifyCreated', 'notifyUpdated', 'notifyClosed', 'notifyResetStatistics', 'showFilters'],  'boolean'],
         ];
     }
 
@@ -47,6 +49,7 @@ class EditForm extends Model
             'notifyUpdated' => Yii::t('AnnouncementsModule.forms', 'Notify all Space Members if an announcement has been updated.'),
             'notifyClosed' => Yii::t('AnnouncementsModule.forms', 'Notify all Space Members if an announcement has been closed or reopened.'),
             'notifyResetStatistics' => Yii::t('AnnouncementsModule.forms', 'Notify all Space Members if an announcement statistics has been reset.'),
+            'showFilters' => Yii::t('AnnouncementsModule.forms', 'Show additional announcement filters on stream.'),
         );
     }
     
@@ -64,6 +67,7 @@ class EditForm extends Model
         $this->notifyUpdated = $settings->set('notify_updated', $this->notifyUpdated);
         $this->notifyClosed = $settings->set('notify_closed', $this->notifyClosed);
         $this->notifyResetStatistics = $settings->set('notify_resetStatistics', $this->notifyResetStatistics);
+        $this->showFilters = $settings->set('show_filters', $this->showFilters);
         return true;
     }
 

@@ -22,14 +22,20 @@ use yii\helpers\Url;
     <div class="panel-body">
         <?php $form = ActiveForm::begin(); ?>
 
-        <h4>
-            <?= Yii::t('AnnouncementsModule.forms', 'Global settings'); ?>
-        </h4>
+        <h5>
+            <?= Yii::t('AnnouncementsModule.forms', 'Notifications'); ?>
+        </h5>
 
         <?= $form->field($model, 'notifyCreated')->checkbox(); ?>
         <?= $form->field($model, 'notifyUpdated')->checkbox(); ?>
         <?= $form->field($model, 'notifyClosed')->checkbox(); ?>
         <?= $form->field($model, 'notifyResetStatistics')->checkbox(); ?>
+
+        <h5>
+            <?= Yii::t('AnnouncementsModule.forms', 'Filters'); ?>
+        </h5>
+
+        <?= $form->field($model, 'showFilters')->checkbox(); ?>
 
         <?= Button::save()->submit(); ?>
         <?= Button::back(Url::to(['/admin/module'])); ?>
