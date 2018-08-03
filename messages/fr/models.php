@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'Not read by me' => 'Non lu pas moi',
-    'Old Announcement' => 'Ancienne annonce',
+    'Not read by me' => 'Non lues pas moi',
+    'Old Announcement' => 'Anciennes',
     'Read' => 'Lu',
     'Message' => 'Message',
 ];
