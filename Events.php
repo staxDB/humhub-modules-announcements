@@ -9,6 +9,9 @@ use humhub\modules\announcements\models\Announcement;
 use humhub\modules\announcements\models\AnnouncementUser;
 use humhub\modules\announcements\widgets\CloseButton;
 use humhub\modules\announcements\widgets\ResetButton;
+use humhub\modules\stream\models\WallStreamQuery;
+use humhub\modules\stream\widgets\WallStreamFilterNavigation;
+use humhub\modules\announcements\models\filters\AnnouncementStreamFilter;
 use Yii;
 
 /**
@@ -18,6 +21,8 @@ use Yii;
  */
 class Events
 {
+    const FILTER_BLOCK_ANNOUNCEMENT = 'announcement';
+    const FILTER_ANNOUNCEMENT = 'announcement';
 
     public static function onWallEntryControlsInit($event)
     {
@@ -50,6 +55,41 @@ class Events
                 'announcement' => $object
             ]);
         }
+    }
+
+    public static function onStreamFilterBeforeRun($event)
+    {
+        /** @var $wallFilterNavigation WallStreamFilterNavigation */
+        $wallFilterNavigation = $event->sender;
+
+        // Add a new filter block to the last filter panel
+        $wallFilterNavigation->addFilterBlock(static::FILTER_BLOCK_ANNOUNCEMENT, [
+            'title' => 'Announcement',
+            'sortOrder' => 400
+        ], WallStreamFilterNavigation::PANEL_POSITION_LEFT);
+
+        // Add the filter to the new filter block
+        $wallFilterNavigation->addFilter([
+            'id' => AnnouncementStreamFilter::FILTER_NOT_READ,
+            'title' => Yii::t('AnnouncementsModule.models', 'Not read by me'),
+            'sortOrder' => 100
+        ],static::FILTER_BLOCK_ANNOUNCEMENT);
+
+        // Add the filter to the new filter block
+        $wallFilterNavigation->addFilter([
+            'id' => AnnouncementStreamFilter::FILTER_CLOSED,
+            'title' => Yii::t('AnnouncementsModule.models', 'Old Announcement'),
+            'sortOrder' => 200
+        ],static::FILTER_BLOCK_ANNOUNCEMENT);
+    }
+
+    public static function onStreamFilterBeforeFilter($event)
+    {
+        /** @var $streamQuery WallStreamQuery */
+        $streamQuery = $event->sender;
+
+        // Add a new filterHandler to WallStreamQuery
+        $streamQuery->filterHandlers[] = AnnouncementStreamFilter::class;
     }
 
     /**

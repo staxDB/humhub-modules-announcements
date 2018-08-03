@@ -6,6 +6,8 @@ use humhub\modules\user\models\User;
 use humhub\modules\space\models\Membership;
 use humhub\commands\IntegrityController;
 use humhub\modules\content\widgets\WallEntryControls;
+use humhub\modules\stream\models\WallStreamQuery;
+use humhub\modules\stream\widgets\WallStreamFilterNavigation;
 
 return [
     'id' => 'announcements',
@@ -18,5 +20,7 @@ return [
         ['class' => Membership::className(), 'event' => Membership::EVENT_MEMBER_ADDED, 'callback' => ['humhub\modules\announcements\Events', 'onMemberAdded']],
         ['class' => Membership::className(), 'event' => Membership::EVENT_MEMBER_REMOVED, 'callback' => ['humhub\modules\announcements\Events', 'onMemberRemoved']],
         ['class' => IntegrityController::className(), 'event' => IntegrityController::EVENT_ON_RUN, 'callback' => ['humhub\modules\announcements\Events', 'onIntegrityCheck']],
+        ['class' => WallStreamQuery::class, 'event' =>  WallStreamQuery::EVENT_BEFORE_FILTER, 'callback' => ['humhub\modules\announcements\Events', 'onStreamFilterBeforeFilter']],
+        ['class' => WallStreamFilterNavigation::class, 'event' =>  WallStreamFilterNavigation::EVENT_BEFORE_RUN, 'callback' => ['humhub\modules\announcements\Events', 'onStreamFilterBeforeRun']],
     ],
 ];

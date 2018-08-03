@@ -31,7 +31,7 @@ $canCreateAnnouncements = $contentContainer->permissionManager->can(new CreateAn
         Yii::t('AnnouncementsModule.views', '<b>There are no announcements yet!</b><br>Be the first and create one...') :
         Yii::t('AnnouncementsModule.views', '<b>There are no announcements yet!</b>'),
     'messageStreamEmptyCss' => ($canCreateAnnouncements) ? 'placeholder-empty-stream' : '',
-    'filters' => $filters
+//    'filters' => $filters
 ]);
 ?>
 
