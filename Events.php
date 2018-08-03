@@ -64,7 +64,7 @@ class Events
 
         // Add a new filter block to the last filter panel
         $wallFilterNavigation->addFilterBlock(static::FILTER_BLOCK_ANNOUNCEMENT, [
-            'title' => 'Announcement',
+            'title' => Yii::t('AnnouncementsModule.base', 'Announcements'),
             'sortOrder' => 400
         ], WallStreamFilterNavigation::PANEL_POSITION_LEFT);
 
