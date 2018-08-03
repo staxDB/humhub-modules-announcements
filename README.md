@@ -8,6 +8,7 @@ __Author:__ David Born ([staxDB](https://github.com/staxDB))
 
 ### v0.3 Works with
 - Humhub version 1.3.*
+- PHP 7.2
 
 ### v0.2 Works with
 - Humhub version 1.2.*
