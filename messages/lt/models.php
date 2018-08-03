@@ -1,6 +1,8 @@
 <?php
 
 return [
-    'Gelesen' => '',
     'Message' => '',
+    'Not read by me' => '',
+    'Old Announcement' => '',
+    'Read' => '',
 ];

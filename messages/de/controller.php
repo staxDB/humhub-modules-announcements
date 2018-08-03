@@ -17,7 +17,7 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Users who read this <strong>{title}</strong>' => '',
+    'Users who read this <strong>{title}</strong>' => 'Personen, die diese <strong>{title}</strong> gelesen haben',
     'Access denied!' => 'Zutritt verboten!',
     'Announcement not found!' => 'Ankündigung nicht gefunden!',
     'Could not load Announcement!' => 'Ankündigung konnte nicht geladen werden!',

@@ -48,7 +48,7 @@ class AnnouncementUser extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'confirmed' => Yii::t('AnnouncementsModule.models', 'Gelesen'),
+            'confirmed' => Yii::t('AnnouncementsModule.models', 'Read'),
         ];
     }
 
