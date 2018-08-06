@@ -7,15 +7,7 @@ then go to `Administration -> Modules` and **Enable** the **Announcements** modu
 
 **_Note:_** You should also enable the module on each Space (settings) you wan't to use it.
 
-## Changelog
-
-[Changelog](CHANGELOG.md)
-
-[Github Changelog](https://github.com/staxDB/humhub-modules-announcements/commits/master)
-
-## Bugtracker
-
-<https://github.com/staxDB/humhub-modules-announcements/issues>
-
-## ToDo
-- testing
+## Links
+- [Changelog](https://github.com/staxDB/humhub-modules-announcements/blob/master/docs/CHANGELOG.md)
+- [Github Changelog](https://github.com/staxDB/humhub-modules-announcements/commits/master)
+- [Bugtracker](https://github.com/staxDB/humhub-modules-announcements/issues)

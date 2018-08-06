@@ -14,8 +14,8 @@ __Author:__ David Born ([staxDB](https://github.com/staxDB))
 - Humhub version 1.2.*
 
 ## Information
-- Check out the [Changelog](docs/CHANGELOG.md)
-- For installation instructions take a look at the [docs-folder](docs/INSTALL.md).
+- Check out the [Changelog](https://github.com/staxDB/humhub-modules-announcements/blob/master/docs/CHANGELOG.md)
+- For installation instructions take a look at the [docs-folder](https://github.com/staxDB/humhub-modules-announcements/blob/master/docs/INSTALL.md).
 
 ## Todo
 - add content type Announcement by default in stream filter
