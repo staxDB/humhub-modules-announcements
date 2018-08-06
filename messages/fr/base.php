@@ -20,6 +20,6 @@ return [
     'Allows to post messages to spaces, that can be confirmed as read.' => 'Ce module permet de publier des annonces importantes dans des espaces, avec option de confirmation de lecture.',
     'Announcement' => 'annonce importante',
     'Announcements' => 'Annonces',
-    'Edit your message' => 'Editer le message',
+    'Edit your message' => 'Modifier l\'annonce',
     'Save' => 'Publier',
 ];
