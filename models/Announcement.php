@@ -3,7 +3,10 @@
 namespace humhub\modules\announcements\models;
 
 use humhub\modules\announcements\models\forms\EditForm;
+use humhub\modules\content\components\ContentContainerActiveRecord;
 use humhub\modules\notification\models\Notification;
+use humhub\modules\space\models\Membership;
+use humhub\modules\space\models\Space;
 use humhub\modules\user\models\User;
 use humhub\modules\content\components\ContentActiveRecord;
 use humhub\modules\announcements\permissions\CreateAnnouncement;
@@ -35,6 +38,12 @@ class Announcement extends ContentActiveRecord implements Searchable
     const SCENARIO_CLOSE = 'close';
     const SCENARIO_DEFAULT = 'default'; // on file-upload
 
+
+    /**
+     * @inheritdoc
+     */
+    public $canMove = true;
+
     public $autoAddToWall = true;
     public $wallEntryClass = 'humhub\modules\announcements\widgets\WallEntry';
 
@@ -45,6 +54,8 @@ class Announcement extends ContentActiveRecord implements Searchable
      * @inheritdoc
      */
     public $managePermission = CreateAnnouncement::class;
+
+    public $moduleId = 'announcements';
 
     /**
      * @return string the associated database table name
@@ -328,6 +339,18 @@ class Announcement extends ContentActiveRecord implements Searchable
 
         return true;
     }
+
+//    TODO: Check if users are also in the new space...
+//    public function afterMove(ContentContainerActiveRecord $container = null)
+//    {
+//        if ($container instanceof Space) {
+//            foreach($this->confirmationUsers as $user) {
+//                $membership = $container->getMembership($user);
+//            }
+//        }
+//        parent::afterMove($container);
+//    }
+
 
     /**
      * @param $insert

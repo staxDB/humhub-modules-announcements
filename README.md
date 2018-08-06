@@ -13,4 +13,10 @@ __Author:__ David Born ([staxDB](https://github.com/staxDB))
 ### v0.2.* Works with
 - Humhub version 1.2.*
 
-> For installation instructions take a look at the docs-folder.
+## Information
+- Check out the [Changelog](docs/CHANGELOG.md)
+- For installation instructions take a look at the [docs-folder](docs/INSTALL.md).
+
+## Todo
+- add content type Announcement by default in stream filter
+- before moving content, check is users in space are the same as in the new space

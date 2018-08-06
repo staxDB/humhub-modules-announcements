@@ -9,6 +9,7 @@ echo RichtextField::widget([
     'pluginOptions' => ['maxHeight' => '300px'],
     'placeholder' => Yii::t('AnnouncementsModule.widgets', 'Add Announcement...'),
     'name' => 'message',
+    'layout' => RichTextField::LAYOUT_INLINE,
     ]);
 ?>
 

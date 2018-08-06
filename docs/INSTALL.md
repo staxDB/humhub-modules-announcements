@@ -9,7 +9,9 @@ then go to `Administration -> Modules` and **Enable** the **Announcements** modu
 
 ## Changelog
 
-<https://github.com/staxDB/humhub-modules-announcements/commits/master>
+[Changelog](CHANGELOG.md)
+
+[Github Changelog](https://github.com/staxDB/humhub-modules-announcements/commits/master)
 
 ## Bugtracker
 

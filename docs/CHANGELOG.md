@@ -1,6 +1,12 @@
 Changelog
 =========
-20.08.2018
+06.08.2018
+----------------------
+- Release: v0.3.1
+  - Added Move-content functionality
+  - Added new stream filter and settings
+  
+20.07.2018
 ----------------------
 - Release: v0.3
   - Added Topics-Feature for Humhub v1.3
