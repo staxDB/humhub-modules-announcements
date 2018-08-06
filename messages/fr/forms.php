@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'Filters' => '',
-    'Notifications' => '',
+    'Filters' => 'Filtres',
+    'Notifications' => 'Notifications',
     'Show additional announcement filters on stream.' => '',
     '<strong>Announcement</strong> module configuration' => 'Paramètres du module <strong>annonces</strong>',
     'Notify all Space Members if an announcement has been closed or reopened.' => 'Avertir les membres lorsqu\'une annonce est clôturée ou réouverte.',
