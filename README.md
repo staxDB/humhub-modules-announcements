@@ -19,4 +19,4 @@ __Author:__ David Born ([staxDB](https://github.com/staxDB))
 
 ## Todo
 - add content type Announcement by default in stream filter
-- before moving content, check is users in space are the same as in the new space
+- before moving content, check if users in space are the same as in the new space
