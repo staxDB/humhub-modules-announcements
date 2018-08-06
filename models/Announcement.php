@@ -35,6 +35,12 @@ class Announcement extends ContentActiveRecord implements Searchable
     const SCENARIO_CLOSE = 'close';
     const SCENARIO_DEFAULT = 'default'; // on file-upload
 
+
+    /**
+     * @inheritdoc
+     */
+    public $canMove = true;
+
     public $autoAddToWall = true;
     public $wallEntryClass = 'humhub\modules\announcements\widgets\WallEntry';
 
@@ -45,6 +51,8 @@ class Announcement extends ContentActiveRecord implements Searchable
      * @inheritdoc
      */
     public $managePermission = CreateAnnouncement::class;
+
+    public $moduleId = 'announcements';
 
     /**
      * @return string the associated database table name
