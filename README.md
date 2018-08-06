@@ -14,4 +14,5 @@ __Author:__ David Born ([staxDB](https://github.com/staxDB))
 - Humhub version 1.2.*
 
 > Check out the [Changelog](docs/CHANGELOG.md)
+
 > For installation instructions take a look at the [docs-folder](docs/INSTALL.md).
