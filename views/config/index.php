@@ -30,18 +30,17 @@ use yii\helpers\Url;
         <?= $form->field($model, 'notifyUpdated')->checkbox(); ?>
         <?= $form->field($model, 'notifyClosed')->checkbox(); ?>
         <?= $form->field($model, 'notifyResetStatistics')->checkbox(); ?>
-        <br />
 
-        <h5>
+        <h5 style="padding-top: 6px;">
             <?= Yii::t('AnnouncementsModule.forms', 'Settings for filters'); ?>
         </h5>
         <?= $form->field($model, 'showFilters')->checkbox(); ?>
-        <br />
 
-        <h5>
+        <h5 style="padding-top: 6px;">
             <?= Yii::t('AnnouncementsModule.forms', 'Settings to move content'); ?>
         </h5>
-        <?= $form->field($model, 'setClosed')->checkbox(); ?>
+        <?= $form->field($model, 'setClosed')->checkbox()
+            ->hint(Yii::t('AnnouncementsModule.forms', 'Be careful! If you uncheck this, users, who are not member of the new space may still be possible to mark the announcement as read. Members of the new space will not automatically be added to the read/unread list. You have to close and reopen the announcement manually to add new members!')); ?>
 
         <?= Button::save()->submit(); ?>
         <?= Button::back(Url::to(['/admin/module'])); ?>

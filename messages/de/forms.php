@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'Be careful! If you uncheck this, users, who are not member of the new space may still be possible to mark the announcement as read. Members of the new space will not automatically be added to the read/unread list. You have to close and reopen the announcement manually to add new members!' => 'Seien Sie vorsichtig! Wenn Sie dieses Kontrollkästchen deaktivieren, könnten Benutzer, die nicht Mitglied des neuen Space sind, die Ankündigung dennoch als gelesen markieren. Mitglieder des neuen Space werden nicht automatisch zur Liste der Gelesenen/Ungelesenen hinzugefügt. Sie müssen die Ankündigung manuell schließen und wieder öffnen, um neue Mitglieder hinzuzufügen!',
     '<strong>Announcement</strong> module configuration' => 'Konfiguration des <strong>Ankündigungen-Moduls</strong>',
     'Notify all Space Members if an announcement has been closed or reopened.' => 'Benachrichtige alle Space-Mitglieder, wenn eine Ankündigung geschlossen oder geöffnet wurde.',
     'Notify all Space Members if an announcement has been created.' => 'Benachrichtige alle Space-Mitglieder, wenn eine Ankündigung erstellt wurde.',

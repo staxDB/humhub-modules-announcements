@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'Be careful! If you uncheck this, users, who are not member of the new space may still be possible to mark the announcement as read. Members of the new space will not automatically be added to the read/unread list. You have to close and reopen the announcement manually to add new members!' => '',
     'Set Announcement as old after moving to another space.' => '',
     'Settings for filters' => '',
     'Settings for notifications' => '',
