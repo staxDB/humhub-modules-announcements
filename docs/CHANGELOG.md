@@ -1,5 +1,11 @@
 Changelog
 =========
+07.08.2018
+----------------------
+- Release: v0.3.2
+  - Added settings for moving content
+  - Moved announcement will be market as closed/old. Can be changed in settings
+  
 06.08.2018
 ----------------------
 - Release: v0.3.1
