@@ -9,7 +9,7 @@
 /* @var $model \humhub\modules\announcements\models\EditForm */
 
 use humhub\widgets\Button;
-use yii\widgets\ActiveForm;
+use humhub\modules\ui\form\widgets\ActiveForm;
 use yii\helpers\Url;
 ?>
 
@@ -23,19 +23,25 @@ use yii\helpers\Url;
         <?php $form = ActiveForm::begin(); ?>
 
         <h5>
-            <?= Yii::t('AnnouncementsModule.forms', 'Notifications'); ?>
+            <?= Yii::t('AnnouncementsModule.forms', 'Settings for notifications'); ?>
         </h5>
 
         <?= $form->field($model, 'notifyCreated')->checkbox(); ?>
         <?= $form->field($model, 'notifyUpdated')->checkbox(); ?>
         <?= $form->field($model, 'notifyClosed')->checkbox(); ?>
         <?= $form->field($model, 'notifyResetStatistics')->checkbox(); ?>
+        <br />
 
         <h5>
-            <?= Yii::t('AnnouncementsModule.forms', 'Filters'); ?>
+            <?= Yii::t('AnnouncementsModule.forms', 'Settings for filters'); ?>
         </h5>
-
         <?= $form->field($model, 'showFilters')->checkbox(); ?>
+        <br />
+
+        <h5>
+            <?= Yii::t('AnnouncementsModule.forms', 'Settings to move content'); ?>
+        </h5>
+        <?= $form->field($model, 'setClosed')->checkbox(); ?>
 
         <?= Button::save()->submit(); ?>
         <?= Button::back(Url::to(['/admin/module'])); ?>

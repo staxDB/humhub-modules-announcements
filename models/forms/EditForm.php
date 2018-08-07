@@ -7,12 +7,25 @@ use \yii\base\Model;
 
 class EditForm extends Model
 {
-
+    /**
+     * notification settings
+     */
     public $notifyCreated = true;
     public $notifyUpdated = false;
     public $notifyClosed = false;
     public $notifyResetStatistics = true;
+
+    /**
+     * filter settings
+     */
     public $showFilters = true;
+
+    /**
+     * move content settings
+     */
+    public $setClosed = true;
+
+
 
     /**
      * @inheritdocs
@@ -25,6 +38,7 @@ class EditForm extends Model
         $this->notifyClosed = $settings->get('notify_closed', $this->notifyClosed);
         $this->notifyResetStatistics = $settings->get('notify_resetStatistics', $this->notifyResetStatistics);
         $this->showFilters = $settings->get('show_filters', $this->showFilters);
+        $this->setClosed = $settings->get('set_closed', $this->setClosed);
     }
     
     /**
@@ -33,7 +47,7 @@ class EditForm extends Model
     public function rules()
     {
         return [
-            [['notifyCreated', 'notifyUpdated', 'notifyClosed', 'notifyResetStatistics', 'showFilters'],  'boolean'],
+            [['notifyCreated', 'notifyUpdated', 'notifyClosed', 'notifyResetStatistics', 'showFilters', 'setClosed'],  'boolean'],
         ];
     }
 
@@ -50,6 +64,7 @@ class EditForm extends Model
             'notifyClosed' => Yii::t('AnnouncementsModule.forms', 'Notify all Space Members if an announcement has been closed or reopened.'),
             'notifyResetStatistics' => Yii::t('AnnouncementsModule.forms', 'Notify all Space Members if an announcement statistics has been reset.'),
             'showFilters' => Yii::t('AnnouncementsModule.forms', 'Show additional announcement filters on stream.'),
+            'setClosed' => Yii::t('AnnouncementsModule.forms', 'Set Announcement as old after moving to another space.'),
         );
     }
     
@@ -68,6 +83,7 @@ class EditForm extends Model
         $this->notifyClosed = $settings->set('notify_closed', $this->notifyClosed);
         $this->notifyResetStatistics = $settings->set('notify_resetStatistics', $this->notifyResetStatistics);
         $this->showFilters = $settings->set('show_filters', $this->showFilters);
+        $this->setClosed = $settings->set('set_closed', $this->setClosed);
         return true;
     }
 

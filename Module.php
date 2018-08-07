@@ -65,7 +65,8 @@ class Module extends ContentContainerModule
         if ($contentContainer instanceof Space) {
             return [
                 new permissions\CreateAnnouncement(),
-                new permissions\ViewStatistics()
+                new permissions\ViewStatistics(),
+                new permissions\MoveContent()
             ];
         }
 
