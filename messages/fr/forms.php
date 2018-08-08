@@ -2,7 +2,7 @@
 
 return [
     'Be careful! If you uncheck this, users, who are not member of the new space may still be possible to mark the announcement as read. Members of the new space will not automatically be added to the read/unread list. You have to close and reopen the announcement manually to add new members!' => '',
-    'Set Announcement as old after moving to another space.' => 'Marquer comme ancienne annonce après l\'avoir déplacée vers l\'autre espace',
+    'Set Announcement as old after moving to another space.' => 'Marquer l\'annonce comme ancienne après l\'avoir déplacée vers un autre espace',
     'Settings for filters' => 'Paramètres des filtres',
     'Settings for notifications' => 'Paramètres des notifications',
     'Settings to move content' => 'Paramètres de déplacement',
