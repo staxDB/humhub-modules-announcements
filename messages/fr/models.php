@@ -2,7 +2,7 @@
 
 return [
     'Not read by me' => 'Non lu pas moi',
-    'Old Announcement' => 'Anciennes annonces',
+    'Old Announcement' => 'Annonces clôturées',
     'Read' => 'Lu',
     'Message' => 'Message',
 ];
