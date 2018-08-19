@@ -14,13 +14,14 @@ use humhub\modules\stream\models\WallStreamQuery;
 use humhub\modules\stream\widgets\WallStreamFilterNavigation;
 use humhub\modules\announcements\models\filters\AnnouncementStreamFilter;
 use Yii;
+use yii\base\BaseObject;
 
 /**
  * Description of Events
  *
  * @author David Born ([staxDB](https://github.com/staxDB))
  */
-class Events
+class Events extends BaseObject
 {
     const FILTER_BLOCK_ANNOUNCEMENT = 'announcement';
     const FILTER_ANNOUNCEMENT = 'announcement';
