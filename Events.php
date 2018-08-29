@@ -35,25 +35,25 @@ class Events extends BaseObject
         }
 
         if ($object->content->canEdit()) {
-            $event->sender->addWidget(CloseButton::className(), [
+            $event->sender->addWidget(CloseButton::class, [
                 'announcement' => $object
             ]);
         }
 
         if ($object->content->canEdit()) {
-            $event->sender->addWidget(ExportButton::className(), [
+            $event->sender->addWidget(ExportButton::class, [
                 'announcement' => $object
             ]);
         }
 
         if ($object->isResetAllowed()) {
-            $event->sender->addWidget(ResetButton::className(), [
+            $event->sender->addWidget(ResetButton::class, [
                 'announcement' => $object
             ]);
         }
 
         if ($object->isResetStatisticsAllowed()) {
-            $event->sender->addWidget(ResetStatisticsButton::className(), [
+            $event->sender->addWidget(ResetStatisticsButton::class, [
                 'announcement' => $object
             ]);
         }
@@ -152,7 +152,7 @@ class Events extends BaseObject
                     }
 
                     // remove notifications
-                    $notifications = Notification::find()->where(['source_class' => Announcement::className(), 'source_pk' => $announcement->id, 'space_id' => $event->space->id])->all();
+                    $notifications = Notification::find()->where(['source_class' => Announcement::class, 'source_pk' => $announcement->id, 'space_id' => $event->space->id])->all();
                     foreach ($notifications as $notification) {
                         $notification->delete();
                     }

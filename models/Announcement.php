@@ -105,7 +105,7 @@ class Announcement extends ContentActiveRecord implements Searchable
 
     public function getConfirmations()
     {
-        return $this->hasMany(AnnouncementUser::className(), ['announcement_id' => 'id']);
+        return $this->hasMany(AnnouncementUser::class, ['announcement_id' => 'id']);
     }
 
     /**
@@ -471,7 +471,7 @@ class Announcement extends ContentActiveRecord implements Searchable
     public function informUsers($newRecord = false)
     {
         // delete old notifications for this announcement
-        $notifications = Notification::find()->where(['source_class' => self::className(), 'source_pk' => $this->id, 'space_id' => $this->content->container->id])->all();
+        $notifications = Notification::find()->where(['source_class' => self::class, 'source_pk' => $this->id, 'space_id' => $this->content->container->id])->all();
         foreach ($notifications as $notification) {
             $notification->delete();
         }

@@ -61,12 +61,12 @@ class AnnouncementUser extends ActiveRecord
 
     public function getAnnouncement()
     {
-        return $this->hasOne(Announcement::className(), ['id' => 'announcement_id']);
+        return $this->hasOne(Announcement::class, ['id' => 'announcement_id']);
     }
 
     public function getUser()
     {
-        return $this->hasOne(User::className(), ['id' => 'user_id']);
+        return $this->hasOne(User::class, ['id' => 'user_id']);
     }
 
     public function afterSave($insert, $changedAttributes)

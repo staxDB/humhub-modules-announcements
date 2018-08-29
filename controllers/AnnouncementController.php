@@ -26,8 +26,8 @@ class AnnouncementController extends ContentContainerController
     {
         return [
             'stream' => [
-                'class' => StreamAction::className(),
-                'includes' => Announcement::className(),
+                'class' => StreamAction::class,
+                'includes' => Announcement::class,
                 'mode' => StreamAction::MODE_NORMAL,
                 'contentContainer' => $this->contentContainer
             ],
