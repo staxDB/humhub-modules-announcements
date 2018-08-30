@@ -1,5 +1,11 @@
 Changelog
 =========
+v0.3.4
+----------------------
+- Removed Deprecations:
+    - Changed className()- to class-function
+    - Changed arrays to short version []
+
 v0.3.3
 ----------------------
 - Updated to yii/base/BaseObject
