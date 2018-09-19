@@ -8,8 +8,10 @@ return [
     'Notify all Space Members if an announcement has been updated.' => '',
     'Notify all Space Members if an announcement statistics has been reset.' => '',
     'Set Announcement as old after moving to another space.' => '',
+    'Settings for announcement creation' => '',
     'Settings for filters' => '',
     'Settings for notifications' => '',
     'Settings to move content' => '',
     'Show additional announcement filters on stream.' => '',
+    'Skip Creator of announcement in read by-list.' => '',
 ];
