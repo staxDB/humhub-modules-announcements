@@ -37,6 +37,11 @@ use yii\helpers\Url;
         <?= $form->field($model, 'showFilters')->checkbox(); ?>
 
         <h5 style="padding-top: 6px;">
+            <?= Yii::t('AnnouncementsModule.forms', 'Settings for announcement creation'); ?>
+        </h5>
+        <?= $form->field($model, 'skipCreator')->checkbox(); ?>
+
+        <h5 style="padding-top: 6px;">
             <?= Yii::t('AnnouncementsModule.forms', 'Settings to move content'); ?>
         </h5>
         <?= $form->field($model, 'setClosed')->checkbox()

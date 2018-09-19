@@ -141,7 +141,7 @@ class Announcement extends ContentActiveRecord implements Searchable
      */
     public function setConfirmations()
     {
-        $members = $this->content->container->getMembershipUser()->all(); // gets all users in space
+        $members = $this->getMembersOfSpace();
         $confirmed = $this->getConfirmations()->all(); // gets all confirmationUsers
 
         foreach ($members as $memberKey => $member) {
@@ -169,10 +169,28 @@ class Announcement extends ContentActiveRecord implements Searchable
     }
 
     /**
+     * returns all members of space except the creator (depending on settings).
+     */
+    private function getMembersOfSpace()
+    {
+        $members = $this->content->container->getMembershipUser()->all(); // gets all users in space
+        $settings = EditForm::instantiate();
+        if ($settings->skipCreator)
+        {
+            foreach ($members as $memberKey => $member) {
+                if ($member->id === $this->content->createdBy->id) {
+                    unset($members[$memberKey]);
+                }
+            }
+        }
+        return $members;
+    }
+
+    /**
      * Finds a AnnouncementUser instance for the given user or the logged in user if no user provided.
      *
-     * @param User $user
-     * @return SpaceNewsRecipient
+     * @param null $id
+     * @return AnnouncementUser|null|void
      */
     public function findAnnouncementUserById($id = null)
     {
@@ -191,7 +209,7 @@ class Announcement extends ContentActiveRecord implements Searchable
      * Finds a AnnouncementUser instance for the given user or the logged in user if no user provided.
      *
      * @param User $user
-     * @return SpaceNewsRecipient
+     * @return AnnouncementUser|null|void
      */
     public function findAnnouncementUser(User $user = null)
     {
@@ -219,7 +237,7 @@ class Announcement extends ContentActiveRecord implements Searchable
     public function getPercent()
     {
         $total = AnnouncementUser::find()->where(['announcement_id' => $this->id])->count();
-        if ($total === 0) {
+        if ($total == 0) {
             return 0;
         }
 
