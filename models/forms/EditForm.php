@@ -71,7 +71,7 @@ class EditForm extends Model
             'notifyResetStatistics' => Yii::t('AnnouncementsModule.forms', 'Notify all Space Members if an announcement statistics has been reset.'),
             'showFilters' => Yii::t('AnnouncementsModule.forms', 'Show additional announcement filters on stream.'),
             'setClosed' => Yii::t('AnnouncementsModule.forms', 'Set Announcement as old after moving to another space.'),
-            'skipCreator' => Yii::t('AnnouncementsModule.forms', 'Skip Creator of announcement in read by-list.'),
+            'skipCreator' => Yii::t('AnnouncementsModule.forms', 'Skip Creator of announcement in \'read by\'-list.'),
         );
     }
     

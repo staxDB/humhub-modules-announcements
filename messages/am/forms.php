@@ -13,5 +13,5 @@ return [
     'Settings for notifications' => '',
     'Settings to move content' => '',
     'Show additional announcement filters on stream.' => '',
-    'Skip Creator of announcement in read by-list.' => '',
+    'Skip Creator of announcement in \'read by\'-list.' => '',
 ];
