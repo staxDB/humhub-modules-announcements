@@ -2,6 +2,7 @@
 
 return [
     'Export in excel' => '',
+    'Marked as read' => '',
     'Reset Statistics' => '',
     'Add Announcement...' => 'Добавить Анонс...',
     'Complete Announcement' => 'Завершить Анонс',

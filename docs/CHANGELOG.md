@@ -1,5 +1,9 @@
 Changelog
 =========
+v0.3.5
+----------------------
+- Added: Marked as read.
+
 v0.3.4
 ----------------------
 - Removed Deprecations:
