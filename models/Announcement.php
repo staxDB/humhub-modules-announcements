@@ -115,7 +115,7 @@ class Announcement extends ContentActiveRecord implements Searchable
      */
     public function getConfirmationUsers()
     {
-        return $this->hasMany(User::class, ['id' => 'user_id'])->via('confirmations');
+        return $this->hasMany(User::class, ['id' => 'user_id'])->where(['status' => 1])->via('confirmations');
     }
 
     /**
@@ -178,7 +178,7 @@ class Announcement extends ContentActiveRecord implements Searchable
         if ($settings->skipCreator)
         {
             foreach ($members as $memberKey => $member) {
-                if ($member->id === $this->content->createdBy->id) {
+                if ($member->id === $this->content->createdBy->id || $member->status != 1) {
                     unset($members[$memberKey]);
                 }
             }
