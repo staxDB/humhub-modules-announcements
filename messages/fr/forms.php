@@ -2,6 +2,7 @@
 
 return [
     'Be careful! If you uncheck this, users, who are not member of the new space may still be possible to mark the announcement as read. Members of the new space will not automatically be added to the read/unread list. You have to close and reopen the announcement manually to add new members!' => '',
+    'Each recipient auto follows the announcement.' => '',
     'Settings for announcement creation' => '',
     'Skip Creator of announcement in \'read by\'-list.' => '',
     '<strong>Announcement</strong> module configuration' => 'Paramètres du module <strong>annonces</strong>',
