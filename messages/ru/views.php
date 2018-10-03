@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'Cancel' => '',
     'Created by me' => '',
     'Not read' => '',
     '<b>There are no announcements yet!</b>' => '<b>Нет анонсов ещё!</b>',
