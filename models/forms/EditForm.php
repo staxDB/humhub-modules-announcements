@@ -26,6 +26,11 @@ class EditForm extends Model
     public $setClosed = true;
 
     /**
+     * move content settings
+     */
+    public $autoFollow = true;
+
+    /**
      * skip creator in read by - list
      */
     public $skipCreator = true;
@@ -44,6 +49,7 @@ class EditForm extends Model
         $this->notifyResetStatistics = $settings->get('notify_resetStatistics', $this->notifyResetStatistics);
         $this->showFilters = $settings->get('show_filters', $this->showFilters);
         $this->setClosed = $settings->get('set_closed', $this->setClosed);
+        $this->autoFollow = $settings->get('auto_follow', $this->autoFollow);
         $this->skipCreator = $settings->get('skip_creator', $this->skipCreator);
     }
     
@@ -53,7 +59,7 @@ class EditForm extends Model
     public function rules()
     {
         return [
-            [['notifyCreated', 'notifyUpdated', 'notifyClosed', 'notifyResetStatistics', 'showFilters', 'setClosed', 'skipCreator'],  'boolean'],
+            [['notifyCreated', 'notifyUpdated', 'notifyClosed', 'notifyResetStatistics', 'showFilters', 'setClosed', 'autoFollow', 'skipCreator'],  'boolean'],
         ];
     }
 
@@ -71,6 +77,7 @@ class EditForm extends Model
             'notifyResetStatistics' => Yii::t('AnnouncementsModule.forms', 'Notify all Space Members if an announcement statistics has been reset.'),
             'showFilters' => Yii::t('AnnouncementsModule.forms', 'Show additional announcement filters on stream.'),
             'setClosed' => Yii::t('AnnouncementsModule.forms', 'Set Announcement as old after moving to another space.'),
+            'autoFollow' => Yii::t('AnnouncementsModule.forms', 'Each recipient auto follows the announcement.'),
             'skipCreator' => Yii::t('AnnouncementsModule.forms', 'Skip Creator of announcement in \'read by\'-list.'),
         );
     }
@@ -91,6 +98,7 @@ class EditForm extends Model
         $this->notifyResetStatistics = $settings->set('notify_resetStatistics', $this->notifyResetStatistics);
         $this->showFilters = $settings->set('show_filters', $this->showFilters);
         $this->setClosed = $settings->set('set_closed', $this->setClosed);
+        $this->autoFollow = $settings->set('auto_follow', $this->autoFollow);
         $this->skipCreator = $settings->set('skip_creator', $this->skipCreator);
         return true;
     }

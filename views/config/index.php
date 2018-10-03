@@ -39,6 +39,7 @@ use yii\helpers\Url;
         <h5 style="padding-top: 6px;">
             <?= Yii::t('AnnouncementsModule.forms', 'Settings for announcement creation'); ?>
         </h5>
+        <?= $form->field($model, 'autoFollow')->checkbox(); ?>
         <?= $form->field($model, 'skipCreator')->checkbox(); ?>
 
         <h5 style="padding-top: 6px;">
