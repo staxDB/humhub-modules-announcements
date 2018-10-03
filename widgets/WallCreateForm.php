@@ -61,6 +61,8 @@ class WallCreateForm extends WallCreateContentForm
             'canSwitchVisibility' => $canSwitchVisibility,
             'fileHandlers' => array_merge($fileHandlerCreate, $fileHandlerImport),
         ]);
+//        return parent::run();
+
     }
 
     /**

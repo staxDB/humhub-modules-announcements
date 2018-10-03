@@ -1,11 +1,15 @@
 <?php
 
 use humhub\modules\announcements\assets\AnnouncementsAsset;
-use humhub\modules\content\widgets\richtext\RichTextField;
+//use humhub\modules\content\widgets\richtext\RichTextField;
+use humhub\widgets\RichtextField;
+
 
 AnnouncementsAsset::register($this);
 
-echo RichtextField::widget([
+?>
+
+<?= RichtextField::widget([
     'pluginOptions' => ['maxHeight' => '300px'],
     'placeholder' => Yii::t('AnnouncementsModule.widgets', 'Add Announcement...'),
     'name' => 'message',

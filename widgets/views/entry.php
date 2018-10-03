@@ -2,12 +2,13 @@
 
 use yii\helpers\Html;
 use humhub\modules\content\widgets\richtext\RichText;
+use humhub\modules\announcements\assets\AnnouncementsAsset;
 
 /* @var $announcement \humhub\modules\announcements\models\Announcement */
 /* @var $user \humhub\modules\user\models\User */
 /* @var $contentContainer \humhub\modules\content\models\ContentContainer */
 
-humhub\modules\announcements\assets\AnnouncementsAsset::register($this);
+AnnouncementsAsset::register($this);
 ?>
 
 <div data-announcement="<?= $announcement->id ?>" data-content-component="announcements.Message" data-content-key="<?= $announcement->content->id ?>">

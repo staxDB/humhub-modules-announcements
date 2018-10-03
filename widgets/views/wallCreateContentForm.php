@@ -10,8 +10,9 @@ use humhub\modules\file\widgets\UploadProgress;
 use humhub\modules\file\widgets\FilePreview;
 use humhub\widgets\Link;
 use humhub\widgets\Button;
+use humhub\modules\content\assets\ContentFormAsset;
 
-\humhub\modules\content\assets\ContentFormAsset::register($this);
+ContentFormAsset::register($this);
 
 $this->registerJsConfig('content.form', [
     'defaultVisibility' => $defaultVisibility,
@@ -21,6 +22,9 @@ $this->registerJsConfig('content.form', [
         'makePublic' => Yii::t('ContentModule.widgets_views_contentForm', 'Make public'),
         'info.archived' => Yii::t('ContentModule.widgets_views_contentForm', 'This space is archived.')
 ]]);
+
+$pickerUrl = ($contentContainer instanceof Space) ? $contentContainer->createUrl('/space/membership/search') : null;
+
 ?>
 
 <div class="panel panel-default clearfix">
@@ -32,7 +36,7 @@ $this->registerJsConfig('content.form', [
         <div id="notifyUserContainer" class="form-group" style="margin-top: 15px;display:none;">
             <?= UserPickerField::widget([
                 'id' => 'notifyUserInput',
-                'url' => ($contentContainer instanceof Space) ? $contentContainer->createUrl('/space/membership/search') : null,
+                'url' => $pickerUrl,
                 'formName' => 'notifyUserInput',
                 'maxSelection' => 10,
                 'disabledItems' => [Yii::$app->user->guid],

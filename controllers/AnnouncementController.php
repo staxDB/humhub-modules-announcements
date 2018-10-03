@@ -72,9 +72,9 @@ class AnnouncementController extends ContentContainerController
         $id = Yii::$app->request->get('id');
         $model = Announcement::findOne(['id' => $id]);
 
-        if (!$model) {
-            throw new HttpException(404);
-        }
+//        if (!$model) {
+//            throw new HttpException(404);
+//        }
 
         if (!$model->content->canRead()) {
             throw new HttpException(403);
