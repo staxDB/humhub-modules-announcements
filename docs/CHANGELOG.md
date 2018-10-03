@@ -1,5 +1,10 @@
 Changelog
 =========
+v0.3.6
+----------------------
+- Added: Config for disabling auto follow each created announcement.
+- Fixed: Disabled users still gets notifications and will be added to list of read/unread users (Thanks to funkycram).
+
 v0.3.5
 ----------------------
 - Added: Marked as read.
