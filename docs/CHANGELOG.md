@@ -1,5 +1,9 @@
 Changelog
 =========
+v0.3.7
+----------------------
+- Fixed: Editing an announcement was not possible anymore.
+
 v0.3.6
 ----------------------
 - Added: Config for disabling auto follow each created announcement.
