@@ -2,17 +2,18 @@
 
 namespace humhub\modules\announcements;
 
-use humhub\modules\announcements\models\forms\EditForm;
-use humhub\modules\announcements\widgets\ExportButton;
-use humhub\modules\announcements\widgets\ResetStatisticsButton;
-use humhub\modules\notification\models\Notification;
 use humhub\modules\announcements\models\Announcement;
 use humhub\modules\announcements\models\AnnouncementUser;
+use humhub\modules\announcements\models\filters\AnnouncementStreamFilter;
+use humhub\modules\announcements\models\forms\EditForm;
 use humhub\modules\announcements\widgets\CloseButton;
+use humhub\modules\announcements\widgets\ExportButton;
 use humhub\modules\announcements\widgets\ResetButton;
+use humhub\modules\announcements\widgets\ResetStatisticsButton;
+use humhub\modules\content\helpers\ContentContainerHelper;
+use humhub\modules\notification\models\Notification;
 use humhub\modules\stream\models\WallStreamQuery;
 use humhub\modules\stream\widgets\WallStreamFilterNavigation;
-use humhub\modules\announcements\models\filters\AnnouncementStreamFilter;
 use Yii;
 use yii\base\BaseObject;
 
@@ -61,6 +62,9 @@ class Events extends BaseObject
 
     public static function onStreamFilterBeforeRun($event)
     {
+        $contentContainer = ContentContainerHelper::getCurrent();
+        if (isset($contentContainer) && !$contentContainer->moduleManager->isEnabled('announcements'))
+            return;
         $settings = EditForm::instantiate();
         if (!$settings->showFilters) {
             return;
@@ -79,18 +83,21 @@ class Events extends BaseObject
             'id' => AnnouncementStreamFilter::FILTER_NOT_READ,
             'title' => Yii::t('AnnouncementsModule.models', 'Not read by me'),
             'sortOrder' => 100
-        ],static::FILTER_BLOCK_ANNOUNCEMENT);
+        ], static::FILTER_BLOCK_ANNOUNCEMENT);
 
         // Add the filter to the new filter block
         $wallFilterNavigation->addFilter([
             'id' => AnnouncementStreamFilter::FILTER_CLOSED,
             'title' => Yii::t('AnnouncementsModule.models', 'Old Announcement'),
             'sortOrder' => 200
-        ],static::FILTER_BLOCK_ANNOUNCEMENT);
+        ], static::FILTER_BLOCK_ANNOUNCEMENT);
     }
 
     public static function onStreamFilterBeforeFilter($event)
     {
+        $contentContainer = ContentContainerHelper::getCurrent();
+        if (isset($contentContainer) && !$contentContainer->moduleManager->isEnabled('announcements'))
+            return;
         $settings = EditForm::instantiate();
         if (!$settings->showFilters) {
             return;
@@ -106,7 +113,7 @@ class Events extends BaseObject
      * @param $event
      * @throws \yii\base\Exception
      */
-    public static function onMemberAdded ($event)
+    public static function onMemberAdded($event)
     {
         $space = $event->space;
 
@@ -131,7 +138,7 @@ class Events extends BaseObject
      * @throws \yii\base\Exception
      * @throws \yii\db\StaleObjectException
      */
-    public static function onMemberRemoved ($event)
+    public static function onMemberRemoved($event)
     {
         $space = $event->space;
 
@@ -173,7 +180,7 @@ class Events extends BaseObject
 
         // Is Module enabled on this workspace and is user member of space?
         if ($space->isModuleEnabled('announcements') && $space->isMember()) {
-                $event->sender->addItem([
+            $event->sender->addItem([
                 'label' => Yii::t('AnnouncementsModule.base', 'Announcements'),
                 'group' => 'modules',
                 'url' => $space->createUrl('/announcements/announcement/show'),

@@ -1,5 +1,9 @@
 Changelog
 =========
+v0.4
+----------------------
+- Fixed: Fixed filter issue, if module is not enabled in space. Rel.: https://github.com/humhub/humhub/issues/3273.
+
 v0.3.7
 ----------------------
 - Fixed: Editing an announcement was not possible anymore.
