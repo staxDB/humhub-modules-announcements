@@ -63,8 +63,9 @@ class Events extends BaseObject
     public static function onStreamFilterBeforeRun($event)
     {
         $contentContainer = ContentContainerHelper::getCurrent();
-        if (isset($contentContainer) && !$contentContainer->moduleManager->isEnabled('announcements'))
+        if (isset($contentContainer) && !$contentContainer->moduleManager->isEnabled('announcements')) {
             return;
+        }
         $settings = EditForm::instantiate();
         if (!$settings->showFilters) {
             return;
@@ -96,8 +97,9 @@ class Events extends BaseObject
     public static function onStreamFilterBeforeFilter($event)
     {
         $contentContainer = ContentContainerHelper::getCurrent();
-        if (isset($contentContainer) && !$contentContainer->moduleManager->isEnabled('announcements'))
+        if (isset($contentContainer) && !$contentContainer->moduleManager->isEnabled('announcements')) {
             return;
+        }
         $settings = EditForm::instantiate();
         if (!$settings->showFilters) {
             return;
@@ -150,9 +152,10 @@ class Events extends BaseObject
                     $announcementUser = $announcement->findAnnouncementUser($event->user);
 
                     if ($announcement->closed) { // Skip closed announcements, because we want user to be part of statistics
-                        if (isset($announcementUser) && $announcementUser !== null)
+                        if (isset($announcementUser) && $announcementUser !== null) {
                             $announcementUser->followContent(false); // But he shouldn't get any notifications about the content
-                        continue;
+                            continue;
+                        }
                     }
                     if (isset($announcementUser) && $announcementUser !== null) {
                         $announcement->unlink('confirmations', $announcementUser, true);
