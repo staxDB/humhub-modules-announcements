@@ -147,7 +147,6 @@ class Announcement extends ContentActiveRecord implements Searchable
         foreach ($members as $memberKey => $member) {
             foreach ($confirmed as $userKey => $user) {
                 if ($member->id === $user->user->id) {
-//                    $this->setConfirmation($member, $user->confirmed);
                     unset($confirmed[$userKey]); // user exists in space and in AnnouncementUser
                     unset($members[$memberKey]);
                 }
@@ -477,10 +476,11 @@ class Announcement extends ContentActiveRecord implements Searchable
 
     public function canMove(ContentContainerActiveRecord $container = null)
     {
-        if(!$this->content->container->permissionManager->can(MoveContent::class))
+        if (!$this->content->container->permissionManager->can(MoveContent::class)) {
             return Yii::t('AnnouncementsModule.permissions', 'You have insufficient permissions to move announcements!');
-        else
+        } else {
             return parent::canMove($container);
+        }
     }
 
     /**
