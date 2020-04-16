@@ -72,11 +72,7 @@ class AnnouncementController extends ContentContainerController
         $id = Yii::$app->request->get('id');
         $model = Announcement::findOne(['id' => $id]);
 
-//        if (!$model) {
-//            throw new HttpException(404);
-//        }
-
-        if (!$model->content->canRead()) {
+        if (!$model->content->canView()) {
             throw new HttpException(403);
         }
 
@@ -96,7 +92,7 @@ class AnnouncementController extends ContentContainerController
 
         $model->scenario = Announcement::SCENARIO_EDIT;
 
-        if (!$model->content->canWrite()) {
+        if (!$model->content->canEdit()) {
             throw new HttpException(403);
         }
 
@@ -138,7 +134,7 @@ class AnnouncementController extends ContentContainerController
             $model->content->unarchive();
         }
 
-        if (!$model->content->canWrite()) {
+        if (!$model->content->canEdit()) {
             throw new HttpException(403, Yii::t('AnnouncementsModule.controller', 'Access denied!'));
         }
 
@@ -321,7 +317,7 @@ class AnnouncementController extends ContentContainerController
             throw new HttpException(401, Yii::t('AnnouncementsModule.controller', 'Could not load Announcement!'));
         }
 
-        if (!$announcement->content->canRead()) {
+        if (!$announcement->content->canView()) {
             throw new HttpException(403, Yii::t('AnnouncementsModule.controller', 'You have insufficient permissions to perform that operation!'));
         }
 
