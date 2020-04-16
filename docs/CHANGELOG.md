@@ -1,5 +1,13 @@
 Changelog
 =========
+v0.5
+----------------------
+- Added: Support for humhub v1.4 
+    - Removed canWrite()-Method. Rel.: https://github.com/staxDB/humhub-modules-announcements/issues/56
+    - Removed canRead()-Method. Rel.: https://github.com/staxDB/humhub-modules-announcements/issues/55
+    - Updated messages. Rel.: https://docs.humhub.org/docs/develop/modules-migrate#migrate-from-13-to-14
+- Added: Additional checkboxes when existing announcement gets edited. Here you can decide whether you want to reset statistics and whether to re-notify users.
+
 v0.4
 ----------------------
 - Fixed: Fixed filter issue, if module is not enabled in space. Rel.: https://github.com/humhub/humhub/issues/3273.

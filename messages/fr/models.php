@@ -5,4 +5,6 @@ return [
     'Old Announcement' => 'Annonces clôturées',
     'Read' => 'Lu',
     'Message' => 'Message',
+    'Reset statistics' => '',
+    'Notify users' => '',
 ];
