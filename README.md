@@ -6,6 +6,10 @@ Also allows (specific) users *(e.g. Admins)* to see a statistic.
 __Module website:__ <https://github.com/staxDB/humhub-modules-announcements>  
 __Author:__ David Born ([staxDB](https://github.com/staxDB))
 
+### v0.5.* works with
+- Humhub version 1.4.*
+- PHP 7.2
+
 ### v0.3.* and v0.4.* Works with
 - Humhub version 1.3.*
 - PHP 7.2
