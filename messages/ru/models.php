@@ -5,4 +5,6 @@ return [
     'Old Announcement' => '',
     'Read' => '',
     'Message' => 'Сообщение',
+    'Reset statistics' => '',
+    'Notify users' => '',
 ];

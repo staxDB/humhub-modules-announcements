@@ -46,6 +46,8 @@ class Announcement extends ContentActiveRecord implements Searchable
     public $canMove = true;
 
     public $autoAddToWall = true;
+    public $reset_stats = false;
+    public $notify_users = false;
     public $wallEntryClass = 'humhub\modules\announcements\widgets\WallEntry';
 
     // won't create any activities
@@ -72,7 +74,7 @@ class Announcement extends ContentActiveRecord implements Searchable
             self::SCENARIO_CLOSE => [],
             self::SCENARIO_RESET => [],
             self::SCENARIO_CREATE => ['message'],
-            self::SCENARIO_EDIT => ['message'],
+            self::SCENARIO_EDIT => ['message', 'reset_stats', 'notify_users'],
             self::SCENARIO_DEFAULT => []
         ];
     }
@@ -85,6 +87,7 @@ class Announcement extends ContentActiveRecord implements Searchable
         return [
             [['message'], 'required'],
             [['message'], 'string'],
+            [['reset_stats', 'notify_users'], 'boolean'],
         ];
     }
 
@@ -95,6 +98,8 @@ class Announcement extends ContentActiveRecord implements Searchable
     {
         return [
             'message' => Yii::t('AnnouncementsModule.models', 'Message'),
+            'reset_stats' => Yii::t('AnnouncementsModule.models', 'Reset statistics'),
+            'notify_users' => Yii::t('AnnouncementsModule.models', 'Notify users'),
         ];
     }
 
@@ -347,7 +352,7 @@ class Announcement extends ContentActiveRecord implements Searchable
 
         if ($this->scenario === self::SCENARIO_CREATE && $settings->notifyCreated && $insert) {
             $this->informUsers(true);
-        } elseif ($this->scenario === self::SCENARIO_EDIT && $settings->notifyUpdated) {
+        } elseif ($this->scenario === self::SCENARIO_EDIT && ($this->notify_users)) {
             $this->informUsers(false);
         } elseif ($this->scenario === self::SCENARIO_CLOSE && $settings->notifyClosed) {
             $this->informUsers(false);
