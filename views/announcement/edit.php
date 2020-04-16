@@ -8,7 +8,6 @@ use humhub\modules\file\widgets\FilePreview;
 /* @var $announcement \humhub\modules\announcements\models\Announcement */
 /* @var $user \humhub\modules\user\models\User */
 /* @var $contentContainer \humhub\modules\content\models\ContentContainer */
-
 ?>
 
 <div class="content_edit input-container" id="comment_edit_<?= $announcement->id; ?>" data-message="<?= $announcement->id ?>" data-content-component="announcements.Message" data-content-key="<?= $announcement->content->id ?>" >
@@ -19,11 +18,16 @@ use humhub\modules\file\widgets\FilePreview;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($announcement, 'message')->widget(RichTextField::class, [
+        'layout' => RichTextField::LAYOUT_INLINE,
         'pluginOptions' => ['maxHeight' => '300px'],
         'disabled' => $announcement->closed,
         'placeholder' => Yii::t('AnnouncementsModule.base', 'Edit your message')
     ])->label(false) ?>
 
+    <div class="contentForm_options">
+        <?= $form->field($announcement, 'reset_stats')->checkbox() ?>
+        <?= $form->field($announcement, 'notify_users')->checkbox() ?>
+    </div>
     <div class="comment-buttons">
         <?= UploadButton::widget([
             'id' => 'announcement_upload_' . $announcement->id,

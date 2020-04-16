@@ -13,7 +13,7 @@ humhub\modules\announcements\assets\AnnouncementsAsset::register($this);
 <?php endif; ?>
 
 <?php if (!$announcement->hasUserConfirmed() && $announcement->findAnnouncementUser() && !Yii::$app->user->isGuest && !$announcement->closed) : ?>
-    <div id="confirm-button" class="alert alert-info" style="margin-top:1px;">
+    <div id="confirm-button" class="alert alert-info" style="margin-top:8px;">
         <?= Html::checkBox('checked', false, ['class' => 'tt', 'label' => Yii::t('AnnouncementsModule.widgets', 'Mark as read'), 'announcementId' => $announcement->id, 'data-action-change' => 'confirm', 'data-action-submit', 'data-ui-loader']); ?>
     </div>
  <?php elseif ($announcement->hasUserConfirmed() && $announcement->findAnnouncementUser() && !Yii::$app->user->isGuest && !$announcement->closed) : ?>
