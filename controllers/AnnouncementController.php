@@ -11,6 +11,7 @@ use humhub\modules\announcements\widgets\WallCreateForm;
 use humhub\modules\announcements\components\StreamAction;
 use humhub\modules\stream\actions\Stream;
 use humhub\modules\announcements\permissions\CreateAnnouncement;
+use function PHPSTORM_META\elementType;
 use Yii;
 use yii\web\HttpException;
 use humhub\components\export\SpreadsheetExport;
@@ -72,11 +73,7 @@ class AnnouncementController extends ContentContainerController
         $id = Yii::$app->request->get('id');
         $model = Announcement::findOne(['id' => $id]);
 
-//        if (!$model) {
-//            throw new HttpException(404);
-//        }
-
-        if (!$model->content->canRead()) {
+        if (!$model->content->canView()) {
             throw new HttpException(403);
         }
 
@@ -96,23 +93,35 @@ class AnnouncementController extends ContentContainerController
 
         $model->scenario = Announcement::SCENARIO_EDIT;
 
-        if (!$model->content->canWrite()) {
+        if (!$model->content->canEdit()) {
             throw new HttpException(403);
         }
 
         if ($model->load($request->post())) {
             Yii::$app->response->format = 'json';
             $result = [];
-            if ($model->validate() && $model->save()) {
-                // Reload record to get populated updated_at field
-                $model = Announcement::findOne(['id' => $id]);
-                return Stream::getContentResultEntry($model->content);
+            if ($model->validate()) {
+                if ($model->reset_stats) {
+                    $model->resetStatistics();
+                }
+                if ($model->save()) {
+                    // Refresh updated_at
+                    $model->content->refresh();
+                    // Reload record to get populated updated_at field
+                    //$model = Announcement::findOne(['id' => $id]);
+                    return Stream::getContentResultEntry($model->content);
+                }
+                else {
+                    $result['errors'] = $model->getErrors();
+                }
             } else {
                 $result['errors'] = $model->getErrors();
             }
             return $result;
         }
 
+        $model->reset_stats = $this->module->settings->get('notify_resetStatistics', false);
+        $model->notify_users = $this->module->settings->get('notify_updated', false);
         return $this->renderAjax('edit', ['announcement' => $model]);
     }
 
@@ -138,7 +147,7 @@ class AnnouncementController extends ContentContainerController
             $model->content->unarchive();
         }
 
-        if (!$model->content->canWrite()) {
+        if (!$model->content->canEdit()) {
             throw new HttpException(403, Yii::t('AnnouncementsModule.controller', 'Access denied!'));
         }
 
@@ -321,7 +330,7 @@ class AnnouncementController extends ContentContainerController
             throw new HttpException(401, Yii::t('AnnouncementsModule.controller', 'Could not load Announcement!'));
         }
 
-        if (!$announcement->content->canRead()) {
+        if (!$announcement->content->canView()) {
             throw new HttpException(403, Yii::t('AnnouncementsModule.controller', 'You have insufficient permissions to perform that operation!'));
         }
 
